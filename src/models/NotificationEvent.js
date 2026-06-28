@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const notificationEventSchema = new mongoose.Schema({
-    NEV_id: { type: Number },
+    NEV_id: { type: Number, unique: true },
     NOT_id: { type: Number },
     ORD_id: { type: Number, default: null },
     SHI_id: { type: Number, default: null },
