@@ -12,10 +12,10 @@ router.get("/", async (req, res) => {
     }
 });
 
-// GET - Obtener por ID
-router.get("/:id", async (req, res) => {
+// GET - Obtener por USU_id
+router.get("/:USU_id", async (req, res) => {
     try {
-        const respuesta = await User.findById(req.params.id);
+        const respuesta = await User.findOne({ USU_id: req.params.USU_id });
         res.send(respuesta);
     } catch (err) {
         res.status(500).json({ error: err.message });

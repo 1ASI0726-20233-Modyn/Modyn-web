@@ -40,7 +40,7 @@
 
 ### Puerto 3000 ocupado
 > netstat -ano | findstr :3000
-> taskkill /PID aqui-va-el-pid /F
+> taskkill /IM node.exe /F
 
 ### Matar todos los procesos Node
 > taskkill /IM node.exe /F
