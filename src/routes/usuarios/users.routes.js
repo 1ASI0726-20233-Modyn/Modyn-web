@@ -34,11 +34,11 @@ router.post("/", async (req, res) => {
 });
 
 // PUT - Actualizar
-router.put("/:id", async (req, res) => {
+router.put("/:USU_id", async (req, res) => {
     try {
-        const id = req.params.id;
+        const USU_id = req.params.USU_id;
         const body = req.body;
-        const respuesta = await User.findByIdAndUpdate(id, body, { new: true });
+        const respuesta = await User.findOneAndUpdate({ USU_id }, body, { new: true });
         res.send(respuesta);
     } catch (err) {
         res.status(500).json({ error: err.message });
@@ -46,10 +46,10 @@ router.put("/:id", async (req, res) => {
 });
 
 // DELETE - Eliminar
-router.delete("/:id", async (req, res) => {
+router.delete("/:USU_id", async (req, res) => {
     try {
-        const id = req.params.id;
-        const respuesta = await User.findByIdAndDelete(id);
+        const USU_id = req.params.USU_id;
+        const respuesta = await User.findOneAndDelete({ USU_id });
         res.send(respuesta);
     } catch (err) {
         res.status(500).json({ error: err.message });
