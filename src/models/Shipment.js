@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const shipmentSchema = new mongoose.Schema({
-    SHI_id:              { type: Number },
+    SHI_id:              { type: Number, unique: true },
     ORD_id:              { type: Number },
     ADD_id:              { type: Number },
     SHI_carrier:         { type: String },

@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const paymentSchema = new mongoose.Schema({
-    PAY_id:      { type: Number },
+    PAY_id:      { type: Number, unique: true },
     ORD_id:      { type: Number },
     PAY_method:  { type: String, enum: ["Tarjeta", "Yape", "Plin"] },
     PAY_amount:  { type: Number },

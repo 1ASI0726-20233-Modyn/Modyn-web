@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const couponUsageSchema = new mongoose.Schema({
-    CPU_id:      { type: Number },
+    CPU_id:      { type: Number, unique: true },
     COU_id:      { type: Number },
     USU_id:      { type: Number },
     ORD_id:      { type: Number },
