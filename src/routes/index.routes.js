@@ -34,18 +34,18 @@ const RecommendationItem = require("../models/RecommendationItem");
 
 // Usuarios
 router.use("/users",     require("./usuarios/users.routes"));
-// router.use("/addresses", require("./usuarios/addresses.routes"));
-// router.use("/sessions",  require("./usuarios/sessions.routes"));
+router.use("/addresses", require("./usuarios/addresses.routes"));
+router.use("/sessions",  require("./usuarios/sessions.routes"));
 
 // Catálogo
-// router.use("/categories",     require("./catalogo/categories.routes"));
-// router.use("/suppliers",      require("./catalogo/suppliers.routes"));
-// router.use("/products",       require("./catalogo/products.routes"));
-// router.use("/product-images", require("./catalogo/productImages.routes"));
-// router.use("/variants",       require("./catalogo/productVariants.routes"));
-// router.use("/likes",          require("./catalogo/productLikes.routes"));
-// router.use("/qa",             require("./catalogo/productQA.routes"));
-// router.use("/views",          require("./catalogo/productViews.routes"));
+router.use("/categories",     require("./catalogo/categories.routes"));
+router.use("/suppliers",      require("./catalogo/suppliers.routes"));
+router.use("/products",       require("./catalogo/products.routes"));
+router.use("/product-images", require("./catalogo/productImages.routes"));
+router.use("/variants",       require("./catalogo/productVariants.routes"));
+router.use("/likes",          require("./catalogo/productLikes.routes"));
+router.use("/qa",             require("./catalogo/productQA.routes"));
+router.use("/views",          require("./catalogo/productViews.routes"));
 
 // Carrito
 // router.use("/cart",         require("./carrito/cart.routes"));
