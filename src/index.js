@@ -1,10 +1,15 @@
-    const express = require('express')
+const express = require("express");
+const app = express();
 
-    const app = express();
+require("./database");
 
-    require('./database');
+app.use(express.json());
 
-    app.use(require('./routes/index.routes'));
+app.get("/", (req, res) => {
+    res.send("Bienvenidos a Modyn E-commerce");
+});
 
-    app.listen(3000);
-    console.log('Server on port', 3000);
+app.use(require("./routes/index.routes.js"));
+
+app.listen(3000);
+console.log("Server on port ", 3000);

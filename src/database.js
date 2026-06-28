@@ -1,11 +1,7 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
-
-
-mongoose.connect('mongodb://mongo/mydatabase',{ 
-    useNewUrlParser: true, 
-    useUnifiedTopology: true 
-})
-    .then(db => console.log('Database connected to', db.connection.host))
-    .catch(err => console.error(err));
+// ENV DEV
+mongoose.connect("mongodb://localhost:27018/modyn_db")
+.then(db=>console.log("DB is connected to ", db.connection.host))
+.catch(err=>console.error(err));
 
