@@ -20,7 +20,7 @@ router.get("/:ORD_id", async (req, res) => {
     }
 });
 
-router.get("/usuario/:USU_id", async (req, res) => {
+router.get("/user/:USU_id", async (req, res) => {
     try {
         const respuesta = await Order.find({ USU_id: req.params.USU_id });
         res.send(respuesta);

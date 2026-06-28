@@ -23,7 +23,7 @@ router.get("/:COU_id", async (req, res) => {
 });
 
 // GET - Buscar cupón por código
-router.get("/codigo/:COU_code", async (req, res) => {
+router.get("/code/:COU_code", async (req, res) => {
     try {
         const respuesta = await Coupon.findOne({ COU_code: req.params.COU_code });
         res.send(respuesta);

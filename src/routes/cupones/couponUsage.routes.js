@@ -23,7 +23,7 @@ router.get("/:CPU_id", async (req, res) => {
 });
 
 // GET - Listar usos de un cupón específico
-router.get("/cupon/:COU_id", async (req, res) => {
+router.get("/coupon/:COU_id", async (req, res) => {
     try {
         const respuesta = await CouponUsage.find({ COU_id: req.params.COU_id });
         res.send(respuesta);
@@ -33,7 +33,7 @@ router.get("/cupon/:COU_id", async (req, res) => {
 });
 
 // GET - Listar usos de cupones de un usuario
-router.get("/usuario/:USU_id", async (req, res) => {
+router.get("/user/:USU_id", async (req, res) => {
     try {
         const respuesta = await CouponUsage.find({ USU_id: req.params.USU_id });
         res.send(respuesta);

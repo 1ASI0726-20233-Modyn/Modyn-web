@@ -23,7 +23,7 @@ router.get("/:DET_id", async (req, res) => {
 });
 
 // GET - Listar detalles de un pedido
-router.get("/pedido/:ORD_id", async (req, res) => {
+router.get("/order/:ORD_id", async (req, res) => {
     try {
         const respuesta = await OrderDetail.find({ ORD_id: req.params.ORD_id });
         res.send(respuesta);
