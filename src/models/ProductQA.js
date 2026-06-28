@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const productQASchema = new mongoose.Schema({
-    QA_id:         { type: Number },
+    QA_id:         { type: Number, unique: true },
     PRO_id:        { type: Number },
     USU_id:        { type: Number },
     QA_question:   { type: String },

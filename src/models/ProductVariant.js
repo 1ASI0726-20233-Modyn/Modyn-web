@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const productVariantSchema = new mongoose.Schema({
-    VAR_id:    { type: Number },
+    VAR_id:    { type: Number, unique: true },
     PRO_id:    { type: Number },
     VAR_size:  { type: String },
     VAR_color: { type: String },

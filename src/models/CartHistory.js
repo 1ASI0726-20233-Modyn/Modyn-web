@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const cartHistorySchema = new mongoose.Schema({
-    CHS_id:         { type: Number },
+    CHS_id:         { type: Number, unique: true },
     CAR_id:         { type: Number },
     PRO_id:         { type: Number },
     CHS_action:     { type: String, enum: ["added", "removed"] },

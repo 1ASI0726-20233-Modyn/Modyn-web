@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const wishlistItemSchema = new mongoose.Schema({
-    WIST_id:         { type: Number },
+    WIST_id:         { type: Number, unique: true },
     WIS_id:          { type: Number },
     PRO_id:          { type: Number },
     WIST_created_at: { type: Date, default: Date.now }
