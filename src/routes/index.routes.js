@@ -46,6 +46,7 @@ router.use("/products",       require("./catalogo/products.routes"));
 router.use("/variants",       require("./catalogo/productVariants.routes"));
 router.use("/views",          require("./catalogo/productViews.routes"));
 router.use("/suppliers",      require("./catalogo/suppliers.routes"));
+router.use("/reviews",        require("./catalogo/reviews.routes"));
 
 // Notificaciones
 router.use("/notification-events", require("./notificaciones/notificationEvents.routes"));
