@@ -77,4 +77,7 @@ router.use("/returns", require("./pedidos/returns.routes"));
 router.use("/coupons", require("./cupones/coupons.routes"));
 router.use("/coupon-usage", require("./cupones/couponUsage.routes"));
 
+//Authentication
+router.use("/auth", require("./auth/auth.routes"));
+
 module.exports = router;
