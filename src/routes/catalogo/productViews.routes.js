@@ -22,6 +22,28 @@ router.get("/:VIEW_id", async (req, res) => {
     }
 });
 
+// GET - Obtener todas las vistas de un usuario (por USU_id)
+router.get("/user/:USU_id", async (req, res) => {
+    try {
+        const USU_id = parseInt(req.params.USU_id); // convertir a número
+        const respuesta = await ProductView.find({ USU_id });
+        res.send(respuesta);
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+});
+
+// GET - Obtener todas las vistas de un producto (por PRO_id)
+router.get("/product/:PRO_id", async (req, res) => {
+    try {
+        const PRO_id = parseInt(req.params.PRO_id);
+        const respuesta = await ProductView.find({ PRO_id });
+        res.send(respuesta);
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+});
+
 // POST - Crear
 router.post("/", async (req, res) => {
     try {

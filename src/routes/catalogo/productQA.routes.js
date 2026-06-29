@@ -22,6 +22,17 @@ router.get("/:QA_id", async (req, res) => {
     }
 });
 
+// GET - Obtener todas las preguntas de un producto (por PRO_id)
+router.get("/product/:PRO_id", async (req, res) => {
+    try {
+        const PRO_id = parseInt(req.params.PRO_id);
+        const respuesta = await ProductQA.find({ PRO_id });
+        res.send(respuesta);
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+});
+
 // POST - Crear
 router.post("/", async (req, res) => {
     try {
