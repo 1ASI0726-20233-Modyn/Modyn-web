@@ -17,11 +17,16 @@ router.post("/register", async (req, res) => {
             return res.status(400).json({ error: "El email ya está registrado" });
         }
 
+        // Generar USU_id automático
+        const ultimo = await User.findOne({}, {}, { sort: { USU_id: -1 } });
+        const nuevoId = ultimo ? ultimo.USU_id + 1 : 1;
+
         // Encriptar password
         const hash = await bcrypt.hash(USU_password, 10);
 
         // Crear usuario
         const nuevoUsuario = await User.create({
+            USU_id: nuevoId,
             USU_name,
             USU_email,
             USU_password: hash,
