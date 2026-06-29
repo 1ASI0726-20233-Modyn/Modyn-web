@@ -67,6 +67,15 @@ router.use("/recommendations", require("./recomendaciones/recommendations.routes
 // router.use("/wishlist-items", require("./wishlist/wishlistItems.routes"));
 
 // Pedidos
+router.use("/orders",       require("./pedidos/orders.routes"));
+router.use("/order-detail", require("./pedidos/orderDetail.routes"));
+router.use("/payments",     require("./pedidos/payments.routes"));
+router.use("/shipments",    require("./pedidos/shipments.routes"));
+router.use("/returns",      require("./pedidos/returns.routes"));
+
+// Cupones
+router.use("/coupons",      require("./cupones/coupons.routes"));
+router.use("/coupon-usage", require("./cupones/couponUsage.routes"));
 // router.use("/orders", require("./pedidos/orders.routes"));
 // router.use("/order-detail", require("./pedidos/orderDetail.routes"));
 // router.use("/payments", require("./pedidos/payments.routes"));
