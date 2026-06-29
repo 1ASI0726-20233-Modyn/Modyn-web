@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const orderSchema = new mongoose.Schema({
-    ORD_id:         { type: Number },
+    ORD_id:         { type: Number, unique: true },
     USU_id:         { type: Number },
     COU_id:         { type: Number, default: null },
     ORD_total:      { type: Number },

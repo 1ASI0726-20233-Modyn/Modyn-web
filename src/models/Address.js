@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const addressSchema = new mongoose.Schema({
-    ADD_id:      { type: Number },
+    ADD_id:      { type: Number, unique: true },
     USU_id:      { type: Number },
     ADD_address: { type: String },
     ADD_city:    { type: String },
