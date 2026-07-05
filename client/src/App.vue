@@ -1,10 +1,10 @@
 <template>
     <div id="app">
-        <Navbar v-if="!isAdminRoute" />
+        <Navbar v-if="!isAdminRoute && !isAuthRoute" />
         <main>
             <RouterView />
         </main>
-        <Footer v-if="!isAdminRoute" />
+        <Footer v-if="!isAdminRoute && !isAuthRoute" />
     </div>
 </template>
 
@@ -16,6 +16,7 @@ import Footer from './components/common/Footer.vue'
 
 const route = useRoute()
 const isAdminRoute = computed(() => route.path.startsWith('/admin'))
+const isAuthRoute  = computed(() => route.path === '/login' || route.path === '/register')
 </script>
 
 <style>
