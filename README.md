@@ -18,25 +18,45 @@
 ## Estructura del proyecto
 
 Modyn-web/
-├── server/                 ← Backend Express
+
+├── server/    ← Backend Express
+
 │   ├── src/
+
 │   │   ├── models/         ← 32 modelos MongoDB
+
 │   │   ├── routes/         ← 32 rutas CRUD
+
 │   │   ├── index.js
+
 │   │   └── database.js
+
 │   ├── package.json
+
 │   ├── .env
+
 │   └── Dockerfile
+
 ├── client/                 ← Frontend Vue
+
 │   ├── src/
+
 │   │   ├── assets/
+
 │   │   ├── components/
+
 │   │   ├── views/
+
 │   │   ├── router/
+
 │   │   ├── stores/
+
 │   │   └── services/
+
 │   └── package.json
+
 ├── docker-compose.yml
+
 └── README.md
 
 ---
