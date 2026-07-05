@@ -1,8 +1,20 @@
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
+import { useAuthStore } from './authStore'
+import {
+    obtenerOCrearCarrito,
+    listarItemsCarrito,
+    agregarItemCarrito,
+    actualizarItemCarrito,
+    eliminarItemCarrito
+} from '../services/carritoService'
+import { obtenerProducto } from '../services/productosService'
 
 export const useCarritoStore = defineStore('carrito', () => {
-    const items = ref([])
+    const CAR_id    = ref(null)
+    const items     = ref([]) // { CARTI_id, CAR_id, PRO_id, CARTI_quantity, CARTI_price, producto }
+    const cargando  = ref(false)
+    const iniciado  = ref(false)
 
     const total = computed(() =>
         items.value.reduce((acc, item) => acc + item.CARTI_price * item.CARTI_quantity, 0)
@@ -12,20 +24,80 @@ export const useCarritoStore = defineStore('carrito', () => {
         items.value.reduce((acc, item) => acc + item.CARTI_quantity, 0)
     )
 
-    const agregar = (producto) => {
-        const existe = items.value.find(i => i.PRO_id === producto.PRO_id)
-        if (existe) {
-            existe.CARTI_quantity++
-        } else {
-            items.value.push({ ...producto, CARTI_quantity: 1 })
+    // Crea/recupera el carrito del usuario logueado y trae sus items
+    const inicializar = async () => {
+        const auth = useAuthStore()
+        if (!auth.usuario) return
+        cargando.value = true
+        try {
+            const carrito = await obtenerOCrearCarrito(auth.usuario.USU_id)
+            CAR_id.value = carrito.CAR_id
+            await cargarItems()
+            iniciado.value = true
+        } finally {
+            cargando.value = false
         }
     }
 
-    const quitar = (PRO_id) => {
-        items.value = items.value.filter(i => i.PRO_id !== PRO_id)
+    const cargarItems = async () => {
+        if (!CAR_id.value) return
+        const data = await listarItemsCarrito(CAR_id.value)
+        const enriquecidos = await Promise.all(
+            (data || []).map(async (item) => {
+                const producto = await obtenerProducto(item.PRO_id).catch(() => null)
+                return { ...item, producto }
+            })
+        )
+        items.value = enriquecidos
     }
 
-    const vaciar = () => { items.value = [] }
+    // producto: objeto de la tabla products (PRO_id, PRO_price, PRO_discount_price, ...)
+    const agregar = async (producto, cantidad = 1) => {
+        if (!iniciado.value) await inicializar()
+        if (!CAR_id.value) return
 
-    return { items, total, cantidadItems, agregar, quitar, vaciar }
+        const precio    = producto.PRO_discount_price || producto.PRO_price
+        const existente = items.value.find((i) => i.PRO_id === producto.PRO_id)
+
+        if (existente) {
+            await actualizarCantidad(existente.CARTI_id, existente.CARTI_quantity + cantidad)
+        } else {
+            const nuevo = await agregarItemCarrito({
+                CAR_id: CAR_id.value,
+                PRO_id: producto.PRO_id,
+                CARTI_quantity: cantidad,
+                CARTI_price: precio
+            })
+            items.value.push({ ...nuevo, producto })
+        }
+    }
+
+    const actualizarCantidad = async (CARTI_id, cantidad) => {
+        if (cantidad < 1) return quitar(CARTI_id)
+        const actualizado = await actualizarItemCarrito(CARTI_id, { CARTI_quantity: cantidad })
+        const item = items.value.find((i) => i.CARTI_id === CARTI_id)
+        if (item) item.CARTI_quantity = actualizado.CARTI_quantity
+    }
+
+    const quitar = async (CARTI_id) => {
+        await eliminarItemCarrito(CARTI_id)
+        items.value = items.value.filter((i) => i.CARTI_id !== CARTI_id)
+    }
+
+    const vaciar = async () => {
+        await Promise.all(items.value.map((i) => eliminarItemCarrito(i.CARTI_id)))
+        items.value = []
+    }
+
+    const reset = () => {
+        CAR_id.value = null
+        items.value = []
+        iniciado.value = false
+    }
+
+    return {
+        CAR_id, items, cargando, iniciado,
+        total, cantidadItems,
+        inicializar, cargarItems, agregar, actualizarCantidad, quitar, vaciar, reset
+    }
 })
