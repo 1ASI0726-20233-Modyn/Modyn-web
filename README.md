@@ -122,8 +122,11 @@ npm run dev
 ## Variables de entorno
 
 Crea un archivo `.env` dentro de `server/`:
+
 MONGODB_URI=mongodb+srv://usuario:password@cluster.mongodb.net/modyn_db
+
 JWT_SECRET=modyn-secret-2026
+
 PORT=3000
 
 ---
@@ -131,7 +134,9 @@ PORT=3000
 ## Solución de errores
 
 ### Puerto 3000 ocupado
+
 netstat -ano | findstr :3000
+
 taskkill /PID aqui-el-pid /F
 
 ### Matar todos los procesos Node
@@ -230,26 +235,3 @@ Tablas: orders, order_detail, payments, shipments, returns, products, categories
 | --color-bg | #FDF5F0 | Fondo crema |
 | --color-text | #3D2B2B | Texto principal |
 | --color-bg-dark | #2D1B1B | Sidebar admin |
-
----
-
-## Flujo de trabajo Git
-main          ← rama principal estable
-develop       ← rama de desarrollo
-feat/luis     ← rama de Luis
-feat/brianna  ← rama de Brianna
-feat/mathias  ← rama de Mathias
-feat/howards  ← rama de Howards
-
-Cada compañero trabaja en su rama y hace PR a develop.
-
----
-
-## Tablas de la base de datos
-
-| # | Tabla | Descripción |
-|---|---|---|
-| 1-29 | Colecciones originales | CRUD completo |
-| 30 | settings | Configuración global de la tienda |
-| 31 | notification_preferences | Preferencias de notificaciones |
-| 32 | newsletter_subscribers | Suscriptores al boletín |
