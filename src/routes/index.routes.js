@@ -77,6 +77,13 @@ router.use("/returns", require("./pedidos/returns.routes"));
 router.use("/coupons", require("./cupones/coupons.routes"));
 router.use("/coupon-usage", require("./cupones/couponUsage.routes"));
 
+// Admin
+router.use("/settings",                 require("./admin/settings.routes"));
+router.use("/notification-preferences", require("./admin/notificationPreferences.routes"));
+
+// Público
+router.use("/newsletter", require("./public/newsletter.routes"));
+
 //Authentication
 router.use("/auth", require("./auth/auth.routes"));
 

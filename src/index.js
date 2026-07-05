@@ -1,12 +1,13 @@
 const express = require("express");
+const cors = require("cors");
+
 const app = express();
 
+require("dotenv").config();
 require("./database");
 
+app.use(cors());
 app.use(express.json());
-
-const { swaggerUi, specs } = require("./swagger");
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(specs));
 
 app.get("/", (req, res) => {
     res.send("Bienvenidos a Modyn E-commerce");

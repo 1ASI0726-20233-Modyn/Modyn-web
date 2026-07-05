@@ -12,6 +12,28 @@ router.get("/", async (req, res) => {
     }
 });
 
+// GET - Top trending
+router.get("/trending", async (req, res) => {
+    try {
+        const respuesta = await Product.find({})
+            .sort({ PRO_trending_score: -1 })
+            .limit(10);
+        res.send(respuesta);
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+});
+
+// GET - Por categoría
+router.get("/category/:CAT_id", async (req, res) => {
+    try {
+        const respuesta = await Product.find({ CAT_id: req.params.CAT_id });
+        res.send(respuesta);
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+});
+
 // GET - Obtener por PRO_id
 router.get("/:PRO_id", async (req, res) => {
     try {

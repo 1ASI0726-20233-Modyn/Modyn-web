@@ -4,7 +4,7 @@ const User = require("../../models/User");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
-const SECRET = "modyn-secret-2026";
+const SECRET = process.env.JWT_SECRET;
 
 // POST - Registro
 router.post("/register", async (req, res) => {
