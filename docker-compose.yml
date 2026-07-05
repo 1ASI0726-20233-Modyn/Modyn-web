@@ -1,24 +1,12 @@
-version: "3"
-
 services:
   webapp:
     container_name: modyn_webapp
     restart: always
-    build: .
+    build: ./server
     ports:
       - "5000:3000"
-    depends_on:
-      - database
-    links:
-      - database
-
-  database:
-    container_name: modyn_db
-    image: mongo
-    ports:
-      - "27018:27017"
     volumes:
-      - modyn_data:/data/db
-
-volumes:
-  modyn_data:
+      - ./server:/usr/src/app
+      - /usr/src/app/node_modules
+    env_file:
+      - .env
