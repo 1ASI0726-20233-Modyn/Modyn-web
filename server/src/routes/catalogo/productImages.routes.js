@@ -26,7 +26,9 @@ router.get("/:IMG_id", async (req, res) => {
 router.post("/", async (req, res) => {
     try {
         const body = req.body;
-        const respuesta = await ProductImage.create(body);
+        const ultimo = await ProductImage.findOne({}, {}, { sort: { IMG_id: -1 } });
+        const nuevoId = ultimo ? ultimo.IMG_id + 1 : 1;
+        const respuesta = await ProductImage.create({ ...body, IMG_id: nuevoId });
         res.send(respuesta);
     } catch (err) {
         res.status(500).json({ error: err.message });

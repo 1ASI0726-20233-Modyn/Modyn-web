@@ -56,6 +56,7 @@ router.post("/", async (req, res) => {
     }
 });
 
+
 // PUT - Actualizar una imagen de reseña
 router.put("/:REVIMG_id", async (req, res) => {
     try {
