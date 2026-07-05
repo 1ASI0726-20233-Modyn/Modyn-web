@@ -13,6 +13,13 @@
 - Pinia (estado global)
 - Vue Router (navegación)
 
+## Usuarios de prueba
+
+| Rol | Email | Password |
+|---|---|---|
+| Admin | admin@modyn.com | admin123 |
+| Cliente | sofia@gmail.com | sofia123 |
+
 ---
 
 ## Estructura del proyecto
