@@ -5,8 +5,11 @@ const Payment = require('../models/Payment');
 const User = require('../models/User');
 const Product = require('../models/Product');
 const Category = require('../models/Category');
+const Return = require('../models/Return');
 
-// 1. Resumen general
+// =====================================================
+// 1. Resumen general (para dashboard)
+// =====================================================
 router.get('/summary', async (req, res) => {
     try {
         const totalSales = await Order.aggregate([
@@ -17,7 +20,6 @@ router.get('/summary', async (req, res) => {
             ORD_status: { $in: ['pending', 'shipped', 'in_transit'] }
         });
         const totalCustomers = await User.countDocuments({ USU_role: 'cliente' });
-        // Ingresos del mes actual
         const now = new Date();
         const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
         const monthlyRevenue = await Order.aggregate([
@@ -36,7 +38,9 @@ router.get('/summary', async (req, res) => {
     }
 });
 
+// =====================================================
 // 2. Ingresos mensuales (últimos 12 meses)
+// =====================================================
 router.get('/monthly-revenue', async (req, res) => {
     try {
         const result = await Order.aggregate([
@@ -59,7 +63,9 @@ router.get('/monthly-revenue', async (req, res) => {
     }
 });
 
-// 3. Ventas por categoría
+// =====================================================
+// 3. Ventas por categoría (opcional)
+// =====================================================
 router.get('/sales-by-category', async (req, res) => {
     try {
         const result = await OrderDetail.aggregate([
@@ -102,7 +108,8 @@ router.get('/sales-by-category', async (req, res) => {
                     categoryName: '$category.CAT_name',
                     total: 1
                 }
-            }
+            },
+            { $sort: { total: -1 } }
         ]);
         res.json(result);
     } catch (err) {
@@ -110,7 +117,9 @@ router.get('/sales-by-category', async (req, res) => {
     }
 });
 
-// 4. Pedidos recientes (con datos del usuario y pago)
+// =====================================================
+// 4. Pedidos recientes (para dashboard)
+// =====================================================
 router.get('/recent-orders', async (req, res) => {
     try {
         const orders = await Order.aggregate([
@@ -147,6 +156,93 @@ router.get('/recent-orders', async (req, res) => {
             }
         ]);
         res.json(orders);
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+});
+
+// =====================================================
+// 5. Categoría con más productos (para análisis)
+// =====================================================
+router.get('/most-popular-category', async (req, res) => {
+    try {
+        const result = await Product.aggregate([
+            {
+                $group: {
+                    _id: '$CAT_id',
+                    count: { $sum: 1 }
+                }
+            },
+            { $sort: { count: -1 } },
+            { $limit: 1 },
+            {
+                $lookup: {
+                    from: 'categories',
+                    localField: '_id',
+                    foreignField: 'CAT_id',
+                    as: 'category'
+                }
+            },
+            { $unwind: '$category' },
+            {
+                $project: {
+                    categoryName: '$category.CAT_name',
+                    productCount: '$count',
+                    categoryId: '$_id'
+                }
+            }
+        ]);
+        res.json(result[0] || { categoryName: 'Sin categoría', productCount: 0 });
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+});
+
+// =====================================================
+// 6. Productos más vendidos (para análisis)
+// =====================================================
+router.get('/top-products', async (req, res) => {
+    try {
+        const result = await OrderDetail.aggregate([
+            {
+                $lookup: {
+                    from: 'orders',
+                    localField: 'ORD_id',
+                    foreignField: 'ORD_id',
+                    as: 'order'
+                }
+            },
+            { $unwind: '$order' },
+            { $match: { 'order.ORD_status': 'completed' } },
+            {
+                $group: {
+                    _id: '$PRO_id',
+                    totalUnits: { $sum: '$DET_quantity' },
+                    totalRevenue: { $sum: { $multiply: ['$DET_quantity', '$DET_unit_price'] } }
+                }
+            },
+            { $sort: { totalUnits: -1 } },
+            { $limit: 5 },
+            {
+                $lookup: {
+                    from: 'products',
+                    localField: '_id',
+                    foreignField: 'PRO_id',
+                    as: 'product'
+                }
+            },
+            { $unwind: '$product' },
+            {
+                $project: {
+                    PRO_id: '$_id',
+                    PRO_name: '$product.PRO_name',
+                    PRO_price: '$product.PRO_price',
+                    totalUnits: 1,
+                    totalRevenue: 1
+                }
+            }
+        ]);
+        res.json(result);
     } catch (err) {
         res.status(500).json({ error: err.message });
     }

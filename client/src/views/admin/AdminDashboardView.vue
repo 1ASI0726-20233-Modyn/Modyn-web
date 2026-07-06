@@ -1,7 +1,6 @@
 <template>
   <div class="admin-layout">
     <AdminSidebar />
-
     <div class="admin-content">
       <h1>Panel de Administración</h1>
       <p class="welcome">Bienvenido, {{ auth.usuario?.USU_name }}</p>
@@ -26,72 +25,60 @@
         </div>
       </div>
 
-      <!-- Gráfico de ingresos mensuales (barras con CSS) -->
-      <div class="chart-section">
-        <h3>Ingresos mensuales</h3>
-        <div v-if="monthlyRevenue.length" class="bar-chart">
-          <div
-            v-for="item in monthlyRevenue"
-            :key="item._id.month"
-            class="bar-item"
-          >
-            <div
-              class="bar"
-              :style="{
-                height: (item.total / maxMonthly) * 100 + '%'
-              }"
-            ></div>
-            <span>{{ item._id.month }}/{{ item._id.year }}</span>
-          </div>
-        </div>
-        <p v-else class="empty-message">Aún no hay datos de ingresos mensuales.</p>
+      <!-- Categoría más popular -->
+      <div class="category-card">
+        <h3>Categoría con más productos</h3>
+        <p v-if="popularCategory">
+          <strong>{{ popularCategory.categoryName }}</strong>
+          ({{ popularCategory.productCount }} productos)
+        </p>
+        <p v-else class="empty-message">No hay categorías</p>
       </div>
 
-      <!-- Ventas por categoría (opcional, pero lo añado para dar más profundidad) -->
-      <div v-if="salesByCategory.length" class="category-section">
-        <h3>Ventas por categoría</h3>
-        <div class="category-list">
-          <div
-            v-for="cat in salesByCategory"
-            :key="cat._id"
-            class="category-item"
-          >
-            <span>{{ cat.categoryName || 'Sin categoría' }}</span>
-            <span>${{ cat.total.toFixed(2) }}</span>
+      <!-- Productos más vendidos -->
+      <div class="top-products-section">
+        <h3>Productos más vendidos</h3>
+        <div v-if="topProducts.length" class="product-list">
+          <div v-for="(p, idx) in topProducts" :key="p.PRO_id" class="product-item">
+            <span class="rank">#{{ idx + 1 }}</span>
+            <span class="name">{{ p.PRO_name }}</span>
+            <span class="units">{{ p.totalUnits }} unidades</span>
+            <span class="revenue">${{ p.totalRevenue.toFixed(2) }}</span>
           </div>
         </div>
+        <p v-else class="empty-message">Aún no hay ventas</p>
       </div>
 
-      <!-- Tabla de pedidos recientes -->
+      <!-- Pedidos recientes -->
       <div class="table-container">
         <h3>Pedidos recientes</h3>
         <table class="admin-table">
           <thead>
-          <tr>
-            <th>ID Pedido</th>
-            <th>Fecha</th>
-            <th>Cliente</th>
-            <th>Total</th>
-            <th>Método pago</th>
-            <th>Estado</th>
-          </tr>
+            <tr>
+              <th>ID Pedido</th>
+              <th>Fecha</th>
+              <th>Cliente</th>
+              <th>Total</th>
+              <th>Método pago</th>
+              <th>Estado</th>
+            </tr>
           </thead>
           <tbody>
-          <tr v-if="recentOrders.length === 0">
-            <td colspan="6" class="empty-state">No hay pedidos recientes</td>
-          </tr>
-          <tr v-for="order in recentOrders" :key="order.ORD_id">
-            <td>#ORD-{{ order.ORD_id }}</td>
-            <td>{{ formatearFecha(order.ORD_created_at) }}</td>
-            <td>{{ order.user?.USU_name || '—' }}</td>
-            <td>${{ order.ORD_total }}</td>
-            <td>{{ order.payment?.PAY_method || '—' }}</td>
-            <td>
+            <tr v-if="recentOrders.length === 0">
+              <td colspan="6" class="empty-state">No hay pedidos recientes</td>
+            </tr>
+            <tr v-for="order in recentOrders" :key="order.ORD_id">
+              <td>#ORD-{{ order.ORD_id }}</td>
+              <td>{{ formatearFecha(order.ORD_created_at) }}</td>
+              <td>{{ order.user?.USU_name || '—' }}</td>
+              <td>${{ order.ORD_total }}</td>
+              <td>{{ order.payment?.PAY_method || '—' }}</td>
+              <td>
                 <span :class="estadoClase(order.ORD_status)">
                   {{ traducirEstado(order.ORD_status) }}
                 </span>
-            </td>
-          </tr>
+              </td>
+            </tr>
           </tbody>
         </table>
       </div>
@@ -107,18 +94,16 @@ import AdminSidebar from '../../components/admin/AdminSidebar.vue'
 
 const auth = useAuthStore()
 
-// Estado principal
+// Estado
 const metrics = ref({
   totalSales: 0,
   activeOrders: 0,
   totalCustomers: 0,
-  monthlyRevenue: 0
+  monthlyRevenue: 0,
 })
-const monthlyRevenue = ref([])
-const salesByCategory = ref([])
+const popularCategory = ref(null)
+const topProducts = ref([])
 const recentOrders = ref([])
-const maxMonthly = ref(1)
-const loading = ref(true)
 
 // Funciones auxiliares
 const formatearFecha = (fecha) => {
@@ -127,7 +112,7 @@ const formatearFecha = (fecha) => {
   return d.toLocaleDateString('es-ES', {
     day: '2-digit',
     month: 'short',
-    year: 'numeric'
+    year: 'numeric',
   })
 }
 
@@ -137,7 +122,7 @@ const traducirEstado = (estado) => {
     shipped: 'Enviado',
     completed: 'Completado',
     cancelled: 'Cancelado',
-    in_transit: 'En tránsito'
+    in_transit: 'En tránsito',
   }
   return mapa[estado] || estado
 }
@@ -148,34 +133,27 @@ const estadoClase = (estado) => {
     shipped: 'badge-enviado',
     completed: 'badge-completado',
     cancelled: 'badge-cancelado',
-    in_transit: 'badge-transito'
+    in_transit: 'badge-transito',
   }
   return clases[estado] || 'badge-default'
 }
 
 // Carga de datos
 const cargarDashboard = async () => {
-  loading.value = true
   try {
-    const [sum, monthly, categories, orders] = await Promise.all([
+    const [sum, category, products, orders] = await Promise.all([
       get('/analytics/summary'),
-      get('/analytics/monthly-revenue'),
-      get('/analytics/sales-by-category'),
-      get('/analytics/recent-orders')
+      get('/analytics/most-popular-category'),
+      get('/analytics/top-products'),
+      get('/analytics/recent-orders'),
     ])
 
     metrics.value = sum
-    monthlyRevenue.value = monthly.slice(-6) // últimos 6 meses
-    if (monthly.length) {
-      const ultimos = monthly.slice(-6)
-      maxMonthly.value = Math.max(...ultimos.map(m => m.total), 1)
-    }
-    salesByCategory.value = categories
+    popularCategory.value = category
+    topProducts.value = products
     recentOrders.value = orders
   } catch (error) {
     console.error('Error cargando el dashboard:', error)
-  } finally {
-    loading.value = false
   }
 }
 
@@ -197,7 +175,7 @@ onMounted(cargarDashboard)
   margin-bottom: 2rem;
 }
 
-/* Tarjetas de métricas */
+/* Tarjetas */
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -221,72 +199,61 @@ onMounted(cargarDashboard)
   color: var(--color-text-light);
 }
 
-/* Gráfico de barras */
-.chart-section {
+/* Categoría popular */
+.category-card {
   background: white;
   padding: 1.5rem;
   border-radius: 12px;
   margin-bottom: 2rem;
   box-shadow: var(--shadow-sm);
 }
-.chart-section h3 {
+.category-card h3 {
   margin-top: 0;
-}
-.bar-chart {
-  display: flex;
-  gap: 0.5rem;
-  align-items: flex-end;
-  height: 150px;
-  margin-top: 1rem;
-}
-.bar-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  flex: 1;
-}
-.bar {
-  width: 100%;
-  background: var(--color-primary);
-  border-radius: 4px 4px 0 0;
-  min-height: 5px;
-  transition: height 0.4s ease;
-}
-.bar-item span {
-  font-size: 0.7rem;
-  margin-top: 0.5rem;
-  color: var(--color-text-light);
-}
-.empty-message {
-  color: var(--color-text-light);
-  margin: 1rem 0;
 }
 
-/* Ventas por categoría */
-.category-section {
+/* Productos más vendidos */
+.top-products-section {
   background: white;
   padding: 1.5rem;
   border-radius: 12px;
   margin-bottom: 2rem;
   box-shadow: var(--shadow-sm);
 }
-.category-section h3 {
+.top-products-section h3 {
   margin-top: 0;
 }
-.category-list {
+.product-list {
   margin-top: 0.5rem;
 }
-.category-item {
+.product-item {
   display: flex;
-  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
   padding: 0.5rem 0;
   border-bottom: 1px solid var(--color-border);
 }
-.category-item:last-child {
+.product-item:last-child {
   border-bottom: none;
 }
+.rank {
+  font-weight: 600;
+  color: var(--color-primary);
+  width: 2.5rem;
+}
+.name {
+  flex: 1;
+}
+.units {
+  color: var(--color-text-light);
+  font-size: 0.9rem;
+}
+.revenue {
+  font-weight: 500;
+  min-width: 80px;
+  text-align: right;
+}
 
-/* Tabla de pedidos recientes */
+/* Tabla pedidos recientes */
 .table-container {
   background: white;
   border-radius: 12px;
@@ -316,8 +283,12 @@ onMounted(cargarDashboard)
   padding: 2rem;
   color: var(--color-text-light);
 }
+.empty-message {
+  color: var(--color-text-light);
+  margin: 0.5rem 0;
+}
 
-/* Badges de estado */
+/* Badges */
 .badge-pendiente {
   background: #fff3cd;
   color: #856404;
@@ -370,9 +341,6 @@ onMounted(cargarDashboard)
 @media (max-width: 640px) {
   .stats-grid {
     grid-template-columns: 1fr;
-  }
-  .bar-chart {
-    height: 100px;
   }
 }
 </style>
