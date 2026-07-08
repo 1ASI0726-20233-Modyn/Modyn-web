@@ -2,7 +2,7 @@ const { Router } = require("express");
 const router = Router();
 const Payment = require("../../models/Payment");
 
-// GET - Listar todos los pagos
+// GET - Listar todos
 router.get("/", async (req, res) => {
     try {
         const respuesta = await Payment.find({});
@@ -12,7 +12,7 @@ router.get("/", async (req, res) => {
     }
 });
 
-// GET - Obtener pago por PAY_id
+// GET - Obtener por PAY_id
 router.get("/:PAY_id", async (req, res) => {
     try {
         const respuesta = await Payment.findOne({ PAY_id: req.params.PAY_id });
@@ -22,17 +22,7 @@ router.get("/:PAY_id", async (req, res) => {
     }
 });
 
-// GET - Listar pagos de un pedido
-router.get("/pedido/:ORD_id", async (req, res) => {
-    try {
-        const respuesta = await Payment.find({ ORD_id: req.params.ORD_id });
-        res.send(respuesta);
-    } catch (err) {
-        res.status(500).json({ error: err.message });
-    }
-});
-
-// POST - Crear pago
+// POST - Crear (auto-incrementa PAY_id)
 router.post("/", async (req, res) => {
     try {
         const body = req.body;
@@ -45,7 +35,7 @@ router.post("/", async (req, res) => {
     }
 });
 
-// PUT - Actualizar pago
+// PUT - Actualizar
 router.put("/:PAY_id", async (req, res) => {
     try {
         const PAY_id = req.params.PAY_id;
@@ -57,7 +47,7 @@ router.put("/:PAY_id", async (req, res) => {
     }
 });
 
-// DELETE - Eliminar pago
+// DELETE - Eliminar
 router.delete("/:PAY_id", async (req, res) => {
     try {
         const PAY_id = req.params.PAY_id;
