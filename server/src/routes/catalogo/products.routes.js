@@ -57,6 +57,29 @@ router.post("/", async (req, res) => {
     }
 });
 
+router.get("/trending/:periodo", async (req, res) => {
+    try {
+        const hoy   = new Date()
+        let desde   = new Date()
+
+        if (req.params.periodo === 'hoy') {
+            desde.setHours(0, 0, 0, 0)
+        } else if (req.params.periodo === 'semana') {
+            desde.setDate(hoy.getDate() - 7)
+        } else if (req.params.periodo === 'mes') {
+            desde.setMonth(hoy.getMonth() - 1)
+        }
+
+        const respuesta = await Product.find({
+            PRO_last_trending_update: { $gte: desde }
+        }).sort({ PRO_trending_score: -1 }).limit(10)
+
+        res.send(respuesta)
+    } catch (err) {
+        res.status(500).json({ error: err.message })
+    }
+})
+
 // PUT - Actualizar
 router.put("/:PRO_id", async (req, res) => {
     try {

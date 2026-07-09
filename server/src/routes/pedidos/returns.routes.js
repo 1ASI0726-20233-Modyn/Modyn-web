@@ -2,7 +2,7 @@ const { Router } = require("express");
 const router = Router();
 const Return = require("../../models/Return");
 
-// GET - Listar todas las devoluciones
+// GET - Listar todos
 router.get("/", async (req, res) => {
     try {
         const respuesta = await Return.find({});
@@ -12,7 +12,7 @@ router.get("/", async (req, res) => {
     }
 });
 
-// GET - Obtener devolución por RET_id
+// GET - Obtener por RET_id
 router.get("/:RET_id", async (req, res) => {
     try {
         const respuesta = await Return.findOne({ RET_id: req.params.RET_id });
@@ -22,17 +22,7 @@ router.get("/:RET_id", async (req, res) => {
     }
 });
 
-// GET - Listar devoluciones de un pedido
-router.get("/pedido/:ORD_id", async (req, res) => {
-    try {
-        const respuesta = await Return.find({ ORD_id: req.params.ORD_id });
-        res.send(respuesta);
-    } catch (err) {
-        res.status(500).json({ error: err.message });
-    }
-});
-
-// POST - Crear devolución
+// POST - Crear (auto-incrementa RET_id)
 router.post("/", async (req, res) => {
     try {
         const body = req.body;
@@ -45,7 +35,7 @@ router.post("/", async (req, res) => {
     }
 });
 
-// PUT - Actualizar devolución
+// PUT - Actualizar
 router.put("/:RET_id", async (req, res) => {
     try {
         const RET_id = req.params.RET_id;
@@ -57,7 +47,7 @@ router.put("/:RET_id", async (req, res) => {
     }
 });
 
-// DELETE - Eliminar devolución
+// DELETE - Eliminar
 router.delete("/:RET_id", async (req, res) => {
     try {
         const RET_id = req.params.RET_id;
