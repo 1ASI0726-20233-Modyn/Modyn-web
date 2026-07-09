@@ -1,0 +1,1 @@
+import{at as e,c as t,t as n,y as r}from"./_plugin-vue_export-helper-tjbHWKbe.js";var i={};function a(n,i){return r(),t(`div`,null,e(n.$route.path),1)}var o=n(i,[[`render`,a]]);export{o as default};
