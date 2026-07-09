@@ -12,6 +12,16 @@ router.get("/", async (req, res) => {
     }
 });
 
+// GET - Imágenes por producto
+router.get("/product/:PRO_id", async (req, res) => {
+    try {
+        const respuesta = await ProductImage.find({ PRO_id: req.params.PRO_id });
+        res.send(respuesta);
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+});
+
 // GET - Obtener por IMG_id
 router.get("/:IMG_id", async (req, res) => {
     try {
