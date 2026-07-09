@@ -1,14 +1,15 @@
 const express = require("express");
 const cors = require("cors");
+require("dotenv").config(); // Carga .env en desarrollo; en producción no hace nada si no existe
 
 const app = express();
 
-if (process.env.NODE_ENV !== "production") {
-    require("dotenv").config();
-}
 require("./database.js");
 
-app.use(cors());
+// CORS: permite tu frontend en producción (opcional, pero recomendado)
+const allowedOrigins = process.env.CLIENT_URL || "http://localhost:5173";
+app.use(cors({ origin: allowedOrigins }));
+
 app.use(express.json());
 
 app.get("/", (req, res) => {
@@ -17,5 +18,8 @@ app.get("/", (req, res) => {
 
 app.use(require("./routes/index.routes.js"));
 
-app.listen(3000);
-console.log("Server on port ", 3000);
+// ⚠️ CAMBIO IMPORTANTE: usa el puerto de la nube o 3000 por defecto
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+});
