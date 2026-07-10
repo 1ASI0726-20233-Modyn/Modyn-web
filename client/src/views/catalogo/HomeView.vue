@@ -10,11 +10,7 @@
             <div class="hero-inner">
                 <!-- Texto -->
                 <div class="hero-text">
-<<<<<<< HEAD
                     <h1>Tu estilo,<br>tu mundo ✨</h1>
-=======
-                    <h1>Tu estilo,<br>tu mundo <i class="pi pi-sparkles"></i></h1>
->>>>>>> 39c2759 (feat: imagenes reales en carrito/checkout, iconos PrimeIcons, mejoras en detalle de producto)
                     <p>Descubre las últimas tendencias de moda. Eleva tu look con nuestra nueva colección diseñada para destacar en cualquier ocasión.</p>
                     <div class="hero-buttons">
                         <RouterLink to="/productos" class="btn-hero-primary">Ver colección</RouterLink>
@@ -32,11 +28,7 @@
         <!-- CATEGORÍAS -->
 <section class="categorias">
     <div class="categorias-inner">
-<<<<<<< HEAD
         <h2>Compra por categoría 🛍️</h2>
-=======
-        <h2>Compra por categoría <i class="pi pi-shopping-bag"></i></h2>
->>>>>>> 39c2759 (feat: imagenes reales en carrito/checkout, iconos PrimeIcons, mejoras en detalle de producto)
         <div class="categorias-pills">
             <button
                 v-for="cat in categorias"
