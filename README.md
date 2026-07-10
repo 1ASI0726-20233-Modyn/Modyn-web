@@ -1,253 +1,297 @@
-# Modyn E-commerce — Fullstack
+# Modyn — E-commerce de Moda
 
-## Tecnologías
+<p align="center">
+  <img src="client/src/assets/logo.png" alt="Modyn Logo" height="80"/>
+</p>
 
-### Backend
-- Node.js + Express.js
-- MongoDB + Mongoose
-- JWT + bcryptjs
-- Docker + Docker Compose
+<p align="center">
+  <img src="https://img.shields.io/badge/Vue-3.5-42b883?style=for-the-badge&logo=vue.js&logoColor=white" />
+  <img src="https://img.shields.io/badge/Vite-8-646CFF?style=for-the-badge&logo=vite&logoColor=white" />
+  <img src="https://img.shields.io/badge/Node.js-Express%205-339933?style=for-the-badge&logo=node.js&logoColor=white" />
+  <img src="https://img.shields.io/badge/MongoDB-Mongoose%209-47A248?style=for-the-badge&logo=mongodb&logoColor=white" />
+  <img src="https://img.shields.io/badge/Pinia-3-F7D336?style=for-the-badge&logo=pinia&logoColor=black" />
+  <img src="https://img.shields.io/badge/JWT-Auth-000000?style=for-the-badge&logo=jsonwebtokens&logoColor=white" />
+  <img src="https://img.shields.io/badge/Docker-Compose-2496ED?style=for-the-badge&logo=docker&logoColor=white" />
+</p>
 
-### Frontend
-- Vue 3 + Vite
-- Pinia (estado global)
-- Vue Router (navegación)
+---
 
-## Usuarios de prueba
+## Descripción
 
-| Rol | Email | Password |
+Aplicación web full-stack para **Modyn** — una tienda de ropa y accesorios online. Los clientes navegan el catálogo, gestionan su carrito y wishlist, dejan reseñas y reciben notificaciones de sus pedidos; los administradores gestionan productos (con subida real de imágenes), pedidos, cupones y analítica desde un panel dedicado. Precios convertibles a más de 15 monedas en tiempo real.
+
+---
+
+## Vistas principales
+
+| Vista | Ruta | Descripción |
 |---|---|---|
-| Admin | admin@modyn.com | admin123 |
-| Cliente | sofia@gmail.com | sofia123 |
+| **Home** | `/` | Landing con productos destacados y tendencias |
+| **Catálogo** | `/productos` | Explora productos con filtros de categoría, precio, color y rating |
+| **Detalle de producto** | `/productos/:id` | Variantes, galería, preguntas y reseñas |
+| **Carrito** | `/carrito` | Gestión de ítems con límite de cantidad por stock |
+| **Checkout** | `/checkout` | Proceso de compra y aplicación de cupones |
+| **Wishlist** | `/wishlist` | Lista de deseos del usuario |
+| **Perfil** | `/perfil` | Datos personales, direcciones e historial de pedidos |
+| **Admin — Dashboard** | `/admin` | Métricas de ventas, pedidos y productos top |
+| **Admin — Productos** | `/admin/productos` | CRUD de productos con subida de imágenes |
+| **Admin — Pedidos** | `/admin/pedidos` | Gestión y cambio de estado de pedidos |
+| **Admin — Análisis** | `/admin/analisis` | Reportes y estadísticas de la tienda |
+| **Admin — Ajustes** | `/admin/ajustes` | Configuración de tienda y notificaciones |
+
+---
+
+## Características
+
+- **Selector de moneda** — precios en soles convertidos en tiempo real a 15+ monedas (USD, EUR, y monedas de Latinoamérica y Asia), con preferencia guardada por usuario.
+- **Notificaciones en tiempo real** — confirmación de pedido, cambio de estado de envío y anuncios de cupones, respetando las preferencias de cada usuario.
+- **Subida real de imágenes** — el admin sube archivos de producto directamente (Multer), sin depender de enlaces externos.
+- **Reseñas y calificaciones** — el rating promedio de cada producto se calcula dinámicamente a partir de las reseñas reales.
+- **Carrito con límites de stock** — validado en frontend y backend.
+- **Diseño responsive** — adaptado a desktop, tablet y mobile en toda la tienda y el panel admin.
+- **Autenticación JWT** — con roles de cliente y administrador.
+
+---
+
+## Tech Stack
+
+| Tecnología | Versión | Rol |
+|---|---|---|
+| [Vue 3](https://vuejs.org) | 3.5 | Framework de frontend (Composition API) |
+| [Vite](https://vitejs.dev) | 8 | Build tool y servidor de desarrollo |
+| [Pinia](https://pinia.vuejs.org) | 3 | Manejo de estado global |
+| [Vue Router](https://router.vuejs.org) | 5 | Enrutamiento del lado del cliente |
+| [PrimeIcons](https://primevue.org/icons) | 7 | Librería de íconos |
+| [Node.js](https://nodejs.org) | ≥22 | Runtime del backend |
+| [Express](https://expressjs.com) | 5 | Framework del servidor / API REST |
+| [MongoDB](https://www.mongodb.com) | — | Base de datos NoSQL |
+| [Mongoose](https://mongoosejs.com) | 9 | ODM para MongoDB |
+| [JSON Web Token](https://jwt.io) | 9 | Autenticación basada en tokens |
+| [bcryptjs](https://www.npmjs.com/package/bcryptjs) | 3 | Hash de contraseñas |
+| [Multer](https://github.com/expressjs/multer) | 1.4 | Subida de archivos (imágenes de producto) |
+| [Docker](https://www.docker.com) / Docker Compose | — | Contenedores para despliegue |
+
+---
+
+## Tabla de contenidos
+
+- [Estructura del proyecto](#estructura-del-proyecto)
+- [Requisitos previos](#requisitos-previos)
+- [Instalación](#instalación)
+- [Variables de entorno](#variables-de-entorno)
+- [Ejecutar el proyecto](#ejecutar-el-proyecto)
+- [Levantar con Docker](#levantar-con-docker)
+- [Scripts disponibles](#scripts-disponibles)
+- [Usuarios de prueba](#usuarios-de-prueba)
+- [Modelo de datos](#modelo-de-datos)
+- [Solución de problemas](#solución-de-problemas)
+- [Equipo](#equipo)
+- [Guía de estilo](#guía-de-estilo)
 
 ---
 
 ## Estructura del proyecto
 
+```
 Modyn-web/
-
-├── server/    ← Backend Express
-
+├── server/                  # Backend Express
 │   ├── src/
-
-│   │   ├── models/         ← 32 modelos MongoDB
-
-│   │   ├── routes/         ← 32 rutas CRUD
-
-│   │   ├── index.js
-
-│   │   └── database.js
-
-│   ├── package.json
-
-│   ├── .env
-
-│   └── Dockerfile
-
-├── client/                 ← Frontend Vue
-
-│   ├── src/
-
-│   │   ├── assets/
-
-│   │   ├── components/
-
-│   │   ├── views/
-
-│   │   ├── router/
-
-│   │   ├── stores/
-
-│   │   └── services/
-
+│   │   ├── models/          # ~32 modelos Mongoose
+│   │   ├── routes/          # Rutas REST agrupadas por dominio
+│   │   ├── middleware/       # Auth, subida de archivos, etc.
+│   │   ├── utils/            # Helpers (ej. notificaciones)
+│   │   ├── database.js
+│   │   └── index.js
+│   ├── uploads/              # Imágenes de producto subidas
+│   ├── scripts/              # Scripts de mantenimiento (ej. recalcular ratings)
 │   └── package.json
-
+├── client/                  # Frontend Vue
+│   ├── src/
+│   │   ├── assets/
+│   │   ├── components/       # Componentes reutilizables (navbar, footer, admin, etc.)
+│   │   ├── views/            # Vistas por ruta (catálogo, admin, auth, etc.)
+│   │   ├── router/
+│   │   ├── stores/           # Pinia (auth, carrito, wishlist, moneda...)
+│   │   └── services/         # Cliente HTTP hacia la API
+│   └── package.json
 ├── docker-compose.yml
-
 └── README.md
+```
 
----
+## Requisitos previos
+
+- Node.js `^22.18.0` o `>=24.12.0`
+- npm
+- Una instancia de MongoDB (local, Docker o MongoDB Atlas)
+- Docker y Docker Compose (opcional, para despliegue con contenedores)
 
 ## Instalación
 
-### Clonar el repositorio
+```bash
 git clone https://github.com/1ASI0726-20233-Modyn/Modyn-web.git
 cd Modyn-web
 
-### Instalar dependencias del backend
+# Backend
 cd server
 npm install
 
-### Instalar dependencias del frontend
-cd client
+# Frontend
+cd ../client
 npm install
+```
 
-> ⚠️ **Importante:** el proyecto usa [PrimeIcons](https://primevue.org/icons/) para los íconos de la interfaz (carrito, wishlist, papelera, etc.), en vez de emojis. Ya está agregado en `client/package.json`, así que un simple `npm install` lo instala junto con el resto.
+> El proyecto usa [PrimeIcons](https://primevue.org/icons/) para los íconos de la interfaz. Ya está declarado en `client/package.json`, así que `npm install` lo instala junto con el resto.
 >
-> Si haces `git pull` y ves errores como `Unable to resolve "primeicons/primeicons.css"` o `ENOENT ... primeicons.css`, significa que tu `node_modules` está desactualizado. Corre de nuevo:
-> ```
-> cd client
-> npm install
-> ```
-> **Regla general:** cada vez que hagas `git pull` y el `package.json` haya cambiado (nuevas librerías), vuelve a correr `npm install` en esa carpeta antes de `npm run dev`.
-
----
-
-## Correr el proyecto
-
-### Backend
-cd server
-npm run dev
-Corre en: http://localhost:3000
-
-### Frontend
-cd client
-npm run dev
-Corre en: http://localhost:5173
-
----
-
-## Levantar con Docker
-
-### Construir y levantar los contenedores
-docker-compose up --build -d
-
-### Ver contenedores corriendo
-docker ps
-
-### Detener los contenedores
-docker-compose down
-
----
-
-## Desarrollo local (sin Docker)
-
-### 1. Levantar solo la base de datos
-docker start modyn_db
-
-### 2. Correr el servidor
-cd server
-npm run dev
-
-### 3. Correr el frontend
-cd client
-npm run dev
-
----
+> Cada vez que hagas `git pull` y el `package.json` de alguna carpeta haya cambiado, vuelve a correr `npm install` en esa carpeta antes de `npm run dev`.
 
 ## Variables de entorno
 
-Crea un archivo `.env` dentro de `server/`:
+Crea un archivo `.env` dentro de `server/` con las siguientes claves:
 
+```env
 MONGODB_URI=mongodb+srv://usuario:password@cluster.mongodb.net/modyn_db
-
-JWT_SECRET=modyn-secret-2026
-
+JWT_SECRET=coloca-un-secreto-largo-y-aleatorio-aqui
 PORT=3000
+CLIENT_URL=http://localhost:5173
+```
 
----
+Y un `.env` dentro de `client/` (opcional, si el backend no corre en `localhost:3000`):
 
-## Solución de errores
+```env
+VITE_API_URL=http://localhost:3000
+```
 
-### Puerto 3000 ocupado
+> No subas nunca el `.env` con credenciales reales al repositorio. Usa un `JWT_SECRET` distinto y robusto en cada entorno (desarrollo, producción).
 
-netstat -ano | findstr :3000
+## Ejecutar el proyecto
 
-taskkill /PID aqui-el-pid /F
+**Backend**
+```bash
+cd server
+npm run dev
+```
+Corre en `http://localhost:3000`
 
-### Matar todos los procesos Node
-taskkill /IM node.exe /F
+**Frontend**
+```bash
+cd client
+npm run dev
+```
+Corre en `http://localhost:5173`
 
-### Detener contenedor de la app
-docker stop modyn_webapp
+## Levantar con Docker
 
----
+```bash
+# Construir y levantar contenedores
+docker-compose up --build -d
 
-## Contenedores
+# Ver contenedores corriendo
+docker ps
 
-| Nombre | Descripción | Puerto |
-|---|---|---|
-| modyn_webapp | App Express | 5000 |
-| modyn_db | MongoDB | 27018 |
+# Detener
+docker-compose down
+```
 
----
+| Contenedor      | Descripción     | Puerto |
+|-----------------|-----------------|--------|
+| `modyn_webapp`  | API Express     | 5000   |
+| `modyn_db`      | MongoDB         | 27018  |
 
-## Acceso
+**Desarrollo local sin levantar todo el stack en Docker:**
+```bash
+docker start modyn_db     # solo la base de datos
+cd server && npm run dev  # backend
+cd client && npm run dev  # frontend
+```
 
-| Entorno | URL |
+## Scripts disponibles
+
+**server/**
+| Script | Descripción |
 |---|---|
-| Backend local | http://localhost:3000 |
-| Frontend local | http://localhost:5173 |
-| MongoDB Compass | mongodb://localhost:27018 |
+| `npm run dev` | Inicia el servidor con recarga automática (nodemon) |
+| `npm start` | Inicia el servidor en modo producción |
+| `npm run recalcular-ratings` | Recalcula `PRO_rating_avg` / `PRO_total_reviews` de todos los productos a partir de las reseñas reales |
 
----
+**client/**
+| Script | Descripción |
+|---|---|
+| `npm run dev` | Servidor de desarrollo con hot-reload |
+| `npm run build` | Compila para producción |
+| `npm run preview` | Sirve el build de producción localmente |
+| `npm run lint` | Corre oxlint + eslint con auto-fix |
+| `npm run format` | Formatea el código con Prettier |
 
-## División del equipo — Frontend
+## Usuarios de prueba
 
-### 👤 Luis — Admin Ajustes y Wishlist
-Pantallas:
-- WishlistView.vue
-- AdminAjustesView.vue
+| Rol | Email | Contraseña |
+|---|---|---|
+| Admin | `admin@modyn.com` | `admin123` |
+| Cliente | `sofia@gmail.com` | `sofia123` |
 
-Tablas: wishlist, wishlist_items, products, product_images, users, settings, notification_preferences
+> Estas credenciales son solo para el entorno de desarrollo/demo. Cámbialas o elimínalas antes de un despliegue real.
 
----
+## Modelo de datos
 
-### 👤 Brianna — Auth, Home y Catálogo
-Pantallas:
-- LoginView.vue
-- RegisterView.vue
-- HomeView.vue
-- ProductosView.vue
-- TendenciasView.vue
+El backend define alrededor de 32 modelos Mongoose organizados por dominio, entre ellos:
 
-Componentes:
-- Navbar.vue
-- Footer.vue
-- ProductCard.vue
-- ProductFilter.vue
+- **Usuarios y sesiones:** `User`, `Session`, `Address`
+- **Catálogo:** `Product`, `ProductVariant`, `ProductImage`, `Category`, `ProductLike`, `ProductView`, `ProductQA`, `Review`, `ProductReviewImage`
+- **Carrito y pedidos:** `Cart`, `CartItem`, `Order`, `OrderDetail`, `Payment`, `Shipment`, `Return`
+- **Promociones:** `Coupon`, `CouponUsage`
+- **Notificaciones:** `Notification`, `NotificationPreference`, `NotificationEvent`
+- **Configuración y wishlist:** `Setting`, `Wishlist`, `WishlistItem`
 
-Tablas: users, sessions, categories, products, product_images, product_likes, product_views, notifications
+Todos los modelos usan un identificador numérico propio (ej. `PRO_id`, `USU_id`, `ORD_id`) como clave primaria de negocio, además del `_id` interno de MongoDB.
 
----
+## Solución de problemas
 
-### 👤 Mathias — Compras y Detalle
-Pantallas:
-- PerfilView.vue
-- CarritoView.vue
-- CheckoutView.vue
-- ProductoDetalleView.vue
+**Puerto 3000 ocupado (Windows)**
+```bash
+netstat -ano | findstr :3000
+taskkill /PID <pid> /F
+```
 
-Componentes:
-- CartItem.vue
-- CartSummary.vue
+**Matar todos los procesos Node (Windows)**
+```bash
+taskkill /IM node.exe /F
+```
 
-Tablas: users, addresses, cart, cart_items, products, product_variants, coupons, coupon_usage, orders, order_detail, payments, shipments, reviews, product_review_images, product_qa
+**Detener el contenedor de la app**
+```bash
+docker stop modyn_webapp
+```
 
----
+**Error `Unable to resolve "primeicons/primeicons.css"` tras un `git pull`**
 
-### 👤 Howards — Panel Admin
-Pantallas:
-- AdminDashboardView.vue
-- AdminProductosView.vue
-- AdminPedidosView.vue
-- AdminAnalisisView.vue
+Tu `node_modules` está desactualizado — vuelve a instalar dependencias:
+```bash
+cd client
+npm install
+```
 
-Componentes:
-- AdminSidebar.vue
-- StatsCard.vue
+## Equipo
 
-Tablas: orders, order_detail, payments, shipments, returns, products, categories, suppliers, product_images, product_variants, users, coupons, coupon_usage
+Proyecto desarrollado en equipo, dividido por módulo funcional:
 
----
+| Integrante | Módulo | Vistas principales |
+|---|---|---|
+| Brianna | Auth, Home y Catálogo | Login, Registro, Home, Catálogo, Tendencias |
+| Mathias | Compras y Detalle | Perfil, Carrito, Checkout, Detalle de producto |
+| Howards | Panel Admin | Dashboard, Productos, Pedidos, Análisis |
+| Luis | Admin Ajustes y Wishlist | Ajustes, Wishlist |
 
-## Colores del proyecto
+## Guía de estilo
+
+Paleta de colores del proyecto (definida como variables CSS globales):
 
 | Variable | Color | Uso |
 |---|---|---|
-| --color-primary | #F4637A | Rosa principal, botones |
-| --color-secondary | #F9A84D | Naranja, acentos |
-| --color-accent | #F7C948 | Amarillo, brillos |
-| --color-bg | #FDF5F0 | Fondo crema |
-| --color-text | #3D2B2B | Texto principal |
-| --color-bg-dark | #2D1B1B | Sidebar admin |
+| `--color-primary` | `#F4637A` | Rosa principal, botones |
+| `--color-secondary` | `#F9A84D` | Naranja, acentos |
+| `--color-accent` | `#F7C948` | Amarillo, brillos |
+| `--color-bg` | `#FDF5F0` | Fondo crema |
+| `--color-text` | `#3D2B2B` | Texto principal |
+| `--color-bg-dark` | `#2D1B1B` | Sidebar del panel admin |
+
+Tipografía: **Poppins** en toda la interfaz, incluyendo elementos de formulario (`button`, `input`).
