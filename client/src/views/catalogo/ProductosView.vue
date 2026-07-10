@@ -15,8 +15,8 @@
           <h3>Precio</h3>
           <input type="range" v-model="precioMax" min="0" max="1000" class="range-slider" />
           <div class="range-labels">
-            <span>$0</span>
-            <span>${{ precioMax }}+</span>
+            <span>{{ currency.formatear(0) }}</span>
+            <span>{{ currency.formatear(precioMax) }}+</span>
           </div>
         </div>
 
@@ -147,10 +147,10 @@
               <h3 class="card-name">{{ producto.PRO_name }}</h3>
               <div class="card-precio">
                 <span class="precio-actual"
-                  >${{ (producto.PRO_discount_price || producto.PRO_price).toFixed(2) }}</span
+                  >{{ currency.formatear(producto.PRO_discount_price || producto.PRO_price) }}</span
                 >
                 <span v-if="producto.PRO_discount_price" class="precio-original"
-                  >${{ producto.PRO_price.toFixed(2) }}</span
+                  >{{ currency.formatear(producto.PRO_price) }}</span
                 >
               </div>
               <div class="card-rating">
@@ -196,8 +196,10 @@ import { ref, computed, onMounted, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import { get } from '../../services/api'
 import { useWishlistStore } from '../../stores/wishlistStore'
+import { useCurrencyStore } from '../../stores/currencyStore'
 
 const wishlist = useWishlistStore()
+const currency = useCurrencyStore()
 const route = useRoute()
 const searchText = ref('')
 const loading = ref(true)

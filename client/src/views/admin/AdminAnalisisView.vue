@@ -13,7 +13,7 @@
             <span class="rank">#{{ idx + 1 }}</span>
             <span class="name">{{ p.PRO_name }}</span>
             <span class="units">{{ p.totalUnits }} unidades</span>
-            <span class="revenue">${{ p.totalRevenue.toFixed(2) }}</span>
+            <span class="revenue">{{ currency.formatear(p.totalRevenue) }}</span>
           </div>
         </div>
         <p v-else class="empty-message">Aún no hay ventas para mostrar.</p>
@@ -55,7 +55,7 @@
                 <td>#{{ p.PAY_id }}</td>
                 <td>#ORD-{{ p.ORD_id }}</td>
                 <td>{{ p.PAY_method }}</td>
-                <td>${{ p.PAY_amount }}</td>
+                <td>{{ currency.formatear(p.PAY_amount) }}</td>
                 <td>
                   <span
                     class="badge"
@@ -104,7 +104,7 @@
                 <td>
                   {{ r.RET_reason?.substring(0, 30) }}{{ r.RET_reason?.length > 30 ? '…' : '' }}
                 </td>
-                <td>${{ r.RET_refund_amount }}</td>
+                <td>{{ currency.formatear(r.RET_refund_amount) }}</td>
                 <td>
                   <span
                     class="badge"
@@ -318,6 +318,9 @@
 import { ref, onMounted } from 'vue'
 import { get, post, del } from '../../services/api'
 import AdminSidebar from '../../components/admin/AdminSidebar.vue'
+import { useCurrencyStore } from '../../stores/currencyStore'
+
+const currency = useCurrencyStore()
 
 // =============================================
 // Estado

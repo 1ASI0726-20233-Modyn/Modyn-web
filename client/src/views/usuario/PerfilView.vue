@@ -87,13 +87,13 @@
                             <span class="pedido-date">{{ formatearFecha(pedido.ORD_created_at) }}</span>
                         </div>
                         <span class="pedido-status" :class="`status-${pedido.ORD_status}`">{{ estadoLabel(pedido.ORD_status) }}</span>
-                        <span class="pedido-total">S/ {{ pedido.ORD_total.toFixed(2) }}</span>
+                        <span class="pedido-total">{{ currency.formatear(pedido.ORD_total) }}</span>
                     </button>
 
                     <div v-if="pedido._abierto" class="pedido-detail">
                         <div v-for="det in pedido._detalle" :key="det.DET_id" class="pedido-detail-item">
                             <span>{{ det._nombreProducto }} × {{ det.DET_quantity }}</span>
-                            <span>S/ {{ (det.DET_unit_price * det.DET_quantity).toFixed(2) }}</span>
+                            <span>{{ currency.formatear(det.DET_unit_price * det.DET_quantity) }}</span>
                         </div>
                         <p v-if="pedido._pago" class="pedido-meta">Pago: {{ pedido._pago.PAY_method }} — {{ pedido._pago.PAY_status }}</p>
                         <p v-if="pedido._envio" class="pedido-meta">Envío: {{ pedido._envio.SHI_carrier }} — {{ pedido._envio.SHI_status }}</p>
@@ -107,6 +107,7 @@
 <script setup>
 import { ref, reactive, onMounted, watch } from 'vue'
 import { useAuthStore } from '../../stores/authStore'
+import { useCurrencyStore } from '../../stores/currencyStore'
 import {
     listarDireccionesUsuario,
     crearDireccion,
@@ -122,6 +123,7 @@ import {
 import { obtenerProducto } from '../../services/productosService'
 
 const auth = useAuthStore()
+const currency = useCurrencyStore()
 
 const tabs = [
     { id: 'datos', label: 'Mis datos' },

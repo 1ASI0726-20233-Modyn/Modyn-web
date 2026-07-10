@@ -12,7 +12,7 @@
                     <p class="cart-summary-item-name">{{ item.producto?.PRO_name || `Producto #${item.PRO_id}` }}</p>
                     <p class="cart-summary-item-qty">{{ item.CARTI_quantity }}x</p>
                 </div>
-                <span class="cart-summary-item-price">S/ {{ (item.CARTI_price * item.CARTI_quantity).toFixed(2) }}</span>
+                <span class="cart-summary-item-price">{{ currency.formatear(item.CARTI_price * item.CARTI_quantity) }}</span>
             </div>
         </div>
 
@@ -39,21 +39,21 @@
         <div class="cart-summary-rows">
             <div class="cart-summary-row">
                 <span>Subtotal</span>
-                <span>S/ {{ subtotal.toFixed(2) }}</span>
+                <span>{{ currency.formatear(subtotal) }}</span>
             </div>
             <div class="cart-summary-row" v-if="descuento > 0">
                 <span>Descuento</span>
-                <span class="cart-summary-discount">− S/ {{ descuento.toFixed(2) }}</span>
+                <span class="cart-summary-discount">− {{ currency.formatear(descuento) }}</span>
             </div>
             <div class="cart-summary-row">
                 <span>Envío</span>
-                <span>{{ envio > 0 ? `S/ ${envio.toFixed(2)}` : 'Gratis' }}</span>
+                <span>{{ envio > 0 ? currency.formatear(envio) : 'Gratis' }}</span>
             </div>
         </div>
 
         <div class="cart-summary-total">
             <span>Total</span>
-            <span>S/ {{ total.toFixed(2) }}</span>
+            <span>{{ currency.formatear(total) }}</span>
         </div>
 
         <button
@@ -71,6 +71,9 @@
 
 <script setup>
 import { ref, computed } from 'vue'
+import { useCurrencyStore } from '../../stores/currencyStore'
+
+const currency = useCurrencyStore()
 
 const props = defineProps({
     items:         { type: Array, default: () => [] },

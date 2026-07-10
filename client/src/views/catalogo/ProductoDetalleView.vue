@@ -44,14 +44,14 @@
                     <span class="detalle-badge" v-if="producto.PRO_brand">{{ producto.PRO_brand }}</span>
                     <h1 class="detalle-name">{{ producto.PRO_name }}</h1>
 
-                    <div class="detalle-rating" v-if="producto.PRO_total_reviews > 0">
-                        <span class="detalle-stars">{{ estrellas(producto.PRO_rating_avg) }}</span>
-                        <span class="detalle-rating-text">{{ producto.PRO_rating_avg.toFixed(1) }} ({{ producto.PRO_total_reviews }} reseñas)</span>
+                    <div class="detalle-rating" v-if="totalResenas > 0">
+                        <span class="detalle-stars">{{ estrellas(ratingPromedio) }}</span>
+                        <span class="detalle-rating-text">{{ ratingPromedio.toFixed(1) }} ({{ totalResenas }} reseñas)</span>
                     </div>
 
                     <div class="detalle-price">
-                        <span class="detalle-price-current">S/ {{ precioActual.toFixed(2) }}</span>
-                        <span v-if="producto.PRO_discount_price" class="detalle-price-old">S/ {{ producto.PRO_price.toFixed(2) }}</span>
+                        <span class="detalle-price-current">{{ currency.formatear(precioActual) }}</span>
+                        <span v-if="producto.PRO_discount_price" class="detalle-price-old">{{ currency.formatear(producto.PRO_price) }}</span>
                         <span v-if="descuentoPorcentaje" class="detalle-price-badge">-{{ descuentoPorcentaje }}% OFF</span>
                     </div>
 
@@ -113,7 +113,7 @@
                         <div class="qty-selector">
                             <button @click="cantidad > 1 && cantidad--">−</button>
                             <span>{{ cantidad }}</span>
-                            <button @click="cantidad++">+</button>
+                            <button :disabled="cantidad >= limiteCantidad" @click="cantidad < limiteCantidad && cantidad++">+</button>
                         </div>
 
                         <button
@@ -134,7 +134,7 @@
                     <p v-if="mensajeAgregado" class="detalle-added-msg">{{ mensajeAgregado }}</p>
 
                     <div class="detalle-shipping-banner">
-                        <i class="pi pi-truck"></i> Envío gratis en pedidos +S/ 100
+                        <i class="pi pi-truck"></i> Envío gratis en pedidos +{{ currency.formatear(100) }}
                     </div>
                 </div>
             </div>
@@ -184,9 +184,9 @@
             <section v-if="tabActiva === 'resenas'" class="detalle-tab-content">
                 <div class="reviews-layout">
                     <div class="reviews-summary-card">
-                        <p class="reviews-summary-score">{{ producto.PRO_rating_avg.toFixed(1) }}</p>
-                        <p class="reviews-summary-stars">{{ estrellas(producto.PRO_rating_avg) }}</p>
-                        <p class="reviews-summary-total">{{ producto.PRO_total_reviews }} reseñas</p>
+                        <p class="reviews-summary-score">{{ ratingPromedio.toFixed(1) }}</p>
+                        <p class="reviews-summary-stars">{{ estrellas(ratingPromedio) }}</p>
+                        <p class="reviews-summary-total">{{ totalResenas }} reseñas</p>
 
                         <div class="reviews-bars">
                             <div v-for="n in [5,4,3,2,1]" :key="n" class="reviews-bar-row">
@@ -257,7 +257,7 @@
                         <span v-else class="relacionado-fallback"><i class="pi pi-image"></i></span>
                     </div>
                     <p class="relacionado-name">{{ rel.PRO_name }}</p>
-                    <p class="relacionado-price">S/ {{ (rel.PRO_discount_price || rel.PRO_price).toFixed(2) }}</p>
+                    <p class="relacionado-price">{{ currency.formatear(rel.PRO_discount_price || rel.PRO_price) }}</p>
                 </RouterLink>
             </div>
         </section>
@@ -269,6 +269,7 @@ import { ref, computed, onMounted, watch } from 'vue'
 import { useRoute, RouterLink } from 'vue-router'
 import { useAuthStore } from '../../stores/authStore'
 import { useCarritoStore } from '../../stores/carritoStore'
+import { useCurrencyStore } from '../../stores/currencyStore'
 import {
     obtenerProducto,
     obtenerVariantesProducto,
@@ -286,6 +287,7 @@ import { obtenerUsuario } from '../../services/usuarioService'
 const route   = useRoute()
 const auth    = useAuthStore()
 const carrito = useCarritoStore()
+const currency = useCurrencyStore()
 
 const cargando   = ref(true)
 const producto   = ref(null)
@@ -336,6 +338,31 @@ const varianteSeleccionada = computed(() =>
         (!colorSeleccionado.value || v.VAR_color === colorSeleccionado.value)
     ) || null
 )
+
+// Conteo y promedio de reseñas calculados a partir de las reseñas reales cargadas
+// (producto.PRO_total_reviews / PRO_rating_avg son campos guardados que pueden
+// desincronizarse de la colección real de reseñas, así que no se usan para mostrar)
+const totalResenas = computed(() => resenas.value.length)
+const ratingPromedio = computed(() => {
+    if (!resenas.value.length) return 0
+    const suma = resenas.value.reduce((acc, r) => acc + (r.REV_rating || 0), 0)
+    return suma / resenas.value.length
+})
+
+// Debe coincidir con MAX_CANTIDAD_POR_PRODUCTO en el backend (cartItems.routes.js)
+const MAX_CANTIDAD_POR_PRODUCTO = 10
+
+// Tope de cantidad: el menor entre el stock disponible (de la variante si hay una seleccionada,
+// o del producto en general) y el máximo permitido por producto
+const limiteCantidad = computed(() => {
+    const stock = varianteSeleccionada.value?.VAR_stock ?? producto.value?.PRO_stock
+    return typeof stock === 'number' ? Math.max(0, Math.min(stock, MAX_CANTIDAD_POR_PRODUCTO)) : MAX_CANTIDAD_POR_PRODUCTO
+})
+
+// Si cambia la variante seleccionada (talla/color) y su stock es menor a la cantidad elegida, se ajusta
+watch(limiteCantidad, (nuevoLimite) => {
+    if (cantidad.value > nuevoLimite) cantidad.value = Math.max(1, nuevoLimite)
+})
 
 const tallaDisponible = (talla) => {
     const variante = variantes.value.find((v) =>
@@ -635,6 +662,7 @@ const enviarResena = async () => {
     background: none;
     border: none;
     color: var(--color-primary);
+    font-family: var(--font-primary);
     font-size: 0.8rem;
     text-decoration: underline;
     cursor: pointer;
@@ -741,6 +769,7 @@ const enviarResena = async () => {
 .qty-selector button {
     border: none;
     background: none;
+    font-family: var(--font-primary);
     font-size: 1.1rem;
     font-weight: 700;
     color: var(--color-primary);
@@ -784,6 +813,8 @@ const enviarResena = async () => {
     border: none;
     padding: var(--space-sm) var(--space-xs);
     cursor: pointer;
+    font-family: var(--font-primary);
+    font-size: 1rem;
     font-weight: 500;
     color: var(--color-text-light);
     border-bottom: 2px solid transparent;

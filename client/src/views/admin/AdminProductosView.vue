@@ -43,7 +43,7 @@
               <strong>{{ p.PRO_name }}</strong><br />
               <small class="sku">{{ p.PRO_brand || 'Sin marca' }}</small>
             </td>
-            <td>${{ p.PRO_price }}</td>
+            <td>{{ currency.formatear(p.PRO_price) }}</td>
             <td>{{ p.PRO_stock }}</td>
             <td>
                 <span :class="estadoClase(p.PRO_stock)">
@@ -89,7 +89,7 @@
 
             <div class="form-row">
               <div class="form-group">
-                <label>Precio *</label>
+                <label>Precio * (en soles, S/)</label>
                 <input v-model.number="formulario.PRO_price" type="number" step="0.01" required class="input" />
               </div>
               <div class="form-group">
@@ -147,6 +147,9 @@
 import { ref, onMounted, computed } from 'vue'
 import { get, post, put, del } from '../../services/api'
 import AdminSidebar from '../../components/admin/AdminSidebar.vue'
+import { useCurrencyStore } from '../../stores/currencyStore'
+
+const currency = useCurrencyStore()
 
 // --- Estado ---
 const productos = ref([])

@@ -41,7 +41,7 @@
               <td>#ORD-{{ orden.ORD_id }}</td>
               <td>{{ formatearFecha(orden.ORD_created_at) }}</td>
               <td>{{ orden.user?.USU_name || '—' }}</td>
-              <td>${{ orden.ORD_total }}</td>
+              <td>{{ currency.formatear(orden.ORD_total) }}</td>
               <td>{{ orden.payment?.PAY_method || '—' }}</td>
               <td>
                 <span :class="estadoClase(orden.ORD_status)">
@@ -164,6 +164,9 @@
 import { ref, onMounted, watch } from 'vue'
 import { get, post, put, del } from '../../services/api'
 import AdminSidebar from '../../components/admin/AdminSidebar.vue'
+import { useCurrencyStore } from '../../stores/currencyStore'
+
+const currency = useCurrencyStore()
 
 // =============================================
 // Estado

@@ -10,6 +10,9 @@ import {
 } from '../services/carritoService'
 import { obtenerProducto, obtenerImagenPrincipal } from '../services/productosService'
 
+// Debe coincidir con MAX_CANTIDAD_POR_PRODUCTO en server/src/routes/carrito/cartItems.routes.js
+const MAX_CANTIDAD_POR_PRODUCTO = 10
+
 export const useCarritoStore = defineStore('carrito', () => {
     const CAR_id    = ref(null)
     const items     = ref([]) // { CARTI_id, CAR_id, PRO_id, CARTI_quantity, CARTI_price, producto }
@@ -56,6 +59,12 @@ export const useCarritoStore = defineStore('carrito', () => {
 
     // producto: objeto de la tabla products (PRO_id, PRO_price, PRO_discount_price, ...)
     // imagen: URL opcional (si ya la tienes, evita otra llamada al backend)
+    // Tope de cantidad para un producto: el menor entre el stock disponible y el máximo permitido
+    const limiteCantidad = (producto) => {
+        const stock = producto?.PRO_stock
+        return typeof stock === 'number' ? Math.min(stock, MAX_CANTIDAD_POR_PRODUCTO) : MAX_CANTIDAD_POR_PRODUCTO
+    }
+
     const agregar = async (producto, cantidad = 1, imagen = null) => {
         if (!iniciado.value) await inicializar()
         if (!CAR_id.value) return
@@ -66,11 +75,13 @@ export const useCarritoStore = defineStore('carrito', () => {
         if (existente) {
             await actualizarCantidad(existente.CARTI_id, existente.CARTI_quantity + cantidad)
         } else {
+            const tope = limiteCantidad(producto)
+            const cantidadFinal = Math.min(Math.max(1, cantidad), tope)
             const imagenFinal = imagen ?? await obtenerImagenPrincipal(producto.PRO_id).catch(() => null)
             const nuevo = await agregarItemCarrito({
                 CAR_id: CAR_id.value,
                 PRO_id: producto.PRO_id,
-                CARTI_quantity: cantidad,
+                CARTI_quantity: cantidadFinal,
                 CARTI_price: precio
             })
             items.value.push({ ...nuevo, producto, imagen: imagenFinal })
@@ -79,8 +90,12 @@ export const useCarritoStore = defineStore('carrito', () => {
 
     const actualizarCantidad = async (CARTI_id, cantidad) => {
         if (cantidad < 1) return quitar(CARTI_id)
-        const actualizado = await actualizarItemCarrito(CARTI_id, { CARTI_quantity: cantidad })
+
         const item = items.value.find((i) => i.CARTI_id === CARTI_id)
+        const tope = limiteCantidad(item?.producto)
+        const cantidadFinal = Math.min(cantidad, tope)
+
+        const actualizado = await actualizarItemCarrito(CARTI_id, { CARTI_quantity: cantidadFinal })
         if (item) item.CARTI_quantity = actualizado.CARTI_quantity
     }
 

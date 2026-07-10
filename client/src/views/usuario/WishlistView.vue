@@ -8,7 +8,7 @@
     </div>
 
     <div class="wishlist-body">
-      <div v-if="loading || wishlist.cargando" class="loading">
+      <div v-if="loading" class="loading">
         <div class="loading-spinner"></div>
         <p>Cargando tus favoritos...</p>
       </div>
@@ -53,10 +53,10 @@
             <h3 class="card-name">{{ producto.PRO_name }}</h3>
             <div class="card-precio">
               <span class="precio-actual"
-                >${{ (producto.PRO_discount_price || producto.PRO_price).toFixed(2) }}</span
+                >{{ currency.formatear(producto.PRO_discount_price || producto.PRO_price) }}</span
               >
               <span v-if="producto.PRO_discount_price" class="precio-original"
-                >${{ producto.PRO_price.toFixed(2) }}</span
+                >{{ currency.formatear(producto.PRO_price) }}</span
               >
             </div>
             <div class="card-rating">
@@ -75,39 +75,32 @@ import { ref, onMounted, watch } from 'vue'
 import { useRouter } from 'vue-router'
 import { get } from '../../services/api'
 import { useWishlistStore } from '../../stores/wishlistStore'
+import { useCurrencyStore } from '../../stores/currencyStore'
 
 const wishlist = useWishlistStore()
+const currency = useCurrencyStore()
 const router = useRouter()
 const loading = ref(true)
 
 const productosFavoritos = ref([])
 const imagenes = ref({})
 
-// Función principal adaptada al mismo formato que el Carrito
+// El store de wishlist guarda los productos completos directamente en localStorage
+// (wishlist.items es un array de productos, NO de { producto: ... }), así que solo
+// hace falta traer las imágenes de cada uno.
 const cargarFavoritos = async () => {
   loading.value = true
   try {
-    // 1. Si el store no se ha inicializado, lo hacemos llamar a la BD (Igual que el carrito)
-    if (!wishlist.iniciado) {
-      await wishlist.inicializar()
-    }
+    const productos = (wishlist.items || []).filter((p) => p !== null && p !== undefined)
 
-    // 2. Extraemos ÚNICAMENTE el objeto "producto" del array de items que trae MongoDB
-    const productosExtraidos = (wishlist.items || [])
-      .map((item) => item.producto)
-      .filter((p) => p !== null && p !== undefined) // Evitar nulos
-
-    // Si está vacío, terminamos
-    if (productosExtraidos.length === 0) {
+    if (productos.length === 0) {
       productosFavoritos.value = []
-      loading.value = false
       return
     }
 
-    // 3. Cargar imágenes
     const imagenesTemp = {}
     await Promise.all(
-      productosExtraidos.map(async (p) => {
+      productos.map(async (p) => {
         try {
           const imgs = await get(`/product-images/product/${p.PRO_id}`)
           if (imgs.length > 0) imagenesTemp[p.PRO_id] = imgs[0].IMG_url
@@ -118,7 +111,7 @@ const cargarFavoritos = async () => {
     )
 
     imagenes.value = imagenesTemp
-    productosFavoritos.value = productosExtraidos
+    productosFavoritos.value = productos
   } catch (error) {
     console.error('Error cargando favoritos:', error)
   } finally {
@@ -126,13 +119,12 @@ const cargarFavoritos = async () => {
   }
 }
 
-// Escuchar cambios profundos por si el usuario borra un elemento
+// Si el usuario agrega o quita un favorito (por ejemplo desde el catálogo en otra pestaña
+// de la misma sesión, o desde el botón de corazón de esta misma vista), refrescamos la lista
 watch(
   () => wishlist.items,
   (nuevosItems) => {
-    productosFavoritos.value = (nuevosItems || [])
-      .map((item) => item.producto)
-      .filter((p) => p !== null && p !== undefined)
+    productosFavoritos.value = (nuevosItems || []).filter((p) => p !== null && p !== undefined)
   },
   { deep: true },
 )

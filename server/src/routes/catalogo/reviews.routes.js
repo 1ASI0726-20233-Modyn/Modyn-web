@@ -1,6 +1,24 @@
 const { Router } = require("express");
 const router = Router();
 const Review = require("../../models/Review");
+const Product = require("../../models/Product");
+
+// Recalcula PRO_rating_avg y PRO_total_reviews de un producto a partir de sus reseñas reales.
+// Se llama después de crear, editar o eliminar una reseña para que el producto nunca quede
+// desincronizado (por ejemplo, mostrando un rating de datos semilla cuando ya no hay reseñas).
+async function actualizarRatingProducto(PRO_id) {
+    const stats = await Review.aggregate([
+        { $match: { PRO_id } },
+        { $group: { _id: "$PRO_id", promedio: { $avg: "$REV_rating" }, total: { $sum: 1 } } }
+    ]);
+
+    const { promedio = 0, total = 0 } = stats[0] || {};
+
+    await Product.findOneAndUpdate(
+        { PRO_id },
+        { PRO_rating_avg: Math.round(promedio * 10) / 10, PRO_total_reviews: total }
+    );
+}
 
 // GET - Listar todas las reseñas (con filtros opcionales por PRO_id o USU_id)
 router.get("/", async (req, res) => {
@@ -64,6 +82,7 @@ router.post("/", async (req, res) => {
         const ultimo = await Review.findOne({}, {}, { sort: { REV_id: -1 } });
         const nuevoId = ultimo ? ultimo.REV_id + 1 : 1;
         const respuesta = await Review.create({ ...body, REV_id: nuevoId });
+        await actualizarRatingProducto(respuesta.PRO_id);
         res.send(respuesta);
     } catch (err) {
         res.status(500).json({ error: err.message });
@@ -91,6 +110,7 @@ router.put("/:REV_id", async (req, res) => {
             return res.status(404).json({ error: "Reseña no encontrada" });
         }
 
+        await actualizarRatingProducto(respuesta.PRO_id);
         res.send(respuesta);
     } catch (err) {
         res.status(500).json({ error: err.message });
@@ -107,6 +127,7 @@ router.delete("/:REV_id", async (req, res) => {
             return res.status(404).json({ error: "Reseña no encontrada" });
         }
 
+        await actualizarRatingProducto(respuesta.PRO_id);
         res.send({ message: "Reseña eliminada correctamente", deleted: respuesta });
     } catch (err) {
         res.status(500).json({ error: err.message });

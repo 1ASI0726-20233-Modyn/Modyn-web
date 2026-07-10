@@ -8,7 +8,7 @@
       <!-- Tarjetas de métricas principales -->
       <div class="stats-grid">
         <div class="stat-card">
-          <h3>${{ metrics.totalSales.toLocaleString() }}</h3>
+          <h3>{{ currency.formatear(metrics.totalSales) }}</h3>
           <p>Ventas totales</p>
         </div>
         <div class="stat-card">
@@ -20,7 +20,7 @@
           <p>Clientes registrados</p>
         </div>
         <div class="stat-card">
-          <h3>${{ metrics.monthlyRevenue.toLocaleString() }}</h3>
+          <h3>{{ currency.formatear(metrics.monthlyRevenue) }}</h3>
           <p>Ingresos del mes</p>
         </div>
       </div>
@@ -43,7 +43,7 @@
             <span class="rank">#{{ idx + 1 }}</span>
             <span class="name">{{ p.PRO_name }}</span>
             <span class="units">{{ p.totalUnits }} unidades</span>
-            <span class="revenue">${{ p.totalRevenue.toFixed(2) }}</span>
+            <span class="revenue">{{ currency.formatear(p.totalRevenue) }}</span>
           </div>
         </div>
         <p v-else class="empty-message">Aún no hay ventas</p>
@@ -71,7 +71,7 @@
               <td>#ORD-{{ order.ORD_id }}</td>
               <td>{{ formatearFecha(order.ORD_created_at) }}</td>
               <td>{{ order.user?.USU_name || '—' }}</td>
-              <td>${{ order.ORD_total }}</td>
+              <td>{{ currency.formatear(order.ORD_total) }}</td>
               <td>{{ order.payment?.PAY_method || '—' }}</td>
               <td>
                 <span :class="estadoClase(order.ORD_status)">
@@ -91,8 +91,10 @@ import { ref, onMounted } from 'vue'
 import { get } from '../../services/api'
 import { useAuthStore } from '../../stores/authStore'
 import AdminSidebar from '../../components/admin/AdminSidebar.vue'
+import { useCurrencyStore } from '../../stores/currencyStore'
 
 const auth = useAuthStore()
+const currency = useCurrencyStore()
 
 // Estado
 const metrics = ref({

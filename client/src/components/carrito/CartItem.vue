@@ -8,7 +8,7 @@
         <div class="cart-item-info">
             <h3 class="cart-item-name">{{ nombreProducto }}</h3>
             <p class="cart-item-brand" v-if="item.producto?.PRO_brand">{{ item.producto.PRO_brand }}</p>
-            <p class="cart-item-price">S/ {{ Number(item.CARTI_price).toFixed(2) }} c/u</p>
+            <p class="cart-item-price">{{ currency.formatear(item.CARTI_price) }} c/u</p>
         </div>
 
         <div class="cart-item-qty">
@@ -20,12 +20,14 @@
             <span class="qty-value">{{ item.CARTI_quantity }}</span>
             <button
                 class="qty-btn"
+                :disabled="item.CARTI_quantity >= limiteCantidad"
+                :title="item.CARTI_quantity >= limiteCantidad ? `Máximo ${limiteCantidad} unidades` : ''"
                 @click="$emit('update-quantity', item.CARTI_id, item.CARTI_quantity + 1)"
             >+</button>
         </div>
 
         <div class="cart-item-subtotal">
-            S/ {{ (item.CARTI_price * item.CARTI_quantity).toFixed(2) }}
+            {{ currency.formatear(item.CARTI_price * item.CARTI_quantity) }}
         </div>
 
         <button class="cart-item-remove" title="Quitar del carrito" @click="$emit('remove', item.CARTI_id)">
@@ -36,6 +38,9 @@
 
 <script setup>
 import { computed } from 'vue'
+import { useCurrencyStore } from '../../stores/currencyStore'
+
+const currency = useCurrencyStore()
 
 const props = defineProps({
     item: { type: Object, required: true }
@@ -43,7 +48,15 @@ const props = defineProps({
 
 defineEmits(['update-quantity', 'remove'])
 
+// Debe coincidir con MAX_CANTIDAD_POR_PRODUCTO en el backend (cartItems.routes.js)
+const MAX_CANTIDAD_POR_PRODUCTO = 10
+
 const nombreProducto = computed(() => props.item.producto?.PRO_name || `Producto #${props.item.PRO_id}`)
+
+const limiteCantidad = computed(() => {
+    const stock = props.item.producto?.PRO_stock
+    return typeof stock === 'number' ? Math.min(stock, MAX_CANTIDAD_POR_PRODUCTO) : MAX_CANTIDAD_POR_PRODUCTO
+})
 </script>
 
 <style scoped>

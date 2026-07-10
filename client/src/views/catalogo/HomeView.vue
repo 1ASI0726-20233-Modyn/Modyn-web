@@ -76,7 +76,7 @@
                 <!-- Info -->
                 <div class="trending-info">
                     <h3>{{ producto.PRO_name }}</h3>
-                    <p class="trending-price">${{ producto.PRO_price.toFixed(2) }}</p>
+                    <p class="trending-price">{{ currency.formatear(producto.PRO_price) }}</p>
                     <div class="trending-bar"></div>
                     <div class="trending-stats">
                         <span>👁 {{ (producto.PRO_trending_score * 100).toFixed(0) }}k</span>
@@ -95,7 +95,9 @@
 
 import { ref, onMounted } from 'vue'
 import { get } from '../../services/api'
+import { useCurrencyStore } from '../../stores/currencyStore'
 
+const currency = useCurrencyStore()
 const categorias      = ref([])
 const categoriaActiva = ref(0)
 

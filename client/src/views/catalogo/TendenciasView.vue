@@ -34,7 +34,7 @@
                         <span class="trend-label">TREND OF THE WEEK</span>
                         <div class="brand-price">
                             <span class="brand-tag">{{ trending[0].PRO_brand }}</span>
-                            <span class="price-big">${{ trending[0].PRO_price.toFixed(2) }}</span>
+                            <span class="price-big">{{ currency.formatear(trending[0].PRO_price) }}</span>
                         </div>
                         <h2>{{ trending[0].PRO_name }}</h2>
 
@@ -67,7 +67,7 @@
                         </div>
 
                         <button class="btn-ver-trend" @click.stop="ir(trending[0].PRO_id)">
-                            🛍 Ver producto en tendencia
+                        Ver producto en tendencia
                         </button>
                     </div>
                 </div>
@@ -93,7 +93,7 @@
                     </div>
                     <div class="card-medio-info">
                         <h3>{{ p.PRO_name }}</h3>
-                        <span class="price-medio">${{ p.PRO_price.toFixed(2) }}</span>
+                        <span class="price-medio">{{ currency.formatear(p.PRO_price) }}</span>
                         <div class="likes-row">
                             <span>♥ {{ (p.PRO_total_reviews * 80).toFixed(1) }}k</span>
                         </div>
@@ -125,7 +125,7 @@
                             <span>{{ p.PRO_trending_score }}%</span>
                         </div>
                     </div>
-                    <span class="lista-price">${{ p.PRO_price.toFixed(2) }}</span>
+                    <span class="lista-price">{{ currency.formatear(p.PRO_price) }}</span>
                     <span class="lista-arrow">→</span>
                 </div>
             </div>
@@ -143,7 +143,9 @@
 import { ref, onMounted, watch } from 'vue'  // ← agregar watch
 import { useRouter } from 'vue-router'
 import { get } from '../../services/api'
+import { useCurrencyStore } from '../../stores/currencyStore'
 
+const currency      = useCurrencyStore()
 const router       = useRouter()
 const trending     = ref([])
 const imagenes     = ref({})

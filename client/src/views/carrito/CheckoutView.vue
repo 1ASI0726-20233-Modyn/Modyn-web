@@ -176,6 +176,7 @@ import { ref, computed, onMounted } from 'vue'
 import { RouterLink } from 'vue-router'
 import { useAuthStore } from '../../stores/authStore'
 import { useCarritoStore } from '../../stores/carritoStore'
+import { useCurrencyStore } from '../../stores/currencyStore'
 import CartSummary from '../../components/carrito/CartSummary.vue'
 import {
     listarDireccionesUsuario,
@@ -185,6 +186,7 @@ import { buscarCupon, crearPedido, crearDetallePedido, crearPago, crearEnvio, re
 
 const auth    = useAuthStore()
 const carrito = useCarritoStore()
+const currency = useCurrencyStore()
 
 const direcciones          = ref([])
 const ADD_id                = ref(null)
@@ -270,7 +272,7 @@ const aplicarCupon = async (codigo) => {
             return
         }
         if (cupon.COU_min_purchase && carrito.total < cupon.COU_min_purchase) {
-            errorCupon.value = `Compra mínima de S/ ${cupon.COU_min_purchase.toFixed(2)} para usar este cupón`
+            errorCupon.value = `Compra mínima de ${currency.formatear(cupon.COU_min_purchase)} para usar este cupón`
             return
         }
         descuento.value = cupon.COU_discount_type === 'percentage'

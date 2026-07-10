@@ -12,6 +12,36 @@
       </ul>
 
       <div class="navbar-actions">
+        <div class="navbar-currency">
+          <select
+            class="currency-select"
+            :value="currency.codigo"
+            @change="currency.cambiar($event.target.value)"
+            title="Moneda de visualización"
+          >
+            <option value="USD">USD ($) — Dólar estadounidense</option>
+            <option value="PEN">PEN (S/) — Sol peruano</option>
+            <option value="EUR">EUR (€) — Euro</option>
+            <optgroup label="Latinoamérica">
+              <option value="MXN">MXN (MX$) — Peso mexicano</option>
+              <option value="COP">COP (COP$) — Peso colombiano</option>
+              <option value="CLP">CLP (CLP$) — Peso chileno</option>
+              <option value="ARS">ARS (AR$) — Peso argentino</option>
+              <option value="BRL">BRL (R$) — Real brasileño</option>
+              <option value="UYU">UYU (UY$) — Peso uruguayo</option>
+              <option value="BOB">BOB (Bs) — Boliviano</option>
+              <option value="PYG">PYG (₲) — Guaraní paraguayo</option>
+              <option value="GTQ">GTQ (Q) — Quetzal guatemalteco</option>
+              <option value="VES">VES (Bs.S) — Bolívar venezolano</option>
+            </optgroup>
+            <optgroup label="Asia">
+              <option value="CNY">CNY (CN¥) — Yuan chino</option>
+              <option value="JPY">JPY (JP¥) — Yen japonés</option>
+              <option value="KRW">KRW (₩) — Won surcoreano</option>
+            </optgroup>
+          </select>
+        </div>
+
         <div class="navbar-notif">
           <button class="icon-btn" @click="toggleNotif">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -89,12 +119,14 @@ import { useAuthStore } from '../../stores/authStore'
 import { useCarritoStore } from '../../stores/carritoStore'
 // 1. Importamos tu store de favoritos (wishlist)
 import { useWishlistStore } from '../../stores/wishlistStore'
+import { useCurrencyStore } from '../../stores/currencyStore'
 import { get, put } from '../../services/api'
 
 const auth = useAuthStore()
 const carrito = useCarritoStore()
 // 2. Inicializamos la variable para usarla en el HTML
 const wishlist = useWishlistStore()
+const currency = useCurrencyStore()
 
 const notifOpen = ref(false)
 const notificaciones = ref([])
@@ -223,6 +255,35 @@ onMounted(async () => {
   align-items: center;
   justify-content: center;
   font-weight: 700;
+}
+
+/* ── Selector de moneda ── */
+.navbar-currency {
+  display: flex;
+  align-items: center;
+}
+
+.currency-select {
+  max-width: 110px;
+  border: 1.5px solid #f0ddd8;
+  border-radius: 50px;
+  padding: 0.35rem 0.7rem;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: #3d2b2b;
+  background: white;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.currency-select:hover,
+.currency-select:focus {
+  border-color: #f4637a;
+  outline: none;
 }
 
 /* ── Notificaciones ── */
