@@ -200,6 +200,9 @@
                         <button class="btn btn-primary reviews-write-btn" type="button" @click="mostrarFormResena = !mostrarFormResena" v-if="auth.isLoggedIn()">
                             Escribir reseña
                         </button>
+                        <RouterLink v-else to="/login" class="reviews-login-hint">
+                            Inicia sesión para dejar una reseña
+                        </RouterLink>
                     </div>
 
                     <div class="reviews-list-col">
@@ -464,6 +467,15 @@ const enviarPregunta = async () => {
 }
 
 const enviarResena = async () => {
+    if (!auth.isLoggedIn()) {
+        alert('Debes iniciar sesión para dejar una reseña.')
+        return
+    }
+    if (!nuevaResena.value.REV_title.trim() || !nuevaResena.value.REV_comment.trim()) {
+        alert('Completa el título y el comentario de tu reseña.')
+        return
+    }
+
     enviandoResena.value = true
     try {
         const creada = await crearResena({
@@ -473,10 +485,18 @@ const enviarResena = async () => {
             REV_title: nuevaResena.value.REV_title,
             REV_comment: nuevaResena.value.REV_comment
         })
+
+        if (!creada || creada.error || !creada.REV_id) {
+            throw new Error(creada?.error || 'No se pudo publicar la reseña')
+        }
+
         resenas.value.unshift({ ...creada, _nombreUsuario: auth.usuario.USU_name })
         imagenesResenas.value[creada.REV_id] = []
         nuevaResena.value = { REV_rating: 5, REV_title: '', REV_comment: '' }
         mostrarFormResena.value = false
+    } catch (error) {
+        console.error('Error al publicar la reseña:', error)
+        alert('No se pudo publicar tu reseña. Intenta de nuevo en unos segundos.')
     } finally {
         enviandoResena.value = false
     }
@@ -969,6 +989,18 @@ const enviarResena = async () => {
 
 .reviews-write-btn {
     margin-top: var(--space-sm);
+}
+
+.reviews-login-hint {
+    margin-top: var(--space-sm);
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--color-primary);
+    text-decoration: none;
+}
+
+.reviews-login-hint:hover {
+    text-decoration: underline;
 }
 
 .reviews-list-col {

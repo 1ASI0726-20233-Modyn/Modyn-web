@@ -1,0 +1,1282 @@
+{
+  "Polos": [
+    {
+      "CAT_id": 1,
+      "PRO_name": "Polo Básico Algodón Blanco",
+      "PRO_description": "Polo Básico Algodón Blanco de la colección Modyn — polos de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 65,
+      "PRO_discount_price": null,
+      "PRO_stock": 28,
+      "PRO_brand": "Modyn Basics"
+    },
+    {
+      "CAT_id": 1,
+      "PRO_name": "Polo Oversize Estampado Urban",
+      "PRO_description": "Polo Oversize Estampado Urban de la colección Modyn — polos de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 80,
+      "PRO_discount_price": null,
+      "PRO_stock": 70,
+      "PRO_brand": "Modyn Urban"
+    },
+    {
+      "CAT_id": 1,
+      "PRO_name": "Polo Rayado Marinero",
+      "PRO_description": "Polo Rayado Marinero de la colección Modyn — polos de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 75,
+      "PRO_discount_price": null,
+      "PRO_stock": 27,
+      "PRO_brand": "Andina Wear"
+    },
+    {
+      "CAT_id": 1,
+      "PRO_name": "Polo Cuello V Slim Fit",
+      "PRO_description": "Polo Cuello V Slim Fit de la colección Modyn — polos de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 70,
+      "PRO_discount_price": 55,
+      "PRO_stock": 33,
+      "PRO_brand": "Modyn Basics"
+    },
+    {
+      "CAT_id": 1,
+      "PRO_name": "Polo Manga Larga Térmico",
+      "PRO_description": "Polo Manga Larga Térmico de la colección Modyn — polos de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 65,
+      "PRO_discount_price": 50,
+      "PRO_stock": 72,
+      "PRO_brand": "Modyn Urban"
+    },
+    {
+      "CAT_id": 1,
+      "PRO_name": "Polo Bordado Logo Minimalista",
+      "PRO_description": "Polo Bordado Logo Minimalista de la colección Modyn — polos de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 80,
+      "PRO_discount_price": 60,
+      "PRO_stock": 23,
+      "PRO_brand": "Andina Wear"
+    },
+    {
+      "CAT_id": 1,
+      "PRO_name": "Polo Tie Dye Verano",
+      "PRO_description": "Polo Tie Dye Verano de la colección Modyn — polos de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 70,
+      "PRO_discount_price": null,
+      "PRO_stock": 51,
+      "PRO_brand": "Modyn Basics"
+    },
+    {
+      "CAT_id": 1,
+      "PRO_name": "Polo Deportivo Dry Fit",
+      "PRO_description": "Polo Deportivo Dry Fit de la colección Modyn — polos de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 55,
+      "PRO_discount_price": null,
+      "PRO_stock": 29,
+      "PRO_brand": "Modyn Urban"
+    },
+    {
+      "CAT_id": 1,
+      "PRO_name": "Polo Camisero Casual",
+      "PRO_description": "Polo Camisero Casual de la colección Modyn — polos de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 55,
+      "PRO_discount_price": null,
+      "PRO_stock": 64,
+      "PRO_brand": "Andina Wear"
+    },
+    {
+      "CAT_id": 1,
+      "PRO_name": "Polo Estampado Gráfico Retro",
+      "PRO_description": "Polo Estampado Gráfico Retro de la colección Modyn — polos de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 40,
+      "PRO_discount_price": null,
+      "PRO_stock": 59,
+      "PRO_brand": "Modyn Basics"
+    },
+    {
+      "CAT_id": 1,
+      "PRO_name": "Polo Básico Negro",
+      "PRO_description": "Polo Básico Negro de la colección Modyn — polos de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 60,
+      "PRO_discount_price": 45,
+      "PRO_stock": 23,
+      "PRO_brand": "Modyn Urban"
+    },
+    {
+      "CAT_id": 1,
+      "PRO_name": "Polo Crop Top Algodón",
+      "PRO_description": "Polo Crop Top Algodón de la colección Modyn — polos de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 70,
+      "PRO_discount_price": 55,
+      "PRO_stock": 29,
+      "PRO_brand": "Andina Wear"
+    },
+    {
+      "CAT_id": 1,
+      "PRO_name": "Polo Oversize Color Pastel",
+      "PRO_description": "Polo Oversize Color Pastel de la colección Modyn — polos de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 60,
+      "PRO_discount_price": null,
+      "PRO_stock": 77,
+      "PRO_brand": "Modyn Basics"
+    },
+    {
+      "CAT_id": 1,
+      "PRO_name": "Polo Manga Corta Rayas",
+      "PRO_description": "Polo Manga Corta Rayas de la colección Modyn — polos de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 40,
+      "PRO_discount_price": null,
+      "PRO_stock": 66,
+      "PRO_brand": "Modyn Urban"
+    }
+  ],
+  "Pantalones": [
+    {
+      "CAT_id": 2,
+      "PRO_name": "Pantalón Jean Skinny",
+      "PRO_description": "Pantalón Jean Skinny de la colección Modyn — pantalones de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 90,
+      "PRO_discount_price": 70,
+      "PRO_stock": 17,
+      "PRO_brand": "Modyn Denim"
+    },
+    {
+      "CAT_id": 2,
+      "PRO_name": "Pantalón Jean Mom Fit",
+      "PRO_description": "Pantalón Jean Mom Fit de la colección Modyn — pantalones de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 140,
+      "PRO_discount_price": null,
+      "PRO_stock": 44,
+      "PRO_brand": "Modyn Basics"
+    },
+    {
+      "CAT_id": 2,
+      "PRO_name": "Pantalón Cargo Urbano",
+      "PRO_description": "Pantalón Cargo Urbano de la colección Modyn — pantalones de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 105,
+      "PRO_discount_price": 85,
+      "PRO_stock": 34,
+      "PRO_brand": "Andina Wear"
+    },
+    {
+      "CAT_id": 2,
+      "PRO_name": "Pantalón Jogger Deportivo",
+      "PRO_description": "Pantalón Jogger Deportivo de la colección Modyn — pantalones de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 90,
+      "PRO_discount_price": 70,
+      "PRO_stock": 22,
+      "PRO_brand": "Modyn Denim"
+    },
+    {
+      "CAT_id": 2,
+      "PRO_name": "Pantalón Palazzo Fluido",
+      "PRO_description": "Pantalón Palazzo Fluido de la colección Modyn — pantalones de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 105,
+      "PRO_discount_price": null,
+      "PRO_stock": 57,
+      "PRO_brand": "Modyn Basics"
+    },
+    {
+      "CAT_id": 2,
+      "PRO_name": "Pantalón de Vestir Slim",
+      "PRO_description": "Pantalón de Vestir Slim de la colección Modyn — pantalones de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 125,
+      "PRO_discount_price": 100,
+      "PRO_stock": 73,
+      "PRO_brand": "Andina Wear"
+    },
+    {
+      "CAT_id": 2,
+      "PRO_name": "Pantalón Wide Leg Denim",
+      "PRO_description": "Pantalón Wide Leg Denim de la colección Modyn — pantalones de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 135,
+      "PRO_discount_price": 105,
+      "PRO_stock": 51,
+      "PRO_brand": "Modyn Denim"
+    },
+    {
+      "CAT_id": 2,
+      "PRO_name": "Pantalón Chino Casual",
+      "PRO_description": "Pantalón Chino Casual de la colección Modyn — pantalones de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 90,
+      "PRO_discount_price": 70,
+      "PRO_stock": 47,
+      "PRO_brand": "Modyn Basics"
+    },
+    {
+      "CAT_id": 2,
+      "PRO_name": "Pantalón Recto Corduroy",
+      "PRO_description": "Pantalón Recto Corduroy de la colección Modyn — pantalones de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 135,
+      "PRO_discount_price": null,
+      "PRO_stock": 25,
+      "PRO_brand": "Andina Wear"
+    },
+    {
+      "CAT_id": 2,
+      "PRO_name": "Pantalón Jean Rasgado",
+      "PRO_description": "Pantalón Jean Rasgado de la colección Modyn — pantalones de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 140,
+      "PRO_discount_price": null,
+      "PRO_stock": 30,
+      "PRO_brand": "Modyn Denim"
+    },
+    {
+      "CAT_id": 2,
+      "PRO_name": "Pantalón Deportivo Térmico",
+      "PRO_description": "Pantalón Deportivo Térmico de la colección Modyn — pantalones de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 90,
+      "PRO_discount_price": null,
+      "PRO_stock": 27,
+      "PRO_brand": "Modyn Basics"
+    },
+    {
+      "CAT_id": 2,
+      "PRO_name": "Pantalón Culotte Elegante",
+      "PRO_description": "Pantalón Culotte Elegante de la colección Modyn — pantalones de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 75,
+      "PRO_discount_price": 60,
+      "PRO_stock": 66,
+      "PRO_brand": "Andina Wear"
+    },
+    {
+      "CAT_id": 2,
+      "PRO_name": "Pantalón Cargo Bolsillos",
+      "PRO_description": "Pantalón Cargo Bolsillos de la colección Modyn — pantalones de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 140,
+      "PRO_discount_price": 105,
+      "PRO_stock": 23,
+      "PRO_brand": "Modyn Denim"
+    },
+    {
+      "CAT_id": 2,
+      "PRO_name": "Pantalón Jean Bootcut",
+      "PRO_description": "Pantalón Jean Bootcut de la colección Modyn — pantalones de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 90,
+      "PRO_discount_price": null,
+      "PRO_stock": 74,
+      "PRO_brand": "Modyn Basics"
+    }
+  ],
+  "Chaquetas": [
+    {
+      "CAT_id": 3,
+      "PRO_name": "Chaqueta de Cuero Sintético",
+      "PRO_description": "Chaqueta de Cuero Sintético de la colección Modyn — chaquetas de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 130,
+      "PRO_discount_price": null,
+      "PRO_stock": 68,
+      "PRO_brand": "Modyn Urban"
+    },
+    {
+      "CAT_id": 3,
+      "PRO_name": "Chaqueta Denim Oversize",
+      "PRO_description": "Chaqueta Denim Oversize de la colección Modyn — chaquetas de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 215,
+      "PRO_discount_price": null,
+      "PRO_stock": 78,
+      "PRO_brand": "Modyn Elegance"
+    },
+    {
+      "CAT_id": 3,
+      "PRO_name": "Chaqueta Bomber Clásica",
+      "PRO_description": "Chaqueta Bomber Clásica de la colección Modyn — chaquetas de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 205,
+      "PRO_discount_price": 165,
+      "PRO_stock": 27,
+      "PRO_brand": "Andina Wear"
+    },
+    {
+      "CAT_id": 3,
+      "PRO_name": "Chaqueta Cortavientos",
+      "PRO_description": "Chaqueta Cortavientos de la colección Modyn — chaquetas de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 155,
+      "PRO_discount_price": null,
+      "PRO_stock": 72,
+      "PRO_brand": "Modyn Urban"
+    },
+    {
+      "CAT_id": 3,
+      "PRO_name": "Chaqueta Acolchada Invierno",
+      "PRO_description": "Chaqueta Acolchada Invierno de la colección Modyn — chaquetas de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 110,
+      "PRO_discount_price": 85,
+      "PRO_stock": 76,
+      "PRO_brand": "Modyn Elegance"
+    },
+    {
+      "CAT_id": 3,
+      "PRO_name": "Chaqueta Blazer Casual",
+      "PRO_description": "Chaqueta Blazer Casual de la colección Modyn — chaquetas de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 140,
+      "PRO_discount_price": 110,
+      "PRO_stock": 32,
+      "PRO_brand": "Andina Wear"
+    },
+    {
+      "CAT_id": 3,
+      "PRO_name": "Chaqueta Rompevientos Deportiva",
+      "PRO_description": "Chaqueta Rompevientos Deportiva de la colección Modyn — chaquetas de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 205,
+      "PRO_discount_price": null,
+      "PRO_stock": 57,
+      "PRO_brand": "Modyn Urban"
+    },
+    {
+      "CAT_id": 3,
+      "PRO_name": "Chaqueta Corduroy Vintage",
+      "PRO_description": "Chaqueta Corduroy Vintage de la colección Modyn — chaquetas de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 170,
+      "PRO_discount_price": null,
+      "PRO_stock": 27,
+      "PRO_brand": "Modyn Elegance"
+    },
+    {
+      "CAT_id": 3,
+      "PRO_name": "Chaqueta Impermeable",
+      "PRO_description": "Chaqueta Impermeable de la colección Modyn — chaquetas de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 150,
+      "PRO_discount_price": null,
+      "PRO_stock": 47,
+      "PRO_brand": "Andina Wear"
+    },
+    {
+      "CAT_id": 3,
+      "PRO_name": "Chaqueta Varsity College",
+      "PRO_description": "Chaqueta Varsity College de la colección Modyn — chaquetas de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 105,
+      "PRO_discount_price": 80,
+      "PRO_stock": 67,
+      "PRO_brand": "Modyn Urban"
+    },
+    {
+      "CAT_id": 3,
+      "PRO_name": "Chaqueta Ligera Primavera",
+      "PRO_description": "Chaqueta Ligera Primavera de la colección Modyn — chaquetas de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 140,
+      "PRO_discount_price": null,
+      "PRO_stock": 16,
+      "PRO_brand": "Modyn Elegance"
+    },
+    {
+      "CAT_id": 3,
+      "PRO_name": "Chaqueta Polar Sherpa",
+      "PRO_description": "Chaqueta Polar Sherpa de la colección Modyn — chaquetas de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 155,
+      "PRO_discount_price": null,
+      "PRO_stock": 22,
+      "PRO_brand": "Andina Wear"
+    },
+    {
+      "CAT_id": 3,
+      "PRO_name": "Chaqueta Utility Bolsillos",
+      "PRO_description": "Chaqueta Utility Bolsillos de la colección Modyn — chaquetas de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 115,
+      "PRO_discount_price": 90,
+      "PRO_stock": 78,
+      "PRO_brand": "Modyn Urban"
+    },
+    {
+      "CAT_id": 3,
+      "PRO_name": "Chaqueta Trench Coat",
+      "PRO_description": "Chaqueta Trench Coat de la colección Modyn — chaquetas de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 115,
+      "PRO_discount_price": null,
+      "PRO_stock": 74,
+      "PRO_brand": "Modyn Elegance"
+    }
+  ],
+  "Vestidos": [
+    {
+      "CAT_id": 4,
+      "PRO_name": "Vestido Midi Floral",
+      "PRO_description": "Vestido Midi Floral de la colección Modyn — vestidos de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 110,
+      "PRO_discount_price": 90,
+      "PRO_stock": 32,
+      "PRO_brand": "Modyn Elegance"
+    },
+    {
+      "CAT_id": 4,
+      "PRO_name": "Vestido Casual Algodón",
+      "PRO_description": "Vestido Casual Algodón de la colección Modyn — vestidos de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 180,
+      "PRO_discount_price": null,
+      "PRO_stock": 69,
+      "PRO_brand": "Modyn Basics"
+    },
+    {
+      "CAT_id": 4,
+      "PRO_name": "Vestido de Fiesta Satinado",
+      "PRO_description": "Vestido de Fiesta Satinado de la colección Modyn — vestidos de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 150,
+      "PRO_discount_price": 120,
+      "PRO_stock": 60,
+      "PRO_brand": "Modyn Elegance"
+    },
+    {
+      "CAT_id": 4,
+      "PRO_name": "Vestido Camisero",
+      "PRO_description": "Vestido Camisero de la colección Modyn — vestidos de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 150,
+      "PRO_discount_price": null,
+      "PRO_stock": 46,
+      "PRO_brand": "Modyn Basics"
+    },
+    {
+      "CAT_id": 4,
+      "PRO_name": "Vestido Off Shoulder",
+      "PRO_description": "Vestido Off Shoulder de la colección Modyn — vestidos de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 165,
+      "PRO_discount_price": 135,
+      "PRO_stock": 61,
+      "PRO_brand": "Modyn Elegance"
+    },
+    {
+      "CAT_id": 4,
+      "PRO_name": "Vestido Wrap Cruzado",
+      "PRO_description": "Vestido Wrap Cruzado de la colección Modyn — vestidos de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 85,
+      "PRO_discount_price": null,
+      "PRO_stock": 66,
+      "PRO_brand": "Modyn Basics"
+    },
+    {
+      "CAT_id": 4,
+      "PRO_name": "Vestido Corto Verano",
+      "PRO_description": "Vestido Corto Verano de la colección Modyn — vestidos de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 130,
+      "PRO_discount_price": null,
+      "PRO_stock": 44,
+      "PRO_brand": "Modyn Elegance"
+    },
+    {
+      "CAT_id": 4,
+      "PRO_name": "Vestido Largo Boho",
+      "PRO_description": "Vestido Largo Boho de la colección Modyn — vestidos de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 150,
+      "PRO_discount_price": null,
+      "PRO_stock": 30,
+      "PRO_brand": "Modyn Basics"
+    },
+    {
+      "CAT_id": 4,
+      "PRO_name": "Vestido Ajustado Elegante",
+      "PRO_description": "Vestido Ajustado Elegante de la colección Modyn — vestidos de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 135,
+      "PRO_discount_price": 105,
+      "PRO_stock": 15,
+      "PRO_brand": "Modyn Elegance"
+    },
+    {
+      "CAT_id": 4,
+      "PRO_name": "Vestido Estampado Tropical",
+      "PRO_description": "Vestido Estampado Tropical de la colección Modyn — vestidos de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 165,
+      "PRO_discount_price": null,
+      "PRO_stock": 25,
+      "PRO_brand": "Modyn Basics"
+    },
+    {
+      "CAT_id": 4,
+      "PRO_name": "Vestido Denim",
+      "PRO_description": "Vestido Denim de la colección Modyn — vestidos de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 135,
+      "PRO_discount_price": 105,
+      "PRO_stock": 28,
+      "PRO_brand": "Modyn Elegance"
+    },
+    {
+      "CAT_id": 4,
+      "PRO_name": "Vestido Plisado",
+      "PRO_description": "Vestido Plisado de la colección Modyn — vestidos de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 105,
+      "PRO_discount_price": null,
+      "PRO_stock": 47,
+      "PRO_brand": "Modyn Basics"
+    },
+    {
+      "CAT_id": 4,
+      "PRO_name": "Vestido Halter Fiesta",
+      "PRO_description": "Vestido Halter Fiesta de la colección Modyn — vestidos de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 180,
+      "PRO_discount_price": 145,
+      "PRO_stock": 78,
+      "PRO_brand": "Modyn Elegance"
+    },
+    {
+      "CAT_id": 4,
+      "PRO_name": "Vestido Básico Negro",
+      "PRO_description": "Vestido Básico Negro de la colección Modyn — vestidos de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 180,
+      "PRO_discount_price": null,
+      "PRO_stock": 32,
+      "PRO_brand": "Modyn Basics"
+    }
+  ],
+  "Faldas": [
+    {
+      "CAT_id": 5,
+      "PRO_name": "Falda Midi Plisada",
+      "PRO_description": "Falda Midi Plisada de la colección Modyn — faldas de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 50,
+      "PRO_discount_price": null,
+      "PRO_stock": 74,
+      "PRO_brand": "Modyn Elegance"
+    },
+    {
+      "CAT_id": 5,
+      "PRO_name": "Falda Denim Clásica",
+      "PRO_description": "Falda Denim Clásica de la colección Modyn — faldas de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 90,
+      "PRO_discount_price": null,
+      "PRO_stock": 40,
+      "PRO_brand": "Modyn Urban"
+    },
+    {
+      "CAT_id": 5,
+      "PRO_name": "Falda Corta Tableada",
+      "PRO_description": "Falda Corta Tableada de la colección Modyn — faldas de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 95,
+      "PRO_discount_price": null,
+      "PRO_stock": 73,
+      "PRO_brand": "Modyn Elegance"
+    },
+    {
+      "CAT_id": 5,
+      "PRO_name": "Falda Lápiz Formal",
+      "PRO_description": "Falda Lápiz Formal de la colección Modyn — faldas de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 100,
+      "PRO_discount_price": 80,
+      "PRO_stock": 46,
+      "PRO_brand": "Modyn Urban"
+    },
+    {
+      "CAT_id": 5,
+      "PRO_name": "Falda Larga Boho",
+      "PRO_description": "Falda Larga Boho de la colección Modyn — faldas de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 85,
+      "PRO_discount_price": 65,
+      "PRO_stock": 67,
+      "PRO_brand": "Modyn Elegance"
+    },
+    {
+      "CAT_id": 5,
+      "PRO_name": "Falda Cargo Urbana",
+      "PRO_description": "Falda Cargo Urbana de la colección Modyn — faldas de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 110,
+      "PRO_discount_price": 85,
+      "PRO_stock": 64,
+      "PRO_brand": "Modyn Urban"
+    },
+    {
+      "CAT_id": 5,
+      "PRO_name": "Falda Cuero Sintético",
+      "PRO_description": "Falda Cuero Sintético de la colección Modyn — faldas de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 70,
+      "PRO_discount_price": null,
+      "PRO_stock": 27,
+      "PRO_brand": "Modyn Elegance"
+    },
+    {
+      "CAT_id": 5,
+      "PRO_name": "Falda Envolvente",
+      "PRO_description": "Falda Envolvente de la colección Modyn — faldas de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 120,
+      "PRO_discount_price": 90,
+      "PRO_stock": 55,
+      "PRO_brand": "Modyn Urban"
+    },
+    {
+      "CAT_id": 5,
+      "PRO_name": "Falda A-Line Casual",
+      "PRO_description": "Falda A-Line Casual de la colección Modyn — faldas de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 80,
+      "PRO_discount_price": 60,
+      "PRO_stock": 51,
+      "PRO_brand": "Modyn Elegance"
+    },
+    {
+      "CAT_id": 5,
+      "PRO_name": "Falda Tul Fiesta",
+      "PRO_description": "Falda Tul Fiesta de la colección Modyn — faldas de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 70,
+      "PRO_discount_price": 55,
+      "PRO_stock": 29,
+      "PRO_brand": "Modyn Urban"
+    },
+    {
+      "CAT_id": 5,
+      "PRO_name": "Falda Jean Oversize",
+      "PRO_description": "Falda Jean Oversize de la colección Modyn — faldas de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 50,
+      "PRO_discount_price": 40,
+      "PRO_stock": 21,
+      "PRO_brand": "Modyn Elegance"
+    },
+    {
+      "CAT_id": 5,
+      "PRO_name": "Falda Estampada Floral",
+      "PRO_description": "Falda Estampada Floral de la colección Modyn — faldas de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 60,
+      "PRO_discount_price": 45,
+      "PRO_stock": 28,
+      "PRO_brand": "Modyn Urban"
+    },
+    {
+      "CAT_id": 5,
+      "PRO_name": "Falda Deportiva Tenis",
+      "PRO_description": "Falda Deportiva Tenis de la colección Modyn — faldas de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 50,
+      "PRO_discount_price": null,
+      "PRO_stock": 77,
+      "PRO_brand": "Modyn Elegance"
+    },
+    {
+      "CAT_id": 5,
+      "PRO_name": "Falda Asimétrica",
+      "PRO_description": "Falda Asimétrica de la colección Modyn — faldas de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 95,
+      "PRO_discount_price": null,
+      "PRO_stock": 27,
+      "PRO_brand": "Modyn Urban"
+    }
+  ],
+  "Calzado": [
+    {
+      "CAT_id": 6,
+      "PRO_name": "Zapatillas Urbanas Blancas",
+      "PRO_description": "Zapatillas Urbanas Blancas de la colección Modyn — calzado de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 170,
+      "PRO_discount_price": null,
+      "PRO_stock": 34,
+      "PRO_brand": "Modyn Step"
+    },
+    {
+      "CAT_id": 6,
+      "PRO_name": "Zapatillas Running Pro",
+      "PRO_description": "Zapatillas Running Pro de la colección Modyn — calzado de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 250,
+      "PRO_discount_price": null,
+      "PRO_stock": 53,
+      "PRO_brand": "Andina Wear"
+    },
+    {
+      "CAT_id": 6,
+      "PRO_name": "Botines Cuero Negro",
+      "PRO_description": "Botines Cuero Negro de la colección Modyn — calzado de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 120,
+      "PRO_discount_price": null,
+      "PRO_stock": 70,
+      "PRO_brand": "Modyn Step"
+    },
+    {
+      "CAT_id": 6,
+      "PRO_name": "Sandalias Plataforma",
+      "PRO_description": "Sandalias Plataforma de la colección Modyn — calzado de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 245,
+      "PRO_discount_price": 200,
+      "PRO_stock": 48,
+      "PRO_brand": "Andina Wear"
+    },
+    {
+      "CAT_id": 6,
+      "PRO_name": "Mocasines Casuales",
+      "PRO_description": "Mocasines Casuales de la colección Modyn — calzado de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 175,
+      "PRO_discount_price": null,
+      "PRO_stock": 18,
+      "PRO_brand": "Modyn Step"
+    },
+    {
+      "CAT_id": 6,
+      "PRO_name": "Botas Camperas",
+      "PRO_description": "Botas Camperas de la colección Modyn — calzado de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 180,
+      "PRO_discount_price": null,
+      "PRO_stock": 30,
+      "PRO_brand": "Andina Wear"
+    },
+    {
+      "CAT_id": 6,
+      "PRO_name": "Zapatillas Skate",
+      "PRO_description": "Zapatillas Skate de la colección Modyn — calzado de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 190,
+      "PRO_discount_price": 155,
+      "PRO_stock": 25,
+      "PRO_brand": "Modyn Step"
+    },
+    {
+      "CAT_id": 6,
+      "PRO_name": "Sandalias Deportivas",
+      "PRO_description": "Sandalias Deportivas de la colección Modyn — calzado de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 125,
+      "PRO_discount_price": 100,
+      "PRO_stock": 26,
+      "PRO_brand": "Andina Wear"
+    },
+    {
+      "CAT_id": 6,
+      "PRO_name": "Zapatos de Vestir",
+      "PRO_description": "Zapatos de Vestir de la colección Modyn — calzado de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 230,
+      "PRO_discount_price": null,
+      "PRO_stock": 42,
+      "PRO_brand": "Modyn Step"
+    },
+    {
+      "CAT_id": 6,
+      "PRO_name": "Botas de Lluvia",
+      "PRO_description": "Botas de Lluvia de la colección Modyn — calzado de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 125,
+      "PRO_discount_price": null,
+      "PRO_stock": 44,
+      "PRO_brand": "Andina Wear"
+    },
+    {
+      "CAT_id": 6,
+      "PRO_name": "Zapatillas Slip-On",
+      "PRO_description": "Zapatillas Slip-On de la colección Modyn — calzado de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 190,
+      "PRO_discount_price": null,
+      "PRO_stock": 74,
+      "PRO_brand": "Modyn Step"
+    },
+    {
+      "CAT_id": 6,
+      "PRO_name": "Botines Chelsea",
+      "PRO_description": "Botines Chelsea de la colección Modyn — calzado de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 190,
+      "PRO_discount_price": null,
+      "PRO_stock": 54,
+      "PRO_brand": "Andina Wear"
+    },
+    {
+      "CAT_id": 6,
+      "PRO_name": "Zapatillas High Top",
+      "PRO_description": "Zapatillas High Top de la colección Modyn — calzado de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 100,
+      "PRO_discount_price": null,
+      "PRO_stock": 39,
+      "PRO_brand": "Modyn Step"
+    },
+    {
+      "CAT_id": 6,
+      "PRO_name": "Sandalias Planas Verano",
+      "PRO_description": "Sandalias Planas Verano de la colección Modyn — calzado de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 205,
+      "PRO_discount_price": 155,
+      "PRO_stock": 23,
+      "PRO_brand": "Andina Wear"
+    }
+  ],
+  "Accesorios": [
+    {
+      "CAT_id": 7,
+      "PRO_name": "Gorra Snapback",
+      "PRO_description": "Gorra Snapback de la colección Modyn — accesorios de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 35,
+      "PRO_discount_price": null,
+      "PRO_stock": 20,
+      "PRO_brand": "Modyn Accesorios"
+    },
+    {
+      "CAT_id": 7,
+      "PRO_name": "Cinturón de Cuero",
+      "PRO_description": "Cinturón de Cuero de la colección Modyn — accesorios de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 85,
+      "PRO_discount_price": null,
+      "PRO_stock": 38,
+      "PRO_brand": "Andina Wear"
+    },
+    {
+      "CAT_id": 7,
+      "PRO_name": "Bufanda Tejida",
+      "PRO_description": "Bufanda Tejida de la colección Modyn — accesorios de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 85,
+      "PRO_discount_price": 70,
+      "PRO_stock": 27,
+      "PRO_brand": "Modyn Accesorios"
+    },
+    {
+      "CAT_id": 7,
+      "PRO_name": "Lentes de Sol Redondos",
+      "PRO_description": "Lentes de Sol Redondos de la colección Modyn — accesorios de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 25,
+      "PRO_discount_price": null,
+      "PRO_stock": 26,
+      "PRO_brand": "Andina Wear"
+    },
+    {
+      "CAT_id": 7,
+      "PRO_name": "Mochila Urbana",
+      "PRO_description": "Mochila Urbana de la colección Modyn — accesorios de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 25,
+      "PRO_discount_price": null,
+      "PRO_stock": 59,
+      "PRO_brand": "Modyn Accesorios"
+    },
+    {
+      "CAT_id": 7,
+      "PRO_name": "Cartera Crossbody",
+      "PRO_description": "Cartera Crossbody de la colección Modyn — accesorios de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 65,
+      "PRO_discount_price": null,
+      "PRO_stock": 50,
+      "PRO_brand": "Andina Wear"
+    },
+    {
+      "CAT_id": 7,
+      "PRO_name": "Gorro de Lana",
+      "PRO_description": "Gorro de Lana de la colección Modyn — accesorios de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 25,
+      "PRO_discount_price": null,
+      "PRO_stock": 15,
+      "PRO_brand": "Modyn Accesorios"
+    },
+    {
+      "CAT_id": 7,
+      "PRO_name": "Collar Minimalista",
+      "PRO_description": "Collar Minimalista de la colección Modyn — accesorios de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 80,
+      "PRO_discount_price": 60,
+      "PRO_stock": 24,
+      "PRO_brand": "Andina Wear"
+    },
+    {
+      "CAT_id": 7,
+      "PRO_name": "Reloj Casual",
+      "PRO_description": "Reloj Casual de la colección Modyn — accesorios de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 20,
+      "PRO_discount_price": 15,
+      "PRO_stock": 69,
+      "PRO_brand": "Modyn Accesorios"
+    },
+    {
+      "CAT_id": 7,
+      "PRO_name": "Billetera de Cuero",
+      "PRO_description": "Billetera de Cuero de la colección Modyn — accesorios de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 80,
+      "PRO_discount_price": null,
+      "PRO_stock": 48,
+      "PRO_brand": "Andina Wear"
+    },
+    {
+      "CAT_id": 7,
+      "PRO_name": "Pañuelo Estampado",
+      "PRO_description": "Pañuelo Estampado de la colección Modyn — accesorios de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 55,
+      "PRO_discount_price": null,
+      "PRO_stock": 62,
+      "PRO_brand": "Modyn Accesorios"
+    },
+    {
+      "CAT_id": 7,
+      "PRO_name": "Aretes Geométricos",
+      "PRO_description": "Aretes Geométricos de la colección Modyn — accesorios de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 80,
+      "PRO_discount_price": null,
+      "PRO_stock": 77,
+      "PRO_brand": "Andina Wear"
+    },
+    {
+      "CAT_id": 7,
+      "PRO_name": "Cadena Dorada",
+      "PRO_description": "Cadena Dorada de la colección Modyn — accesorios de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 75,
+      "PRO_discount_price": null,
+      "PRO_stock": 24,
+      "PRO_brand": "Modyn Accesorios"
+    },
+    {
+      "CAT_id": 7,
+      "PRO_name": "Riñonera Deportiva",
+      "PRO_description": "Riñonera Deportiva de la colección Modyn — accesorios de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 35,
+      "PRO_discount_price": null,
+      "PRO_stock": 74,
+      "PRO_brand": "Andina Wear"
+    }
+  ],
+  "Shorts": [
+    {
+      "CAT_id": 8,
+      "PRO_name": "Short Denim Clásico",
+      "PRO_description": "Short Denim Clásico de la colección Modyn — shorts de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 50,
+      "PRO_discount_price": null,
+      "PRO_stock": 60,
+      "PRO_brand": "Modyn Basics"
+    },
+    {
+      "CAT_id": 8,
+      "PRO_name": "Short Deportivo Dry Fit",
+      "PRO_description": "Short Deportivo Dry Fit de la colección Modyn — shorts de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 60,
+      "PRO_discount_price": 45,
+      "PRO_stock": 44,
+      "PRO_brand": "Modyn Sport"
+    },
+    {
+      "CAT_id": 8,
+      "PRO_name": "Short Cargo Urbano",
+      "PRO_description": "Short Cargo Urbano de la colección Modyn — shorts de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 55,
+      "PRO_discount_price": null,
+      "PRO_stock": 36,
+      "PRO_brand": "Modyn Basics"
+    },
+    {
+      "CAT_id": 8,
+      "PRO_name": "Short Jean Rasgado",
+      "PRO_description": "Short Jean Rasgado de la colección Modyn — shorts de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 40,
+      "PRO_discount_price": null,
+      "PRO_stock": 40,
+      "PRO_brand": "Modyn Sport"
+    },
+    {
+      "CAT_id": 8,
+      "PRO_name": "Short de Baño Estampado",
+      "PRO_description": "Short de Baño Estampado de la colección Modyn — shorts de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 70,
+      "PRO_discount_price": 55,
+      "PRO_stock": 16,
+      "PRO_brand": "Modyn Basics"
+    },
+    {
+      "CAT_id": 8,
+      "PRO_name": "Short Alto Talle",
+      "PRO_description": "Short Alto Talle de la colección Modyn — shorts de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 85,
+      "PRO_discount_price": null,
+      "PRO_stock": 21,
+      "PRO_brand": "Modyn Sport"
+    },
+    {
+      "CAT_id": 8,
+      "PRO_name": "Short Jogger",
+      "PRO_description": "Short Jogger de la colección Modyn — shorts de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 85,
+      "PRO_discount_price": 65,
+      "PRO_stock": 37,
+      "PRO_brand": "Modyn Basics"
+    },
+    {
+      "CAT_id": 8,
+      "PRO_name": "Short Cuadros Casual",
+      "PRO_description": "Short Cuadros Casual de la colección Modyn — shorts de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 85,
+      "PRO_discount_price": 70,
+      "PRO_stock": 40,
+      "PRO_brand": "Modyn Sport"
+    },
+    {
+      "CAT_id": 8,
+      "PRO_name": "Short Biker",
+      "PRO_description": "Short Biker de la colección Modyn — shorts de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 50,
+      "PRO_discount_price": null,
+      "PRO_stock": 20,
+      "PRO_brand": "Modyn Basics"
+    },
+    {
+      "CAT_id": 8,
+      "PRO_name": "Short Lino Verano",
+      "PRO_description": "Short Lino Verano de la colección Modyn — shorts de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 45,
+      "PRO_discount_price": 35,
+      "PRO_stock": 38,
+      "PRO_brand": "Modyn Sport"
+    },
+    {
+      "CAT_id": 8,
+      "PRO_name": "Short Palazzo Corto",
+      "PRO_description": "Short Palazzo Corto de la colección Modyn — shorts de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 70,
+      "PRO_discount_price": null,
+      "PRO_stock": 38,
+      "PRO_brand": "Modyn Basics"
+    },
+    {
+      "CAT_id": 8,
+      "PRO_name": "Short Mezclilla Oversize",
+      "PRO_description": "Short Mezclilla Oversize de la colección Modyn — shorts de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 80,
+      "PRO_discount_price": 65,
+      "PRO_stock": 27,
+      "PRO_brand": "Modyn Sport"
+    },
+    {
+      "CAT_id": 8,
+      "PRO_name": "Short Running Pro",
+      "PRO_description": "Short Running Pro de la colección Modyn — shorts de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 45,
+      "PRO_discount_price": null,
+      "PRO_stock": 66,
+      "PRO_brand": "Modyn Basics"
+    },
+    {
+      "CAT_id": 8,
+      "PRO_name": "Short Básico Algodón",
+      "PRO_description": "Short Básico Algodón de la colección Modyn — shorts de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 75,
+      "PRO_discount_price": 60,
+      "PRO_stock": 46,
+      "PRO_brand": "Modyn Sport"
+    }
+  ],
+  "Ropa Deportiva": [
+    {
+      "CAT_id": 9,
+      "PRO_name": "Conjunto Deportivo Dry Fit",
+      "PRO_description": "Conjunto Deportivo Dry Fit de la colección Modyn — ropa deportiva de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 150,
+      "PRO_discount_price": 115,
+      "PRO_stock": 32,
+      "PRO_brand": "Modyn Sport"
+    },
+    {
+      "CAT_id": 9,
+      "PRO_name": "Top Deportivo Sujeción",
+      "PRO_description": "Top Deportivo Sujeción de la colección Modyn — ropa deportiva de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 60,
+      "PRO_discount_price": 45,
+      "PRO_stock": 41,
+      "PRO_brand": "Andina Wear"
+    },
+    {
+      "CAT_id": 9,
+      "PRO_name": "Legging Compresión",
+      "PRO_description": "Legging Compresión de la colección Modyn — ropa deportiva de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 50,
+      "PRO_discount_price": 40,
+      "PRO_stock": 18,
+      "PRO_brand": "Modyn Sport"
+    },
+    {
+      "CAT_id": 9,
+      "PRO_name": "Camiseta Running Transpirable",
+      "PRO_description": "Camiseta Running Transpirable de la colección Modyn — ropa deportiva de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 100,
+      "PRO_discount_price": null,
+      "PRO_stock": 57,
+      "PRO_brand": "Andina Wear"
+    },
+    {
+      "CAT_id": 9,
+      "PRO_name": "Sudadera Training",
+      "PRO_description": "Sudadera Training de la colección Modyn — ropa deportiva de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 110,
+      "PRO_discount_price": null,
+      "PRO_stock": 26,
+      "PRO_brand": "Modyn Sport"
+    },
+    {
+      "CAT_id": 9,
+      "PRO_name": "Short Deportivo Doble Capa",
+      "PRO_description": "Short Deportivo Doble Capa de la colección Modyn — ropa deportiva de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 105,
+      "PRO_discount_price": 80,
+      "PRO_stock": 51,
+      "PRO_brand": "Andina Wear"
+    },
+    {
+      "CAT_id": 9,
+      "PRO_name": "Chaleco Deportivo",
+      "PRO_description": "Chaleco Deportivo de la colección Modyn — ropa deportiva de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 125,
+      "PRO_discount_price": 95,
+      "PRO_stock": 25,
+      "PRO_brand": "Modyn Sport"
+    },
+    {
+      "CAT_id": 9,
+      "PRO_name": "Body Fitness",
+      "PRO_description": "Body Fitness de la colección Modyn — ropa deportiva de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 60,
+      "PRO_discount_price": 45,
+      "PRO_stock": 25,
+      "PRO_brand": "Andina Wear"
+    },
+    {
+      "CAT_id": 9,
+      "PRO_name": "Casaca Deportiva Ligera",
+      "PRO_description": "Casaca Deportiva Ligera de la colección Modyn — ropa deportiva de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 145,
+      "PRO_discount_price": null,
+      "PRO_stock": 45,
+      "PRO_brand": "Modyn Sport"
+    },
+    {
+      "CAT_id": 9,
+      "PRO_name": "Pantalón Buzo Jogger",
+      "PRO_description": "Pantalón Buzo Jogger de la colección Modyn — ropa deportiva de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 60,
+      "PRO_discount_price": null,
+      "PRO_stock": 74,
+      "PRO_brand": "Andina Wear"
+    },
+    {
+      "CAT_id": 9,
+      "PRO_name": "Top Yoga Strappy",
+      "PRO_description": "Top Yoga Strappy de la colección Modyn — ropa deportiva de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 100,
+      "PRO_discount_price": 75,
+      "PRO_stock": 73,
+      "PRO_brand": "Modyn Sport"
+    },
+    {
+      "CAT_id": 9,
+      "PRO_name": "Polo Deportivo Manga Larga",
+      "PRO_description": "Polo Deportivo Manga Larga de la colección Modyn — ropa deportiva de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 90,
+      "PRO_discount_price": 70,
+      "PRO_stock": 19,
+      "PRO_brand": "Andina Wear"
+    },
+    {
+      "CAT_id": 9,
+      "PRO_name": "Legging Estampado Training",
+      "PRO_description": "Legging Estampado Training de la colección Modyn — ropa deportiva de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 125,
+      "PRO_discount_price": null,
+      "PRO_stock": 43,
+      "PRO_brand": "Modyn Sport"
+    },
+    {
+      "CAT_id": 9,
+      "PRO_name": "Conjunto Yoga Set",
+      "PRO_description": "Conjunto Yoga Set de la colección Modyn — ropa deportiva de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 115,
+      "PRO_discount_price": null,
+      "PRO_stock": 39,
+      "PRO_brand": "Andina Wear"
+    }
+  ],
+  "Ropa Interior": [
+    {
+      "CAT_id": 10,
+      "PRO_name": "Boxer Algodón Pack x3",
+      "PRO_description": "Boxer Algodón Pack x3 de la colección Modyn — ropa interior de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 45,
+      "PRO_discount_price": 35,
+      "PRO_stock": 29,
+      "PRO_brand": "Modyn Intimates"
+    },
+    {
+      "CAT_id": 10,
+      "PRO_name": "Brasier Sin Costuras",
+      "PRO_description": "Brasier Sin Costuras de la colección Modyn — ropa interior de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 30,
+      "PRO_discount_price": 25,
+      "PRO_stock": 52,
+      "PRO_brand": "Modyn Basics"
+    },
+    {
+      "CAT_id": 10,
+      "PRO_name": "Panty Bikini Algodón",
+      "PRO_description": "Panty Bikini Algodón de la colección Modyn — ropa interior de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 30,
+      "PRO_discount_price": 25,
+      "PRO_stock": 46,
+      "PRO_brand": "Modyn Intimates"
+    },
+    {
+      "CAT_id": 10,
+      "PRO_name": "Conjunto Lencería Encaje",
+      "PRO_description": "Conjunto Lencería Encaje de la colección Modyn — ropa interior de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 55,
+      "PRO_discount_price": null,
+      "PRO_stock": 21,
+      "PRO_brand": "Modyn Basics"
+    },
+    {
+      "CAT_id": 10,
+      "PRO_name": "Camiseta Térmica Interior",
+      "PRO_description": "Camiseta Térmica Interior de la colección Modyn — ropa interior de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 50,
+      "PRO_discount_price": 40,
+      "PRO_stock": 17,
+      "PRO_brand": "Modyn Intimates"
+    },
+    {
+      "CAT_id": 10,
+      "PRO_name": "Boxer Deportivo",
+      "PRO_description": "Boxer Deportivo de la colección Modyn — ropa interior de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 60,
+      "PRO_discount_price": 45,
+      "PRO_stock": 49,
+      "PRO_brand": "Modyn Basics"
+    },
+    {
+      "CAT_id": 10,
+      "PRO_name": "Brasier Deportivo Alta Sujeción",
+      "PRO_description": "Brasier Deportivo Alta Sujeción de la colección Modyn — ropa interior de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 30,
+      "PRO_discount_price": null,
+      "PRO_stock": 59,
+      "PRO_brand": "Modyn Intimates"
+    },
+    {
+      "CAT_id": 10,
+      "PRO_name": "Panty Culotte Cómodo",
+      "PRO_description": "Panty Culotte Cómodo de la colección Modyn — ropa interior de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 50,
+      "PRO_discount_price": 40,
+      "PRO_stock": 52,
+      "PRO_brand": "Modyn Basics"
+    },
+    {
+      "CAT_id": 10,
+      "PRO_name": "Body Lencero",
+      "PRO_description": "Body Lencero de la colección Modyn — ropa interior de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 50,
+      "PRO_discount_price": null,
+      "PRO_stock": 45,
+      "PRO_brand": "Modyn Intimates"
+    },
+    {
+      "CAT_id": 10,
+      "PRO_name": "Calzoncillo Slip Pack x3",
+      "PRO_description": "Calzoncillo Slip Pack x3 de la colección Modyn — ropa interior de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 40,
+      "PRO_discount_price": null,
+      "PRO_stock": 17,
+      "PRO_brand": "Modyn Basics"
+    },
+    {
+      "CAT_id": 10,
+      "PRO_name": "Pijama Set Algodón",
+      "PRO_description": "Pijama Set Algodón de la colección Modyn — ropa interior de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 25,
+      "PRO_discount_price": null,
+      "PRO_stock": 31,
+      "PRO_brand": "Modyn Intimates"
+    },
+    {
+      "CAT_id": 10,
+      "PRO_name": "Top Bralette",
+      "PRO_description": "Top Bralette de la colección Modyn — ropa interior de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 20,
+      "PRO_discount_price": 15,
+      "PRO_stock": 70,
+      "PRO_brand": "Modyn Basics"
+    },
+    {
+      "CAT_id": 10,
+      "PRO_name": "Boxer Estampado",
+      "PRO_description": "Boxer Estampado de la colección Modyn — ropa interior de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 35,
+      "PRO_discount_price": 30,
+      "PRO_stock": 54,
+      "PRO_brand": "Modyn Intimates"
+    },
+    {
+      "CAT_id": 10,
+      "PRO_name": "Panty Invisible Sin Costuras",
+      "PRO_description": "Panty Invisible Sin Costuras de la colección Modyn — ropa interior de alta calidad, cómodo y versátil para el día a día.",
+      "PRO_price": 25,
+      "PRO_discount_price": null,
+      "PRO_stock": 72,
+      "PRO_brand": "Modyn Basics"
+    }
+  ]
+}
