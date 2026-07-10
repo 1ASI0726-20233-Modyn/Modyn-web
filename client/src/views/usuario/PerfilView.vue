@@ -44,7 +44,7 @@
                         <strong>{{ dir.ADD_address }}</strong>
                         <p>{{ dir.ADD_city }}, {{ dir.ADD_country }} — {{ dir.ADD_zipcode }}</p>
                     </div>
-                    <button class="perfil-address-delete" @click="eliminar(dir.ADD_id)">🗑️</button>
+                    <button class="perfil-address-delete" @click="eliminar(dir.ADD_id)"><i class="pi pi-trash"></i></button>
                 </div>
             </div>
             <p v-else class="perfil-empty">Aún no tienes direcciones guardadas.</p>

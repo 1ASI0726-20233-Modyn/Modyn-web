@@ -13,12 +13,14 @@ export const obtenerVariantesProducto = async (PRO_id) => {
     return variantes.filter((v) => v.PRO_id === Number(PRO_id))
 }
 
-// ---- Product images ---- (misma limitación, se filtra en el cliente)
-export const listarImagenesProducto = async (PRO_id) => {
-    const imagenes = await get('/product-images')
-    return imagenes
-        .filter((img) => img.PRO_id === Number(PRO_id))
-        .sort((a, b) => (a.IMG_order ?? 0) - (b.IMG_order ?? 0))
+// ---- Product images ----
+export const listarImagenesProducto = (PRO_id) => get(`/product-images/product/${PRO_id}`)
+
+// Devuelve solo la URL de la primera imagen (o null), útil para miniaturas (carrito, relacionados)
+export const obtenerImagenPrincipal = async (PRO_id) => {
+    const imagenes = await listarImagenesProducto(PRO_id)
+    const ordenadas = [...imagenes].sort((a, b) => (a.IMG_order ?? 0) - (b.IMG_order ?? 0))
+    return ordenadas[0]?.IMG_url || null
 }
 
 // ---- Reviews ----
@@ -34,3 +36,11 @@ export const crearImagenResena = (imagen) => post('/review-images', imagen)
 export const listarPreguntasProducto = (PRO_id) => get(`/qa/product/${PRO_id}`)
 
 export const crearPregunta = (pregunta) => post('/qa', pregunta)
+
+// ---- Relacionados ---- (misma categoría, excluyendo el producto actual)
+export const listarProductosRelacionados = async (CAT_id, PRO_id_excluir, limite = 4) => {
+    const productos = await listarProductos()
+    return productos
+        .filter((p) => p.CAT_id === CAT_id && p.PRO_id !== Number(PRO_id_excluir))
+        .slice(0, limite)
+}

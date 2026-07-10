@@ -2,6 +2,20 @@
     <aside class="cart-summary">
         <h2 class="cart-summary-title">Resumen del pedido</h2>
 
+        <div v-if="items.length" class="cart-summary-items">
+            <div v-for="item in items" :key="item.CARTI_id" class="cart-summary-item">
+                <div class="cart-summary-item-img">
+                    <img v-if="item.imagen" :src="item.imagen" :alt="item.producto?.PRO_name" />
+                    <span v-else class="cart-summary-item-fallback"><i class="pi pi-image"></i></span>
+                </div>
+                <div class="cart-summary-item-info">
+                    <p class="cart-summary-item-name">{{ item.producto?.PRO_name || `Producto #${item.PRO_id}` }}</p>
+                    <p class="cart-summary-item-qty">{{ item.CARTI_quantity }}x</p>
+                </div>
+                <span class="cart-summary-item-price">S/ {{ (item.CARTI_price * item.CARTI_quantity).toFixed(2) }}</span>
+            </div>
+        </div>
+
         <div v-if="mostrarCupon" class="cart-summary-coupon">
             <input
                 v-model="codigoCupon"
@@ -59,6 +73,7 @@
 import { ref, computed } from 'vue'
 
 const props = defineProps({
+    items:         { type: Array, default: () => [] },
     subtotal:      { type: Number, default: 0 },
     descuento:     { type: Number, default: 0 },
     envio:         { type: Number, default: 0 },
@@ -100,6 +115,66 @@ const aplicar = () => {
     font-size: 1.15rem;
     font-weight: 700;
     color: var(--color-text);
+}
+
+.cart-summary-items {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    padding-bottom: var(--space-md);
+    border-bottom: 1px solid var(--color-border);
+}
+
+.cart-summary-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+}
+
+.cart-summary-item-img {
+    width: 48px;
+    height: 48px;
+    border-radius: var(--radius-md);
+    background: var(--color-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.cart-summary-item-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.cart-summary-item-fallback {
+    font-size: 1.25rem;
+}
+
+.cart-summary-item-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.cart-summary-item-name {
+    font-size: 0.85rem;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.cart-summary-item-qty {
+    font-size: 0.75rem;
+    color: var(--color-text-light);
+}
+
+.cart-summary-item-price {
+    font-size: 0.85rem;
+    font-weight: 600;
+    white-space: nowrap;
 }
 
 .cart-summary-coupon {
