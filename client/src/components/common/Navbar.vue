@@ -243,7 +243,7 @@ onMounted(async () => {
 }
 
 .navbar-quick-actions {
-  display: none;
+  display: flex;
   align-items: center;
   gap: 0.25rem;
 }

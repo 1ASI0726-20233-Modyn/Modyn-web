@@ -110,6 +110,11 @@
           <p>Cargando productos...</p>
         </div>
 
+        <!-- Error de conexión -->
+        <div v-else-if="errorCarga" class="sin-resultados">
+          <p>⚠️ No se pudo conectar con el servidor. Verifica que el backend esté corriendo.</p>
+        </div>
+
         <div v-else class="productos-grid">
           <div
             v-for="producto in productosPaginados"
@@ -206,6 +211,7 @@ const loading = ref(true)
 
 const productos = ref([])
 const categorias = ref([])
+const errorCarga = ref(false)
 const imagenes = ref({})
 const categoriaActiva = ref(0)
 const precioMax = ref(1000)
@@ -301,8 +307,14 @@ const toggleFavorito = (producto) => {
 
 onMounted(async () => {
   loading.value = true
+  errorCarga.value = false
   try {
     const [prods, cats] = await Promise.all([get('/products'), get('/categories')])
+
+    if (!Array.isArray(prods) || !Array.isArray(cats)) {
+      throw new Error('Respuesta inesperada del servidor al cargar productos/categorías')
+    }
+
     productos.value = prods
     categorias.value = [{ CAT_id: 0, CAT_name: 'Todos' }, ...cats]
 
@@ -321,6 +333,9 @@ onMounted(async () => {
       }),
     )
     imagenes.value = imagenesTemp
+  } catch (error) {
+    console.error('Error cargando el catálogo:', error)
+    errorCarga.value = true
   } finally {
     loading.value = false
   }

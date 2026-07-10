@@ -1,15 +1,3 @@
-// Migración de un solo uso: recalcula PRO_rating_avg y PRO_total_reviews de TODOS
-// los productos a partir de las reseñas reales guardadas en la colección "reviews".
-//
-// Por qué hace falta: estos dos campos se guardaban como datos semilla (seed) y nunca
-// se actualizaban cuando se creaba/eliminaba una reseña, por eso productos sin ninguna
-// reseña real mostraban ratings como 4.5, 4.9 o conteos como "42 reseñas". El código de
-// server/src/routes/catalogo/reviews.routes.js ya se corrigió para mantenerlos
-// sincronizados hacia adelante; este script solo corrige los datos que ya existen.
-//
-// Cómo correrlo (una sola vez):
-//   cd server
-//   node scripts/recalcular-ratings.js
 
 require("dotenv").config();
 const mongoose = require("mongoose");
