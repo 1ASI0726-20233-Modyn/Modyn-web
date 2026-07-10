@@ -5,7 +5,7 @@
         <div v-if="carrito.cargando" class="carrito-loading">Cargando tu carrito...</div>
 
         <div v-else-if="carrito.items.length === 0" class="carrito-empty">
-            <span class="carrito-empty-icon">🛒</span>
+            <span class="carrito-empty-icon"><i class="pi pi-shopping-cart"></i></span>
             <h2>Tu carrito está vacío</h2>
             <p>Explora nuestro catálogo y encuentra tu próximo look favorito.</p>
             <RouterLink to="/productos" class="btn btn-primary">Ir a productos</RouterLink>
@@ -86,6 +86,7 @@ const irACheckout = () => {
 
 .carrito-empty-icon {
     font-size: 3rem;
+    color: var(--color-border);
 }
 
 .carrito-empty h2 {

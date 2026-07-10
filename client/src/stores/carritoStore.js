@@ -8,7 +8,7 @@ import {
     actualizarItemCarrito,
     eliminarItemCarrito
 } from '../services/carritoService'
-import { obtenerProducto } from '../services/productosService'
+import { obtenerProducto, obtenerImagenPrincipal } from '../services/productosService'
 
 export const useCarritoStore = defineStore('carrito', () => {
     const CAR_id    = ref(null)
@@ -44,15 +44,19 @@ export const useCarritoStore = defineStore('carrito', () => {
         const data = await listarItemsCarrito(CAR_id.value)
         const enriquecidos = await Promise.all(
             (data || []).map(async (item) => {
-                const producto = await obtenerProducto(item.PRO_id).catch(() => null)
-                return { ...item, producto }
+                const [producto, imagen] = await Promise.all([
+                    obtenerProducto(item.PRO_id).catch(() => null),
+                    obtenerImagenPrincipal(item.PRO_id).catch(() => null)
+                ])
+                return { ...item, producto, imagen }
             })
         )
         items.value = enriquecidos
     }
 
     // producto: objeto de la tabla products (PRO_id, PRO_price, PRO_discount_price, ...)
-    const agregar = async (producto, cantidad = 1) => {
+    // imagen: URL opcional (si ya la tienes, evita otra llamada al backend)
+    const agregar = async (producto, cantidad = 1, imagen = null) => {
         if (!iniciado.value) await inicializar()
         if (!CAR_id.value) return
 
@@ -62,13 +66,14 @@ export const useCarritoStore = defineStore('carrito', () => {
         if (existente) {
             await actualizarCantidad(existente.CARTI_id, existente.CARTI_quantity + cantidad)
         } else {
+            const imagenFinal = imagen ?? await obtenerImagenPrincipal(producto.PRO_id).catch(() => null)
             const nuevo = await agregarItemCarrito({
                 CAR_id: CAR_id.value,
                 PRO_id: producto.PRO_id,
                 CARTI_quantity: cantidad,
                 CARTI_price: precio
             })
-            items.value.push({ ...nuevo, producto })
+            items.value.push({ ...nuevo, producto, imagen: imagenFinal })
         }
     }
 
