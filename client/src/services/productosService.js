@@ -1,4 +1,4 @@
-import { get, post } from './api'
+import API_URL, { get, post, put, del, subirArchivo } from './api'
 
 // ---- Products ----
 export const listarProductos = () => get('/products')
@@ -22,6 +22,21 @@ export const obtenerImagenPrincipal = async (PRO_id) => {
     const ordenadas = [...imagenes].sort((a, b) => (a.IMG_order ?? 0) - (b.IMG_order ?? 0))
     return ordenadas[0]?.IMG_url || null
 }
+
+// Sube el archivo al backend (guarda el binario en server/uploads/products) y devuelve
+// la URL absoluta lista para guardar en IMG_url. Se guarda absoluta (con API_URL incluido)
+// para que el resto de la app pueda usarla tal cual, igual que las URLs externas (Unsplash).
+export const subirImagenProducto = async (file) => {
+    const { url } = await subirArchivo('/uploads/product-image', file, 'imagen')
+    return `${API_URL}${url}`
+}
+
+// Crea el registro de la imagen en la base de datos, asociado a un producto
+export const crearImagenProducto = (imagen) => post('/product-images', imagen)
+
+export const actualizarImagenProducto = (IMG_id, cambios) => put(`/product-images/${IMG_id}`, cambios)
+
+export const eliminarImagenProducto = (IMG_id) => del(`/product-images/${IMG_id}`)
 
 // ---- Reviews ----
 export const listarResenasProducto = (PRO_id) => get(`/reviews/product/${PRO_id}`)

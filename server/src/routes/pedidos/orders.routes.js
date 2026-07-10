@@ -1,6 +1,14 @@
 const { Router } = require("express");
 const router = Router();
 const Order = require("../../models/Order");
+const { crearNotificacion } = require("../../utils/notify");
+
+const MENSAJES_ESTADO = {
+    pending:   "Tu pedido #ORD-{id} fue registrado y está pendiente de confirmación.",
+    shipped:   "Tu pedido #ORD-{id} ha sido enviado.",
+    completed: "Tu pedido #ORD-{id} fue completado. ¡Gracias por tu compra!",
+    cancelled: "Tu pedido #ORD-{id} fue cancelado."
+};
 
 // GET - Listar pedidos con paginación, filtros y datos de usuario/pago
 router.get("/", async (req, res) => {
@@ -96,6 +104,24 @@ router.post("/", async (req, res) => {
         const nuevoId = ultimo ? ultimo.ORD_id + 1 : 1;
         const nuevaOrden = new Order({ ...body, ORD_id: nuevoId });
         await nuevaOrden.save();
+
+        // Notificar al usuario que su pedido fue registrado
+        const mensajeEstado = MENSAJES_ESTADO[nuevaOrden.ORD_status] || MENSAJES_ESTADO.pending;
+        await crearNotificacion(
+            nuevaOrden.USU_id,
+            "order",
+            mensajeEstado.replace("{id}", nuevaOrden.ORD_id)
+        );
+
+        // Si el pedido usó un cupón, notificar también como promo
+        if (nuevaOrden.COU_id) {
+            await crearNotificacion(
+                nuevaOrden.USU_id,
+                "promo",
+                `Aplicaste un cupón de descuento en tu pedido #ORD-${nuevaOrden.ORD_id}.`
+            );
+        }
+
         res.status(201).json(nuevaOrden);
     } catch (err) {
         res.status(500).json({ error: err.message });
@@ -107,11 +133,21 @@ router.put("/:ORD_id", async (req, res) => {
     try {
         const ORD_id = req.params.ORD_id;
         const body = req.body;
+        const anterior = await Order.findOne({ ORD_id });
         const actualizada = await Order.findOneAndUpdate(
             { ORD_id },
             body,
             { new: true }
         );
+
+        // Notificar solo si el estado del pedido cambió
+        if (actualizada && body.ORD_status && anterior?.ORD_status !== actualizada.ORD_status) {
+            const tipo = actualizada.ORD_status === "shipped" ? "shipment" : "order";
+            const mensaje = (MENSAJES_ESTADO[actualizada.ORD_status] || `Tu pedido #ORD-{id} cambió de estado.`)
+                .replace("{id}", actualizada.ORD_id);
+            await crearNotificacion(actualizada.USU_id, tipo, mensaje);
+        }
+
         res.json(actualizada);
     } catch (err) {
         res.status(500).json({ error: err.message });

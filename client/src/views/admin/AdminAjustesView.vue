@@ -37,8 +37,8 @@
         <div class="settings-card">
           <h3>Configuración de la Tienda</h3>
           <div class="form-group" v-for="(value, key) in tienda" :key="key">
-            <label>{{ key.replace(/_/g, ' ') }}</label>
-            <input v-model="tienda[key]" class="input" />
+            <label>{{ etiquetasTienda[key] || key.replace(/_/g, ' ') }}</label>
+            <input v-model="tienda[key]" class="input" :placeholder="placeholdersTienda[key] || ''" />
           </div>
           <button @click="guardarTienda" class="btn btn-primary">Guardar Configuración</button>
         </div>
@@ -50,7 +50,7 @@
         <div v-for="pref in notificaciones" :key="pref.NPR_type" class="checkbox-group">
           <label>
             <input type="checkbox" v-model="pref.NPR_enabled" />
-            {{ pref.NPR_type }}
+            {{ etiquetasNotificacion[pref.NPR_type] || pref.NPR_type }}
           </label>
         </div>
         <button @click="guardarNotificaciones" class="btn btn-primary">Guardar Preferencias</button>
@@ -106,6 +106,23 @@ const tienda = ref({
   tax_id: ''
 })
 
+// Etiquetas en español para los campos de configuración de tienda
+const etiquetasTienda = {
+  store_name: 'Nombre de la tienda',
+  currency: 'Moneda predeterminada',
+  language: 'Idioma de la tienda',
+  contact_address: 'Dirección de contacto',
+  tax_id: 'RUC / Identificación tributaria'
+}
+
+const placeholdersTienda = {
+  store_name: 'Ej: Modyn',
+  currency: 'Ej: PEN, USD',
+  language: 'Ej: Español',
+  contact_address: 'Ej: Av. Principal 123, Lima',
+  tax_id: 'Ej: 20123456789'
+}
+
 // Preferencias de notificaciones
 const notificaciones = ref([
   { NPR_type: 'order', NPR_enabled: true },
@@ -114,6 +131,15 @@ const notificaciones = ref([
   { NPR_type: 'review', NPR_enabled: true },
   { NPR_type: 'system', NPR_enabled: true }
 ])
+
+// Etiquetas en español y descriptivas para las preferencias de notificaciones
+const etiquetasNotificacion = {
+  order: 'Pedidos (confirmaciones y actualizaciones de tus pedidos)',
+  shipment: 'Envíos (seguimiento y entregas)',
+  promo: 'Promociones y ofertas',
+  review: 'Reseñas (respuestas y nuevas reseñas de productos)',
+  system: 'Sistema (avisos generales de la plataforma)'
+}
 
 // Seguridad
 const password = ref({ actual: '', nueva: '', confirmar: '' })
@@ -269,4 +295,20 @@ onMounted(cargarDatos)
   cursor: pointer;
 }
 .btn-danger:hover { background: #c82333; }
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .admin-layout {
+    flex-direction: column;
+  }
+
+  .admin-content {
+    padding: 1.25rem;
+  }
+
+  .settings-grid,
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+}
 </style>

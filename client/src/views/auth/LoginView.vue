@@ -180,16 +180,16 @@ const handleLogin = async () => {
 /* ── Derecha ── */
 .login-right {
     flex: 1;
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(135deg,
-        #FDF5F0 0%,
-        #FAE8E4 25%,
-        #F9E0D8 50%,
-        #FAE8E0 75%,
-        #FDF5F0 100%
-    );
+    background:
+        radial-gradient(circle at 12% 15%, rgba(244, 99, 122, 0.28) 0%, transparent 45%),
+        radial-gradient(circle at 88% 85%, rgba(249, 168, 77, 0.28) 0%, transparent 50%),
+        radial-gradient(circle at 90% 12%, rgba(194, 24, 91, 0.18) 0%, transparent 40%),
+        linear-gradient(135deg, #FDF5F0 0%, #FDE8EC 45%, #FDF0E4 100%);
+    overflow: hidden;
     padding: 2rem;
 }
 

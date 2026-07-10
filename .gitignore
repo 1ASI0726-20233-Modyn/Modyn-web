@@ -3,3 +3,5 @@ node_modules/
 .idea
 package-lock.json
 server/.env
+server/uploads/products/*
+!server/uploads/products/.gitkeep

@@ -261,12 +261,14 @@ onMounted(cargarDashboard)
   border-radius: 12px;
   padding: 1.5rem;
   box-shadow: var(--shadow-sm);
+  overflow-x: auto;
 }
 .table-container h3 {
   margin-top: 0;
 }
 .admin-table {
   width: 100%;
+  min-width: 700px;
   border-collapse: collapse;
   margin-top: 0.5rem;
 }
@@ -343,6 +345,24 @@ onMounted(cargarDashboard)
 @media (max-width: 640px) {
   .stats-grid {
     grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 768px) {
+  .admin-layout {
+    flex-direction: column;
+  }
+  .admin-content {
+    padding: 1.25rem;
+  }
+  .table-container {
+    padding: 1rem;
+  }
+  .product-item {
+    flex-wrap: wrap;
+    gap: 0.35rem 1rem;
+  }
+  .revenue {
+    text-align: left;
   }
 }
 </style>

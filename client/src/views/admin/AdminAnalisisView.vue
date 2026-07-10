@@ -674,4 +674,23 @@ onMounted(cargarDatos)
 .btn-outline:hover {
   background: #f5f5f5;
 }
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .admin-layout {
+    flex-direction: column;
+  }
+
+  .admin-content {
+    padding: 1.25rem;
+  }
+
+  .product-item {
+    flex-wrap: wrap;
+  }
+
+  .modal-content {
+    padding: 1.5rem;
+  }
+}
 </style>

@@ -42,4 +42,20 @@ export const del = async (endpoint) => {
   return res.json()
 }
 
+// Sube un archivo como multipart/form-data (para imágenes, etc.).
+// No se debe usar getHeaders() aquí: el navegador tiene que fijar el
+// Content-Type con el boundary correcto, así que solo mandamos el token.
+export const subirArchivo = async (endpoint, file, campo = 'imagen') => {
+  const formData = new FormData()
+  formData.append(campo, file)
+
+  const token = localStorage.getItem('token')
+  const res = await fetch(`${API_URL}${endpoint}`, {
+    method: 'POST',
+    headers: token ? { authorization: token } : {},
+    body: formData,
+  })
+  return res.json()
+}
+
 export default API_URL

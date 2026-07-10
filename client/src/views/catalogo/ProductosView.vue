@@ -868,4 +868,74 @@ onMounted(async () => {
   width: 24px;
   border-radius: 5px;
 }
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+  .productos-body {
+    grid-template-columns: 1fr;
+  }
+
+  /* En mobile primero va el buscador + categorías, y los filtros (precio, talla,
+     color, valoración) quedan debajo, aunque en el HTML el sidebar va antes */
+  .productos-main {
+    order: 1;
+  }
+
+  .sidebar {
+    order: 2;
+    position: static;
+  }
+
+  .productos-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .productos-header {
+    padding: 2rem 1.25rem;
+    margin: 0 0.75rem;
+  }
+
+  .productos-header h1 {
+    font-size: 1.75rem;
+  }
+
+  .productos-body {
+    padding: 0 0.75rem;
+    margin: 1.5rem auto;
+  }
+
+  .productos-top {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .productos-sort {
+    justify-content: space-between;
+  }
+
+  .productos-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+  }
+
+  .card-img {
+    height: 160px;
+  }
+
+  .card-info {
+    padding: 0.75rem;
+  }
+
+  .precio-actual {
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .productos-grid {
+    grid-template-columns: 1fr;
+  }
+}
 </style>

@@ -397,4 +397,29 @@ onMounted(() => {
   font-size: 0.8rem;
   color: #8a6a6a;
 }
+
+/* ── Responsive ── */
+@media (max-width: 640px) {
+  .wishlist-header {
+    padding: 2rem 1.25rem;
+    margin: 0 0.75rem;
+  }
+
+  .wishlist-header h1 {
+    font-size: 1.75rem;
+  }
+
+  .wishlist-body {
+    padding: 0 0.75rem;
+  }
+
+  .productos-grid {
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 1rem;
+  }
+
+  .card-img {
+    height: 160px;
+  }
+}
 </style>

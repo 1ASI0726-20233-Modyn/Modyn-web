@@ -130,9 +130,38 @@
               </div>
             </div>
 
+            <div class="form-group">
+              <label>Imágenes del producto</label>
+              <div class="imagenes-grid">
+                <div v-for="(img, idx) in imagenes" :key="img.IMG_id ?? `nueva-${idx}`" class="imagen-thumb">
+                  <img :src="img.IMG_url" :alt="`Imagen ${idx + 1}`" />
+                  <button
+                    type="button"
+                    class="imagen-thumb-remove"
+                    title="Quitar imagen"
+                    @click="quitarImagen(idx)"
+                  >✕</button>
+                </div>
+
+                <label class="imagen-upload-btn" :class="{ disabled: subiendoImagen }">
+                  <span v-if="subiendoImagen">Subiendo...</span>
+                  <span v-else>+ Agregar</span>
+                  <input
+                    type="file"
+                    accept="image/*"
+                    multiple
+                    :disabled="subiendoImagen"
+                    @change="onSeleccionArchivos"
+                    hidden
+                  />
+                </label>
+              </div>
+              <p class="imagenes-hint">Puedes subir varias imágenes (JPG, PNG, WEBP — máx. 5MB c/u). La primera se usa como imagen principal.</p>
+            </div>
+
             <div class="modal-actions">
               <button type="button" @click="cerrarModal" class="btn btn-outline">Cancelar</button>
-              <button type="submit" class="btn btn-primary">
+              <button type="submit" class="btn btn-primary" :disabled="subiendoImagen">
                 {{ productoEditando ? 'Actualizar' : 'Crear' }}
               </button>
             </div>
@@ -148,6 +177,12 @@ import { ref, onMounted, computed } from 'vue'
 import { get, post, put, del } from '../../services/api'
 import AdminSidebar from '../../components/admin/AdminSidebar.vue'
 import { useCurrencyStore } from '../../stores/currencyStore'
+import {
+  listarImagenesProducto,
+  subirImagenProducto,
+  crearImagenProducto,
+  eliminarImagenProducto
+} from '../../services/productosService'
 
 const currency = useCurrencyStore()
 
@@ -171,6 +206,12 @@ const formulario = ref({
   CAT_id: null,
   SUP_id: null
 })
+
+// Imágenes del producto que se está creando/editando.
+// { IMG_id: number|null, IMG_url, IMG_order } — IMG_id es null mientras no exista en la
+// base de datos (caso: producto nuevo, todavía sin PRO_id al momento de subir la imagen)
+const imagenes = ref([])
+const subiendoImagen = ref(false)
 
 // --- Computed ---
 const productosFiltrados = computed(() => {
@@ -245,18 +286,76 @@ const abrirModalCrear = () => {
     CAT_id: null,
     SUP_id: null
   }
+  imagenes.value = []
   mostrarModal.value = true
 }
 
-const abrirModalEditar = (producto) => {
+const abrirModalEditar = async (producto) => {
   productoEditando.value = producto
   formulario.value = { ...producto }
   mostrarModal.value = true
+
+  imagenes.value = []
+  try {
+    const existentes = await listarImagenesProducto(producto.PRO_id)
+    imagenes.value = [...existentes].sort((a, b) => (a.IMG_order ?? 0) - (b.IMG_order ?? 0))
+  } catch (error) {
+    console.error('Error cargando imágenes del producto:', error)
+  }
 }
 
 const cerrarModal = () => {
   mostrarModal.value = false
   productoEditando.value = null
+  imagenes.value = []
+}
+
+// --- Imágenes ---
+const onSeleccionArchivos = async (event) => {
+  const archivos = Array.from(event.target.files || [])
+  if (!archivos.length) return
+
+  subiendoImagen.value = true
+  try {
+    for (const archivo of archivos) {
+      const IMG_url = await subirImagenProducto(archivo)
+
+      // Si el producto ya existe (edición), persistimos la imagen de inmediato.
+      // Si es un producto nuevo (todavía sin PRO_id), la dejamos en memoria y se
+      // crea en la base de datos recién cuando se guarde el producto (ver guardarProducto).
+      if (productoEditando.value?.PRO_id) {
+        const creada = await crearImagenProducto({
+          PRO_id: productoEditando.value.PRO_id,
+          IMG_url,
+          IMG_order: imagenes.value.length
+        })
+        imagenes.value.push(creada)
+      } else {
+        imagenes.value.push({ IMG_id: null, IMG_url, IMG_order: imagenes.value.length })
+      }
+    }
+  } catch (error) {
+    console.error('Error subiendo imagen:', error)
+    alert('No se pudo subir una de las imágenes. Revisa la consola.')
+  } finally {
+    subiendoImagen.value = false
+    event.target.value = '' // permite volver a seleccionar el mismo archivo si hace falta
+  }
+}
+
+const quitarImagen = async (idx) => {
+  const img = imagenes.value[idx]
+  if (img.IMG_id) {
+    if (!confirm('¿Quitar esta imagen del producto?')) return
+    try {
+      await eliminarImagenProducto(img.IMG_id)
+    } catch (error) {
+      console.error('Error eliminando imagen:', error)
+      alert('No se pudo eliminar la imagen.')
+      return
+    }
+  }
+  imagenes.value.splice(idx, 1)
 }
 
 // --- Guardar (crear / editar) ---
@@ -265,12 +364,23 @@ const guardarProducto = async () => {
     const payload = { ...formulario.value }
 
     if (productoEditando.value) {
-      // Edición: enviar PUT con el PRO_id existente
+      // Edición: enviar PUT con el PRO_id existente. Las imágenes ya se
+      // persistieron de inmediato al subirlas (ver onSeleccionArchivos).
       await put(`/products/${payload.PRO_id}`, payload)
     } else {
       // Creación: NO enviar PRO_id, el backend lo genera automáticamente
       delete payload.PRO_id
-      await post('/products', payload)
+      const nuevoProducto = await post('/products', payload)
+
+      // Recién ahora existe un PRO_id: creamos los registros de las imágenes
+      // que se subieron mientras el producto todavía no existía.
+      for (const [index, img] of imagenes.value.entries()) {
+        await crearImagenProducto({
+          PRO_id: nuevoProducto.PRO_id,
+          IMG_url: img.IMG_url,
+          IMG_order: index
+        })
+      }
     }
 
     await cargarProductos()
@@ -509,6 +619,85 @@ textarea.input {
   gap: 1rem;
 }
 
+/* Imágenes */
+.imagenes-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.imagen-thumb {
+  position: relative;
+  width: 84px;
+  height: 84px;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1.5px solid var(--color-border);
+  flex-shrink: 0;
+}
+
+.imagen-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.imagen-thumb-remove {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(0, 0, 0, 0.65);
+  color: white;
+  font-size: 0.7rem;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.imagen-thumb-remove:hover {
+  background: #dc3545;
+}
+
+.imagen-upload-btn {
+  width: 84px;
+  height: 84px;
+  flex-shrink: 0;
+  border: 1.5px dashed var(--color-border);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--color-text-light);
+  cursor: pointer;
+  transition: var(--transition);
+  padding: 0.25rem;
+}
+
+.imagen-upload-btn:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+.imagen-upload-btn.disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.imagenes-hint {
+  font-size: 0.78rem;
+  color: var(--color-text-light);
+  margin-top: 0.4rem;
+}
+
 .modal-actions {
   display: flex;
   gap: 1rem;
@@ -559,6 +748,14 @@ textarea.input {
 
   .modal-content {
     padding: 1.5rem;
+  }
+
+  .admin-layout {
+    flex-direction: column;
+  }
+
+  .admin-content {
+    padding: 1.25rem;
   }
 }
 </style>

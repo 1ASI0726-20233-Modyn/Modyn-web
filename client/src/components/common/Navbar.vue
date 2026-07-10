@@ -11,7 +11,42 @@
         <li><RouterLink to="/tendencias" class="nav-link">Tendencia</RouterLink></li>
       </ul>
 
-      <div class="navbar-actions">
+      <div class="navbar-quick-actions">
+        <RouterLink to="/wishlist" class="icon-btn" title="Mis Favoritos">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path
+              d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+            />
+          </svg>
+          <span v-if="wishlist?.items?.length > 0" class="badge">{{ wishlist.items.length }}</span>
+        </RouterLink>
+
+        <RouterLink to="/carrito" class="icon-btn" title="Mi Carrito">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0" />
+          </svg>
+          <span v-if="carrito.cantidadItems > 0" class="badge">{{ carrito.cantidadItems }}</span>
+        </RouterLink>
+
+        <button
+          class="navbar-burger"
+          :class="{ active: menuAbierto }"
+          @click="menuAbierto = !menuAbierto"
+          aria-label="Abrir menú"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+
+      <div class="navbar-actions" :class="{ open: menuAbierto }">
+        <ul class="navbar-links-mobile">
+          <li><RouterLink to="/" class="nav-link" @click="menuAbierto = false">Inicio</RouterLink></li>
+          <li><RouterLink to="/productos" class="nav-link" @click="menuAbierto = false">Productos</RouterLink></li>
+          <li><RouterLink to="/tendencias" class="nav-link" @click="menuAbierto = false">Tendencia</RouterLink></li>
+        </ul>
+
         <div class="navbar-currency">
           <select
             class="currency-select"
@@ -84,29 +119,13 @@
           </div>
         </div>
 
-        <RouterLink to="/wishlist" class="icon-btn" title="Mis Favoritos">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path
-              d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-            />
-          </svg>
-          <span v-if="wishlist?.items?.length > 0" class="badge">{{ wishlist.items.length }}</span>
-        </RouterLink>
-
-        <RouterLink to="/carrito" class="icon-btn" title="Mi Carrito">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0" />
-          </svg>
-          <span v-if="carrito.cantidadItems > 0" class="badge">{{ carrito.cantidadItems }}</span>
-        </RouterLink>
-
         <template v-if="!auth.isLoggedIn()">
-          <RouterLink to="/login" class="btn-entrar">Entrar</RouterLink>
-          <RouterLink to="/register" class="btn-registrarse">Registrarse</RouterLink>
+          <RouterLink to="/login" class="btn-entrar" @click="menuAbierto = false">Entrar</RouterLink>
+          <RouterLink to="/register" class="btn-registrarse" @click="menuAbierto = false">Registrarse</RouterLink>
         </template>
         <template v-else>
-          <RouterLink to="/perfil" class="btn-entrar">{{ auth.usuario?.USU_name }}</RouterLink>
-          <button @click="auth.logout()" class="btn-registrarse">Salir</button>
+          <RouterLink to="/perfil" class="btn-entrar" @click="menuAbierto = false">{{ auth.usuario?.USU_name }}</RouterLink>
+          <button @click="auth.logout(); menuAbierto = false" class="btn-registrarse">Salir</button>
         </template>
       </div>
     </div>
@@ -131,6 +150,7 @@ const currency = useCurrencyStore()
 const notifOpen = ref(false)
 const notificaciones = ref([])
 const notifCount = ref(0)
+const menuAbierto = ref(false)
 
 const toggleNotif = () => {
   notifOpen.value = !notifOpen.value
@@ -216,6 +236,50 @@ onMounted(async () => {
   display: flex;
   align-items: center;
   gap: 0.75rem;
+}
+
+.navbar-links-mobile {
+  display: none;
+}
+
+.navbar-quick-actions {
+  display: none;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.navbar-burger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 34px;
+  height: 34px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.navbar-burger span {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background: #3d2b2b;
+  border-radius: 2px;
+  transition: all 0.25s;
+}
+
+.navbar-burger.active span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.navbar-burger.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.navbar-burger.active span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
 }
 
 .icon-btn {
@@ -408,5 +472,114 @@ onMounted(async () => {
 
 .btn-registrarse:hover {
   background: #f4637a;
+}
+
+/* ── Responsive ── */
+@media (max-width: 860px) {
+  .navbar-inner {
+    padding: 0 1rem;
+    gap: 1rem;
+  }
+
+  .navbar-links {
+    display: none;
+  }
+
+  .navbar-quick-actions {
+    display: flex;
+  }
+
+  .navbar-burger {
+    display: flex;
+  }
+
+  .navbar-actions {
+    position: fixed;
+    top: 64px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: white;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1.25rem;
+    padding: 1.5rem;
+    overflow-y: auto;
+    transform: translateX(100%);
+    transition: transform 0.25s ease;
+    z-index: 150;
+  }
+
+  .navbar-actions.open {
+    transform: translateX(0);
+  }
+
+  .navbar-links-mobile {
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    gap: 0.25rem;
+    border-bottom: 1px solid #f0ddd8;
+    padding-bottom: 1rem;
+  }
+
+  .navbar-links-mobile .nav-link {
+    display: block;
+    padding: 0.6rem 0.25rem;
+    font-size: 1.05rem;
+  }
+
+  .navbar-currency {
+    width: 100%;
+  }
+
+  .currency-select {
+    max-width: none;
+    width: 100%;
+  }
+
+  .navbar-notif {
+    width: 100%;
+  }
+
+  .navbar-notif .icon-btn {
+    width: 100%;
+    justify-content: flex-start;
+    gap: 0.5rem;
+    border-radius: 8px;
+    padding: 0.6rem 0.25rem;
+  }
+
+  .navbar-notif .icon-btn::after {
+    content: 'Notificaciones';
+    font-size: 0.95rem;
+    color: #3d2b2b;
+  }
+
+  .navbar-notif .badge {
+    position: static;
+    margin-left: 0.25rem;
+  }
+
+  .notif-dropdown {
+    position: static;
+    width: 100%;
+    box-shadow: none;
+    border: 1px solid #f0ddd8;
+    margin-top: 0.5rem;
+  }
+
+  .btn-entrar,
+  .btn-registrarse {
+    width: 100%;
+    text-align: center;
+    padding: 0.75rem;
+  }
+}
+
+@media (max-width: 420px) {
+  .navbar-logo img {
+    height: 30px;
+  }
 }
 </style>

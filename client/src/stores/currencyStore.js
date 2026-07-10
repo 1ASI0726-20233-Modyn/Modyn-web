@@ -1,12 +1,6 @@
 import { defineStore } from 'pinia'
 import { ref, computed, watch } from 'vue'
 
-// Todos los precios en la base de datos (PRO_price, CARTI_price, ORD_total, etc.) están
-// guardados en soles peruanos (PEN), que es la moneda nativa de MODYN. Esta tabla define,
-// para cada moneda que el usuario puede elegir, cuántos soles equivalen a 1 unidad de esa
-// moneda (tasaPEN). Son tasas fijas aproximadas (referencia ~2025); si más adelante se
-// integra una API de tipo de cambio en tiempo real, este es el único lugar que habría que
-// tocar. "decimales" indica cuántos decimales mostrar (el yen y el won no usan centavos).
 export const MONEDAS = {
     USD: { simbolo: '$',      nombre: 'Dólar estadounidense', tasaPEN: 3.75 },
     PEN: { simbolo: 'S/',     nombre: 'Sol peruano',           tasaPEN: 1 },

@@ -407,4 +407,35 @@ watch(tabActiva, (tab) => {
     color: var(--color-text-light);
     margin-top: var(--space-xs);
 }
+
+/* ── Responsive ── */
+@media (max-width: 640px) {
+    .perfil-page {
+        padding: var(--space-lg) var(--space-md);
+    }
+
+    .page-title {
+        font-size: 1.5rem;
+    }
+
+    .perfil-tabs {
+        overflow-x: auto;
+        white-space: nowrap;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .new-address-row {
+        flex-direction: column;
+    }
+
+    .pedido-header {
+        flex-wrap: wrap;
+    }
+
+    .perfil-address-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--space-sm);
+    }
+}
 </style>

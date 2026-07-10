@@ -425,4 +425,80 @@ onMounted(async () => {
     color: #8A6A6A;
 }
 
+/* ── Responsive ── */
+@media (max-width: 900px) {
+    .hero-inner {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        text-align: center;
+    }
+
+    .hero-text {
+        align-items: center;
+    }
+
+    .hero-text p {
+        max-width: 100%;
+    }
+
+    .hero-buttons {
+        justify-content: center;
+    }
+
+    .hero-image img {
+        height: 360px;
+    }
+
+    .trending-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 640px) {
+    .hero {
+        padding: 2.5rem 1.25rem 3rem;
+    }
+
+    .hero-text h1 {
+        font-size: 2.25rem;
+    }
+
+    .btn-hero-primary,
+    .btn-hero-secondary {
+        height: 48px;
+        padding: 0 1.5rem;
+        font-size: 0.88rem;
+    }
+
+    .hero-image img {
+        height: 280px;
+    }
+
+    .categorias {
+        padding: 2rem 1.25rem;
+    }
+
+    .trending {
+        padding: 1rem;
+    }
+
+    .trending-inner {
+        border-radius: 1.5rem;
+        padding: 1.5rem 1.25rem;
+    }
+
+    .trending-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+
+    .trending-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .trending-img {
+        height: 220px;
+    }
+}
 </style>

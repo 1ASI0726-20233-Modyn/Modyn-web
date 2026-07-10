@@ -40,6 +40,7 @@ router.use("/users", require("./usuarios/users.routes"));
 // Catálogo
 router.use("/categories", require("./catalogo/categories.routes"));
 router.use("/product-images", require("./catalogo/productImages.routes"));
+router.use("/uploads", require("./catalogo/upload.routes"));
 router.use("/likes", require("./catalogo/productLikes.routes"));
 router.use("/qa", require("./catalogo/productQA.routes"));
 router.use("/products", require("./catalogo/products.routes"));

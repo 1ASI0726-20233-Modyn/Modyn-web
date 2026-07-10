@@ -555,11 +555,14 @@ const enviarResena = async () => {
     display: flex;
     gap: var(--space-sm);
     margin-top: var(--space-sm);
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
 }
 
 .detalle-thumb {
     width: 64px;
     height: 64px;
+    flex-shrink: 0;
     border-radius: var(--radius-md);
     overflow: hidden;
     border: 2px solid transparent;
@@ -1085,6 +1088,28 @@ const enviarResena = async () => {
     }
     .reviews-layout {
         grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .detalle-name {
+        font-size: 1.4rem;
+    }
+
+    .detalle-price-current {
+        font-size: 1.4rem;
+    }
+
+    .detalle-actions {
+        flex-wrap: wrap;
+    }
+
+    .detalle-add-btn {
+        flex-basis: 100%;
+    }
+
+    .relacionados-grid {
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
     }
 }
 </style>

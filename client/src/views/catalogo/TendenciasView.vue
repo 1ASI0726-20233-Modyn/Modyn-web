@@ -650,4 +650,55 @@ onMounted(() => {
     background: #F4637A;
     color: white;
 }
+
+/* ── Responsive ── */
+@media (max-width: 720px) {
+    .tendencias-header {
+        padding: 2.5rem 1.25rem 3rem;
+        margin: 0 0.5rem;
+    }
+
+    .tendencias-header h1 {
+        font-size: 1.75rem;
+    }
+
+    .tendencias-body {
+        padding: 1.5rem 1rem 2.5rem;
+    }
+
+    .card-top-inner {
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+    }
+
+    .card-top-img {
+        height: 220px;
+    }
+
+    .card-top-info h2 {
+        font-size: 1.4rem;
+    }
+
+    .price-big {
+        font-size: 1.5rem;
+    }
+
+    .cards-medio {
+        grid-template-columns: 1fr;
+    }
+
+    .card-lista {
+        flex-wrap: wrap;
+    }
+
+    .lista-info {
+        min-width: 0;
+    }
+
+    .lista-info h4 {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+}
 </style>

@@ -384,6 +384,7 @@ onMounted(cargarPedidos)
   border: none;
   padding: 0.6rem 1.2rem;
   border-radius: 8px;
+  font-family: var(--font-primary);
   cursor: pointer;
   font-weight: 500;
   transition: var(--transition);
@@ -403,6 +404,8 @@ onMounted(cargarPedidos)
   border-radius: 20px;
   border: 1px solid var(--color-border);
   background: white;
+  font-family: var(--font-primary);
+  font-size: 0.9rem;
   cursor: pointer;
   transition: all 0.2s;
 }
@@ -438,6 +441,7 @@ onMounted(cargarPedidos)
   border: none;
   cursor: pointer;
   padding: 0.25rem 0.5rem;
+  font-family: var(--font-primary);
   font-size: 0.9rem;
 }
 .action-btn.edit {
@@ -599,5 +603,20 @@ onMounted(cargarPedidos)
 }
 .btn-outline:hover {
   background: #f5f5f5;
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .admin-layout {
+    flex-direction: column;
+  }
+
+  .admin-content {
+    padding: 1.25rem;
+  }
+
+  .modal-content {
+    padding: 1.5rem;
+  }
 }
 </style>

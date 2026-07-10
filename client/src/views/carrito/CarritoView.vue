@@ -116,4 +116,14 @@ const irACheckout = () => {
         grid-template-columns: 1fr;
     }
 }
+
+@media (max-width: 640px) {
+    .carrito-page {
+        padding: var(--space-lg) var(--space-md);
+    }
+
+    .page-title {
+        font-size: 1.5rem;
+    }
+}
 </style>

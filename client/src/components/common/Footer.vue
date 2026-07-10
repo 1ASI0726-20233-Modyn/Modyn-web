@@ -185,4 +185,33 @@ const suscribirse = async () => {
     color: rgba(255,255,255,0.4);
     font-weight: 500;
 }
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+    .footer {
+        border-radius: 40px 40px 0 0;
+    }
+
+    .footer-inner {
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+        padding: 2.5rem 1.5rem 1.5rem;
+    }
+
+    .footer-brand {
+        grid-column: 1 / -1;
+    }
+}
+
+@media (max-width: 560px) {
+    .footer-inner {
+        grid-template-columns: 1fr;
+        gap: 1.75rem;
+        padding: 2rem 1.25rem 1.25rem;
+    }
+
+    .newsletter-form {
+        width: 100%;
+    }
+}
 </style>

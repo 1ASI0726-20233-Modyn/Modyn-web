@@ -522,4 +522,22 @@ const confirmarPedido = async () => {
         grid-template-columns: 1fr;
     }
 }
+
+@media (max-width: 640px) {
+    .checkout-page {
+        padding: var(--space-lg) var(--space-md);
+    }
+
+    .page-title {
+        font-size: 1.5rem;
+    }
+
+    .new-address-row {
+        flex-direction: column;
+    }
+
+    .payment-options {
+        flex-direction: column;
+    }
+}
 </style>
