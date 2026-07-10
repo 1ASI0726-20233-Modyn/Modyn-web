@@ -5,7 +5,7 @@
         <div v-if="carrito.cargando" class="checkout-loading">Cargando...</div>
 
         <div v-else-if="pedidoConfirmado" class="checkout-success">
-            <span class="checkout-success-icon">🎉</span>
+            <span class="checkout-success-icon"><i class="pi pi-check-circle"></i></span>
             <h2>¡Tu pedido ha sido confirmado!</h2>
             <p>Número de pedido: <strong>#{{ pedidoConfirmado.ORD_id }}</strong></p>
             <p>Te avisaremos cuando esté en camino.</p>
@@ -79,12 +79,81 @@
                             {{ metodo }}
                         </label>
                     </div>
+
+                    <!-- Tarjeta -->
+                    <div v-if="PAY_method === 'Tarjeta'" class="payment-details">
+                        <div class="form-group">
+                            <label>Número de tarjeta</label>
+                            <input
+                                v-model="tarjeta.numero"
+                                @input="formatearNumeroTarjeta"
+                                class="input"
+                                placeholder="0000 0000 0000 0000"
+                                maxlength="19"
+                                inputmode="numeric"
+                            />
+                        </div>
+                        <div class="form-group">
+                            <label>Nombre en la tarjeta</label>
+                            <input v-model="tarjeta.nombre" class="input" placeholder="Como aparece en la tarjeta" />
+                        </div>
+                        <div class="new-address-row">
+                            <div class="form-group">
+                                <label>Expiración</label>
+                                <input
+                                    v-model="tarjeta.expiracion"
+                                    @input="formatearExpiracion"
+                                    class="input"
+                                    placeholder="MM/AA"
+                                    maxlength="5"
+                                    inputmode="numeric"
+                                />
+                            </div>
+                            <div class="form-group">
+                                <label>CVV</label>
+                                <input
+                                    v-model="tarjeta.cvv"
+                                    class="input"
+                                    placeholder="123"
+                                    maxlength="4"
+                                    inputmode="numeric"
+                                    type="password"
+                                />
+                            </div>
+                        </div>
+                        <p class="payment-hint"><i class="pi pi-lock"></i> Tus datos están protegidos y no se almacenan en nuestros servidores.</p>
+                    </div>
+
+                    <!-- Yape / Plin -->
+                    <div v-else-if="PAY_method === 'Yape' || PAY_method === 'Plin'" class="payment-details">
+                        <div class="form-group">
+                            <label>Número de celular asociado a {{ PAY_method }}</label>
+                            <input
+                                v-model="billeteraDigital.telefono"
+                                class="input"
+                                placeholder="9XX XXX XXX"
+                                maxlength="9"
+                                inputmode="numeric"
+                            />
+                        </div>
+                        <p class="payment-hint"><i class="pi pi-mobile"></i> Al confirmar, recibirás una notificación en tu app de {{ PAY_method }} para aprobar el pago.</p>
+                    </div>
+
+                    <!-- Paypal -->
+                    <div v-else-if="PAY_method === 'Paypal'" class="payment-details">
+                        <div class="form-group">
+                            <label>Correo de tu cuenta PayPal</label>
+                            <input v-model="paypal.correo" type="email" class="input" placeholder="tucorreo@ejemplo.com" />
+                        </div>
+                        <p class="payment-hint">Serás redirigido a PayPal para completar el pago de forma segura.</p>
+                    </div>
                 </section>
 
                 <p v-if="errorGeneral" class="checkout-error">{{ errorGeneral }}</p>
             </div>
 
             <CartSummary
+                :items="carrito.items"
                 :subtotal="carrito.total"
                 :descuento="descuento"
                 mostrar-cupon
@@ -92,7 +161,7 @@
                 :cargando-cupon="cargandoCupon"
                 :error-cupon="errorCupon"
                 action-label="Confirmar pedido"
-                :disabled="procesando || !ADD_id || !PAY_method"
+                :disabled="procesando || !ADD_id || !PAY_method || !pagoValido"
                 @apply-coupon="aplicarCupon"
                 @action="confirmarPedido"
             >
@@ -103,7 +172,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { RouterLink } from 'vue-router'
 import { useAuthStore } from '../../stores/authStore'
 import { useCarritoStore } from '../../stores/carritoStore'
@@ -125,6 +194,37 @@ const nuevaDireccion        = ref({ ADD_address: '', ADD_city: '', ADD_country: 
 
 const metodosPago = ['Tarjeta', 'Yape', 'Plin', 'Paypal']
 const PAY_method  = ref('')
+
+const tarjeta = ref({ numero: '', nombre: '', expiracion: '', cvv: '' })
+const billeteraDigital = ref({ telefono: '' })
+const paypal = ref({ correo: '' })
+
+const formatearNumeroTarjeta = () => {
+    const digitos = tarjeta.value.numero.replace(/\D/g, '').slice(0, 16)
+    tarjeta.value.numero = digitos.replace(/(.{4})/g, '$1 ').trim()
+}
+
+const formatearExpiracion = () => {
+    const digitos = tarjeta.value.expiracion.replace(/\D/g, '').slice(0, 4)
+    tarjeta.value.expiracion = digitos.length > 2 ? `${digitos.slice(0, 2)}/${digitos.slice(2)}` : digitos
+}
+
+// Valida que los datos del método de pago elegido estén completos
+const pagoValido = computed(() => {
+    if (PAY_method.value === 'Tarjeta') {
+        return tarjeta.value.numero.replace(/\s/g, '').length === 16 &&
+               tarjeta.value.nombre.trim().length > 0 &&
+               /^\d{2}\/\d{2}$/.test(tarjeta.value.expiracion) &&
+               tarjeta.value.cvv.length >= 3
+    }
+    if (PAY_method.value === 'Yape' || PAY_method.value === 'Plin') {
+        return billeteraDigital.value.telefono.replace(/\D/g, '').length === 9
+    }
+    if (PAY_method.value === 'Paypal') {
+        return /\S+@\S+\.\S+/.test(paypal.value.correo)
+    }
+    return false
+})
 
 const cuponInfo    = ref(null)
 const descuento    = ref(0)
@@ -187,6 +287,10 @@ const aplicarCupon = async (codigo) => {
 const confirmarPedido = async () => {
     if (!ADD_id.value || !PAY_method.value) {
         errorGeneral.value = 'Selecciona dirección y método de pago'
+        return
+    }
+    if (!pagoValido.value) {
+        errorGeneral.value = 'Completa correctamente los datos de pago'
         return
     }
     errorGeneral.value = ''
@@ -270,6 +374,7 @@ const confirmarPedido = async () => {
 
 .checkout-success-icon {
     font-size: 3rem;
+    color: var(--color-success);
 }
 
 .checkout-layout {
@@ -345,6 +450,30 @@ const confirmarPedido = async () => {
 
 .new-address-row > * {
     flex: 1;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+}
+
+.form-group label {
+    font-weight: 500;
+    font-size: 0.85rem;
+    color: var(--color-text);
+}
+
+.payment-details {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    padding-top: var(--space-sm);
+}
+
+.payment-hint {
+    font-size: 0.8rem;
+    color: var(--color-text-light);
 }
 
 .payment-options {

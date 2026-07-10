@@ -82,6 +82,15 @@ npm install
 cd client
 npm install
 
+> ⚠️ **Importante:** el proyecto usa [PrimeIcons](https://primevue.org/icons/) para los íconos de la interfaz (carrito, wishlist, papelera, etc.), en vez de emojis. Ya está agregado en `client/package.json`, así que un simple `npm install` lo instala junto con el resto.
+>
+> Si haces `git pull` y ves errores como `Unable to resolve "primeicons/primeicons.css"` o `ENOENT ... primeicons.css`, significa que tu `node_modules` está desactualizado. Corre de nuevo:
+> ```
+> cd client
+> npm install
+> ```
+> **Regla general:** cada vez que hagas `git pull` y el `package.json` haya cambiado (nuevas librerías), vuelve a correr `npm install` en esa carpeta antes de `npm run dev`.
+
 ---
 
 ## Correr el proyecto

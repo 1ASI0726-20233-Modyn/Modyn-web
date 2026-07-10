@@ -1,7 +1,8 @@
 <template>
     <div class="cart-item">
         <div class="cart-item-img">
-            <span class="cart-item-img-fallback">👗</span>
+            <img v-if="item.imagen" :src="item.imagen" :alt="nombreProducto" />
+            <span v-else class="cart-item-img-fallback"><i class="pi pi-image"></i></span>
         </div>
 
         <div class="cart-item-info">
@@ -28,7 +29,7 @@
         </div>
 
         <button class="cart-item-remove" title="Quitar del carrito" @click="$emit('remove', item.CARTI_id)">
-            🗑️
+            <i class="pi pi-trash"></i>
         </button>
     </div>
 </template>
