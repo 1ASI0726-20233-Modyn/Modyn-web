@@ -12,7 +12,6 @@
             <div class="footer-col">
                 <h4>Enlaces</h4>
                 <RouterLink to="/productos">Categorías</RouterLink>
-                <RouterLink to="/tendencias">Tendencias</RouterLink>
             </div>
 
             <!-- Legal -->
