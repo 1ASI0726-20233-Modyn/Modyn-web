@@ -40,7 +40,6 @@ const menuItems = [
   { label: 'Dashboard', path: '/admin' },
   { label: 'Productos', path: '/admin/productos' },
   { label: 'Pedidos',   path: '/admin/pedidos' },
-  { label: 'Análisis',  path: '/admin/analisis' },
   { label: 'Ajustes',   path: '/admin/ajustes' }
 ]
 </script>
