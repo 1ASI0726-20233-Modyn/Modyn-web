@@ -8,7 +8,6 @@
       <ul class="navbar-links">
         <li><RouterLink to="/" class="nav-link">Inicio</RouterLink></li>
         <li><RouterLink to="/productos" class="nav-link">Productos</RouterLink></li>
-        <li><RouterLink to="/tendencias" class="nav-link">Tendencia</RouterLink></li>
       </ul>
 
       <div class="navbar-quick-actions">
