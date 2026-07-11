@@ -14,7 +14,6 @@
                     <p>Descubre las últimas tendencias de moda. Eleva tu look con nuestra nueva colección diseñada para destacar en cualquier ocasión.</p>
                     <div class="hero-buttons">
                         <RouterLink to="/productos" class="btn-hero-primary">Ver colección</RouterLink>
-                        <RouterLink to="/tendencias" class="btn-hero-secondary">Ver trending 🔥</RouterLink>
                     </div>
                 </div>
 
